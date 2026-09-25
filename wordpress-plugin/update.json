@@ -1,0 +1,11 @@
+{
+  "version": "1.3.0",
+  "download_url": "wordpress-plugin/zd-support-chat.zip",
+  "requires": "5.8",
+  "requires_php": "7.2",
+  "last_updated": "2026-09-25",
+  "sections": {
+    "description": "<p>REACHRIGHT support chat for site admins, inside the WordPress dashboard: step-by-step answers, Cornerstone and WordPress help guides, Loom video walkthroughs, and a ticket form.</p>",
+    "changelog": "<h4>1.3.0</h4><ul><li>Chat only: no settings page, uploads or database options in WordPress. Everything is managed by REACHRIGHT Studios.</li><li>Answers come from REACHRIGHT's database, with a built-in backup copy.</li></ul><h4>1.2.0</h4><ul><li>The chat now appears only in the WordPress dashboard, for logged-in staff.</li><li>Choose who sees it: administrators only, or editors too.</li><li>Ticket form is pre-filled with the admin's name, email and site; tickets include site details (WordPress, PHP, theme).</li><li>Greets admins by name; hidden while editing pages.</li></ul><h4>1.1.0</h4><ul><li>Updates install from GitHub.</li><li>Answers can load from Firebase.</li><li>Loom video walkthroughs.</li></ul>"
+  }
+}

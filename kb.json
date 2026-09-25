@@ -1,0 +1,1730 @@
+{
+ "meta": {
+  "source": "ReachRight support answers, based on 358 Zoho Desk ticket topics",
+  "generated": "2026-09-24",
+  "count": 61,
+  "resources": 62
+ },
+ "entries": [
+  {
+   "id": "k01",
+   "q": "How do I edit text on a page?",
+   "alt": [
+    "change to website",
+    "changes to website",
+    "edit page",
+    "change text",
+    "update page",
+    "correction needed",
+    "fix typo",
+    "website update",
+    "edit website",
+    "make changes",
+    "revisions"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in to your website (add **/wp-admin** to the end of your web address, for example yourchurch.org/wp-admin).\n2. Go to **Pages** and find the page you want to change.\n3. Hover over it and click **Edit with Cornerstone**.\n4. Click the text on the page and type your changes.\n5. Click **Save** in the bottom-left corner.\n\nOpen the page in a new tab to check it. If you still see the old text, press **Ctrl + F5** (or **Cmd + Shift + R** on a Mac) to refresh."
+  },
+  {
+   "id": "k02",
+   "q": "How do I add a new page?",
+   "alt": [
+    "new page",
+    "create page",
+    "add page",
+    "make a page"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in and go to **Pages → Add New**.\n2. Type a title for the page and click **Publish**.\n3. Click **Edit with Cornerstone** to design the page. You can add text, images and buttons from the elements panel.\n4. Click **Save**.\n5. To show it in your menu, go to **Appearance → Menus**, tick the new page, click **Add to Menu**, then **Save Menu**."
+  },
+  {
+   "id": "k03",
+   "q": "How do I add or replace a photo?",
+   "alt": [
+    "trouble uploading media",
+    "media upload",
+    "upload images",
+    "add photos",
+    "replace image",
+    "change picture",
+    "upload photos",
+    "update image",
+    "banner image",
+    "picture not right"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Open the page with **Edit with Cornerstone**.\n2. Click the photo you want to change.\n3. In the left panel, click the image box to open your **Media Library**.\n4. Choose an existing photo, or click **Upload Files** to add a new one from your computer.\n5. Click **Select**, then **Save**.\n\n**Tips:** use JPG or PNG files, choose wide photos for banners, and avoid huge files straight from a camera (resize to about 2000 pixels wide first)."
+  },
+  {
+   "id": "k04",
+   "q": "How do I change the photos in a slider or carousel?",
+   "alt": [
+    "carousel",
+    "slider images",
+    "update carousel",
+    "slideshow",
+    "footer carousel",
+    "rotating images"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Open the page with **Edit with Cornerstone**.\n2. Click the slider. In the left panel you'll see each slide listed.\n3. Click a slide to change its photo or text. Use the **+** button to add a slide, or the trash icon to remove one.\n4. Click **Save**.\n\nIf the slider is in your header or footer, edit it from **Cornerstone → Headers** or **Footers** instead of the page.",
+   "video": "https://www.loom.com/share/64abe0bf24bf4e258c3f2e98f8558dc2"
+  },
+  {
+   "id": "k05",
+   "q": "How do I update the footer?",
+   "alt": [
+    "address correction",
+    "update address",
+    "footer edits",
+    "change footer",
+    "footer information",
+    "address in footer",
+    "service times",
+    "phone number footer",
+    "copyright year"
+   ],
+   "cat": "Editing your website",
+   "a": "The footer is the section at the bottom of every page.\n\n1. Log in and open **Cornerstone** from the left menu.\n2. Go to **Footers** and click the footer your site uses.\n3. Click the text you want to change (address, phone, service times, links) and type the new information.\n4. Click **Save**. The change appears on every page."
+  },
+  {
+   "id": "k06",
+   "q": "How do I update the header or change the logo?",
+   "alt": [
+    "edit header",
+    "change logo",
+    "update logo",
+    "header",
+    "top of website",
+    "new logo"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in and open **Cornerstone** from the left menu.\n2. Go to **Headers** and click the header your site uses.\n3. To change the logo, click it and choose a new image from the Media Library (a PNG with a transparent background looks best).\n4. Click any other text or button to edit it.\n5. Click **Save**."
+  },
+  {
+   "id": "k07",
+   "q": "How do I change the menu?",
+   "alt": [
+    "navigation bar",
+    "nav bar",
+    "edit menu",
+    "navigation",
+    "add menu item",
+    "remove menu link",
+    "menu order",
+    "rename menu",
+    "menu links"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in and go to **Appearance → Menus**.\n2. **To add a page:** tick it in the left column and click **Add to Menu**.\n3. **To reorder:** drag items up or down. Drag an item slightly to the right to make it a drop-down under the item above.\n4. **To rename or remove:** click the arrow on the item, change the **Navigation Label**, or click **Remove**.\n5. Click **Save Menu**.",
+   "video": "https://www.loom.com/share/3a5d3a6285a24c4b9faf42488b6653fd"
+  },
+  {
+   "id": "k08",
+   "q": "How do I update our staff or leadership page?",
+   "alt": [
+    "staff page",
+    "leadership page",
+    "add pastor",
+    "new staff member",
+    "remove staff",
+    "team page",
+    "staff bio"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Open the staff page with **Edit with Cornerstone**.\n2. **To add someone:** right-click an existing staff card and choose **Duplicate**, then change the name, title, bio and photo.\n3. **To remove someone:** right-click their card and choose **Delete**.\n4. Click **Save**.\n\nClear, similar-sized headshots keep the page looking tidy."
+  },
+  {
+   "id": "k09",
+   "q": "How do I add a sermon video or livestream?",
+   "alt": [
+    "video thumbnail",
+    "photo at start of video",
+    "video cover image",
+    "sermon video",
+    "add youtube",
+    "livestream",
+    "add video",
+    "embed video",
+    "sermon page",
+    "facebook live",
+    "vimeo"
+   ],
+   "cat": "Editing your website",
+   "a": "1. On YouTube, open your video, click **Share**, and copy the link.\n2. Open your page with **Edit with Cornerstone**.\n3. Click the **+** (add element) button, search for **Video**, and drag it onto the page.\n4. Paste the YouTube link into the video settings on the left.\n5. Click **Save**.\n\nTo replace last week's sermon, just click the existing video and paste the new link.\n\n**The photo shown before the video plays** comes from YouTube. Change it in **YouTube Studio → Content**, click the video, and upload a custom thumbnail.",
+   "video": "https://www.loom.com/share/a5a307665e354a208745628adcbe66f5"
+  },
+  {
+   "id": "k10",
+   "q": "How do I post a bulletin, newsletter or PDF?",
+   "alt": [
+    "flyer",
+    "flyers",
+    "updating flyers",
+    "upload pdf",
+    "bulletin",
+    "newsletter",
+    "add document",
+    "pdf link",
+    "weekly bulletin",
+    "upload file"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in and go to **Media → Add New**, then upload your PDF.\n2. Click the uploaded file and copy the **File URL**.\n3. Open the page with **Edit with Cornerstone** and click the text or button where the link should go.\n4. Paste the File URL as the link and click **Save**.\n\nTo update it each week, you can upload the new PDF and change the link the same way.",
+   "video": "https://www.loom.com/share/0f8984580a5e43a2971690c5362b6b0d"
+  },
+  {
+   "id": "k11",
+   "q": "How do I add a button that links somewhere?",
+   "alt": [
+    "add button",
+    "link button",
+    "donate button",
+    "register button",
+    "link to page"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Open the page with **Edit with Cornerstone**.\n2. Click **+** to add an element, search for **Button**, and drag it onto the page.\n3. On the left, type the button text (for example \"Give Online\") and paste the link it should open.\n4. Turn on **open in new tab** if it goes to another website.\n5. Click **Save**."
+  },
+  {
+   "id": "k12",
+   "q": "I made a mistake while editing. How do I undo it?",
+   "alt": [
+    "undo",
+    "mistake",
+    "deleted by accident",
+    "revert changes",
+    "restore page",
+    "go back"
+   ],
+   "cat": "Editing your website",
+   "a": "**Before saving:** press **Ctrl + Z** (or **Cmd + Z** on a Mac) in the builder to undo your last steps, or close the builder without saving.\n\n**Deleted a whole page?** Go to **Pages → Trash**, hover over it and click **Restore**.\n\nIf you already saved a change you can't undo, send us a request and we can restore it from a backup."
+  },
+  {
+   "id": "k13",
+   "q": "How do I use a ready-made design template?",
+   "alt": [
+    "templates",
+    "design cloud",
+    "premade design",
+    "page template",
+    "layout ideas"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Open a page with **Edit with Cornerstone**.\n2. Open the **template library** and browse the ready-made pages and sections.\n3. Click one to add it to your page.\n4. Replace the sample text and photos with your own, then click **Save**."
+  },
+  {
+   "id": "k14",
+   "q": "How do I add a pop-up announcement?",
+   "alt": [
+    "pop-up plugin",
+    "popup",
+    "pop up",
+    "announcement popup",
+    "modal",
+    "newsletter popup",
+    "pop-up recommendations"
+   ],
+   "cat": "Editing your website",
+   "a": "If your site uses the **Convert Plus** plugin, the video below shows how to create a promotional pop-up with it. You can also make a simple pop-up without a plugin:\n\n1. Open your page with **Edit with Cornerstone**.\n2. Add a **Modal** element and type your message inside it (you can add text, a photo and a button).\n3. In its settings, choose what opens it, for example a button click.\n4. Click **Save** and test it on the live page.\n\nIf you need it to appear automatically on a schedule or on every page, send us a request and we'll set it up.",
+   "video": "https://www.loom.com/share/fdfd7e727002421c98dea237cc2e3f91"
+  },
+  {
+   "id": "k15",
+   "q": "How do I change fonts or colors across the whole website?",
+   "alt": [
+    "font manager",
+    "change font",
+    "brand colors",
+    "color manager",
+    "global colors",
+    "site colors"
+   ],
+   "cat": "Editing your website",
+   "a": "Fonts and colors are managed in one place, so one change updates the whole site:\n\n1. Log in and open **Cornerstone**.\n2. Open the **Font Manager** to change fonts, or the **Color Manager** to change colors.\n3. Edit the saved font or color and click **Save**.\n\nEverything using that font or color updates automatically."
+  },
+  {
+   "id": "k16",
+   "q": "How do I add a blog post or news update?",
+   "alt": [
+    "blog post",
+    "blog posts",
+    "news update",
+    "add post",
+    "blog appearance",
+    "announcement post"
+   ],
+   "cat": "Editing your website",
+   "a": "1. Log in and go to **Posts → Add New**.\n2. Add a title and write your post.\n3. On the right, choose a **Category** and set a **Featured image** (the photo shown in lists).\n4. Click **Publish**.\n\nTo change how the blog list looks, open the blog page with **Edit with Cornerstone**.\n\nAnother walkthrough: https://www.loom.com/share/4f9b1ea18dbe4dbd93d545c6a890e75a",
+   "video": "https://www.loom.com/share/4b8277edeb4947b2a3919ba04803d91f"
+  },
+  {
+   "id": "k17",
+   "q": "How do I redirect an old page to a new one?",
+   "alt": [
+    "redirect",
+    "creating redirect",
+    "forward page",
+    "old link",
+    "moved page"
+   ],
+   "cat": "Editing your website",
+   "a": "If your site has the **Redirection** plugin, go to **Tools → Redirection**, enter the old address in **Source URL** and the new page in **Target URL**, and click **Add Redirect**.\n\nDon't see it? Send us a request with the old and new addresses and we'll set it up."
+  },
+  {
+   "id": "k18",
+   "q": "How do I add an announcement bar?",
+   "alt": [
+    "announcement bar",
+    "top bar",
+    "notice bar",
+    "banner at top",
+    "alert bar",
+    "news bar"
+   ],
+   "cat": "Editing your website",
+   "a": "An announcement bar is a strip across the top of your website for quick news, like a change in service times or an upcoming event.\n\nThis 4-minute video shows how to add one and change its message.",
+   "video": "https://www.loom.com/share/f1f3b503f11a418d86be99afef789532"
+  },
+  {
+   "id": "k19",
+   "q": "How do I add a scrolling featured events carousel to the homepage?",
+   "alt": [
+    "event carousel",
+    "featured events",
+    "events slider",
+    "homepage events",
+    "scrolling events"
+   ],
+   "cat": "Events",
+   "a": "A featured events carousel shows your upcoming events as scrolling cards on the homepage, so visitors see what's coming up right away.\n\nThis video walks through setting one up step by step.",
+   "video": "https://www.loom.com/share/4af8fff6ea8647e08f2dea1701fb382c"
+  },
+  {
+   "id": "k20",
+   "q": "How do I add a form to a page?",
+   "alt": [
+    "add form",
+    "new form",
+    "create form",
+    "embed form",
+    "form on page",
+    "contact form on page",
+    "signup form"
+   ],
+   "cat": "Forms",
+   "a": "Forms are built in your form plugin and then placed on a page.\n\nThis video shows the whole process: creating the form, choosing its fields, and adding it to your website.",
+   "video": "https://www.loom.com/share/b7e37e36fd0744b0b86c4b2db1f9dd9c"
+  },
+  {
+   "id": "k21",
+   "q": "How do I create a photo gallery?",
+   "alt": [
+    "photo gallery",
+    "gallery",
+    "envira",
+    "gallery page",
+    "image gallery",
+    "picture gallery"
+   ],
+   "cat": "Editing your website",
+   "a": "Photo galleries are made with the **Envira Gallery** plugin: you create a gallery, add your photos, then place it on a page.\n\nThis 5-minute video shows each step.",
+   "video": "https://www.loom.com/share/b0dbf3242a7d4059a5c7b41f644a9691"
+  },
+  {
+   "id": "k22",
+   "q": "How do I replace the background image or video on the homepage?",
+   "alt": [
+    "background image",
+    "background video",
+    "homepage background",
+    "hero image",
+    "hero video",
+    "homepage banner video"
+   ],
+   "cat": "Editing your website",
+   "a": "The large photo or video behind the top of your homepage can be swapped any time.\n\nThis video shows how. **Tip:** keep background videos short and small; the video on compressing videos shows how.",
+   "video": "https://www.loom.com/share/baa78ab27aee44f2bbcc5e028c6853a8"
+  },
+  {
+   "id": "k23",
+   "q": "How do I make a link that jumps to a section on the page?",
+   "alt": [
+    "jump link",
+    "anchor link",
+    "scroll to section",
+    "link to section",
+    "page anchor"
+   ],
+   "cat": "Editing your website",
+   "a": "A jump link takes visitors straight to a section further down a page, for example a \"Service Times\" button that scrolls down to that section.\n\nIn short, you give the section a name (an ID) and link to it with **#** in front, like **#service-times**. The video shows exactly where to do both.",
+   "video": "https://www.loom.com/share/9b1fa11f40c14819b60446d0422f1286"
+  },
+  {
+   "id": "k24",
+   "q": "How do I edit a banner?",
+   "alt": [
+    "edit banner",
+    "page banner",
+    "banner image",
+    "banner text",
+    "header image on page"
+   ],
+   "cat": "Editing your website",
+   "a": "Banners are the large image sections with a heading, usually at the top of a page.\n\nThis video shows how to change a banner's image, heading and text.",
+   "video": "https://www.loom.com/share/21a498edbef143bba08fc1daca8f82a8"
+  },
+  {
+   "id": "k25",
+   "q": "How do I crop a photo with Canva?",
+   "alt": [
+    "canva",
+    "crop photo",
+    "resize photo",
+    "photo size",
+    "image dimensions"
+   ],
+   "cat": "Editing your website",
+   "a": "Canva is a free design tool (canva.com) that makes it easy to crop photos to the right shape before you upload them to your website.\n\nThis 5-minute video shows how.",
+   "video": "https://www.loom.com/share/b8de8885a896472c989ae01592335950"
+  },
+  {
+   "id": "k26",
+   "q": "My video file is too big. How do I compress it?",
+   "alt": [
+    "compress video",
+    "video too large",
+    "video file size",
+    "shrink video",
+    "video upload failed"
+   ],
+   "cat": "Editing your website",
+   "a": "Large video files make pages slow and can fail to upload. This video shows how to compress a video before uploading it.\n\n**Tip:** for long videos like sermons, upload them to YouTube or Vimeo and embed them instead. It keeps your website fast.",
+   "video": "https://www.loom.com/share/0a2230b81f6d47d2959baf86ed4bf7c9"
+  },
+  {
+   "id": "k27",
+   "q": "How do I add a section with an image and text?",
+   "alt": [
+    "image section",
+    "graphic section",
+    "image and text",
+    "add graphic",
+    "picture with text"
+   ],
+   "cat": "Editing your website",
+   "a": "This short video shows how to add a section to a page with a graphic or photo alongside your text.",
+   "video": "https://www.loom.com/share/8f8a1e8a065e42c48c623f94c5c391e0"
+  },
+  {
+   "id": "k28",
+   "q": "Something isn't showing correctly on mobile",
+   "alt": [
+    "not showing on mobile",
+    "mobile display",
+    "phone view broken",
+    "looks wrong on phone",
+    "mobile layout",
+    "content not showing on mobile"
+   ],
+   "cat": "Display & mobile",
+   "a": "1. Refresh the page on your phone, or open it in a **private/incognito** tab. Phones often show an older saved copy.\n2. If it still looks wrong, open the page with **Edit with Cornerstone** on a computer.\n3. Use the **phone icon** at the top of the builder to preview the mobile view.\n4. Click the element that looks wrong and adjust it while in phone view (for example smaller text or less spacing). Changes made in phone view only affect phones.\n5. Click **Save**."
+  },
+  {
+   "id": "k29",
+   "q": "How do I hide something on mobile or desktop?",
+   "alt": [
+    "hide on mobile",
+    "show only desktop",
+    "hide section phone",
+    "device size",
+    "hide on desktop"
+   ],
+   "cat": "Display & mobile",
+   "a": "1. Open the page with **Edit with Cornerstone**.\n2. Click the section or element you want to hide.\n3. In its settings, find the **hide** options and pick the screen sizes to hide it on (phone, tablet or desktop).\n4. Click **Save**, then check the page on your phone."
+  },
+  {
+   "id": "k30",
+   "q": "I made changes but I still see the old version",
+   "alt": [
+    "changes not showing",
+    "old version",
+    "updated but not showing",
+    "cache",
+    "not updating"
+   ],
+   "cat": "Display & mobile",
+   "a": "Your browser is probably showing a saved copy.\n\n1. Press **Ctrl + F5** (Windows) or **Cmd + Shift + R** (Mac) to fully refresh.\n2. Or open the page in a **private/incognito** window.\n3. If you're logged in and see a **Purge Cache** or **Clear Cache** option in the black bar at the top, click it.\n\nChanges usually show within a few minutes."
+  },
+  {
+   "id": "k31",
+   "q": "My website looks broken after an update",
+   "alt": [
+    "broken after update",
+    "unstyled after update",
+    "styles missing",
+    "spacing wrong",
+    "layout broke",
+    "site looks weird"
+   ],
+   "cat": "Display & mobile",
+   "a": "This is almost always old saved files. Clear them in this order:\n\n1. Log in and go to **Cornerstone → Settings**, then click **Clear Style Cache**.\n2. If there's a **Purge Cache** option in the top black bar, click it.\n3. Refresh the site with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac)."
+  },
+  {
+   "id": "k32",
+   "q": "My website is down",
+   "alt": [
+    "website down",
+    "site not loading",
+    "can't access website",
+    "site offline",
+    "website not working",
+    "white screen",
+    "error on website",
+    "urgent website down"
+   ],
+   "cat": "Website problems",
+   "a": "Try these quick checks:\n\n1. Open the site on **your phone using mobile data** (Wi-Fi off). If it works there, the problem is your internet or computer.\n2. Try a **private/incognito** window.\n3. Check your email (including spam) for a **domain renewal** notice. An expired domain takes the site offline.\n\nIf the site is still down for everyone, send us a request right away and mention it's urgent.",
+   "handoff": true
+  },
+  {
+   "id": "k33",
+   "q": "My website is slow",
+   "alt": [
+    "slow website",
+    "site loading slowly",
+    "takes long to load",
+    "speed",
+    "performance"
+   ],
+   "cat": "Website problems",
+   "a": "1. Test the site on another device or network to rule out your internet.\n2. Check recent pages for **very large photos**. Photos straight from a camera or phone can be huge; resize them to about 2000 pixels wide before uploading.\n3. Avoid adding many videos or sliders to one page.\n\nIf it's still slow, send us a request with the pages that feel slow."
+  },
+  {
+   "id": "k34",
+   "q": "New pages show \"Page not found\" (404)",
+   "alt": [
+    "broken links",
+    "link issue",
+    "link not working",
+    "404",
+    "page not found",
+    "broken link",
+    "link not working"
+   ],
+   "cat": "Website problems",
+   "a": "1. Log in and go to **Settings → Permalinks**.\n2. Don't change anything; just click **Save Changes** at the bottom.\n3. Refresh the page that showed the error.\n\nThis resets your website's links and usually fixes it straight away."
+  },
+  {
+   "id": "k35",
+   "q": "My website says \"Not secure\"",
+   "alt": [
+    "not secure",
+    "ssl",
+    "https",
+    "certificate",
+    "security warning",
+    "padlock"
+   ],
+   "cat": "Website problems",
+   "a": "1. Check the address starts with **https://** (with an \"s\"). Try typing https:// in front of your web address.\n2. Refresh with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\n3. If only one page shows it, an image on that page may be linked from an old address; replace that image.\n\nIf the warning shows on the whole site, send us a request so we can renew the security certificate."
+  },
+  {
+   "id": "k36",
+   "q": "Our contact form isn't sending emails",
+   "alt": [
+    "contact form not working",
+    "not receiving form",
+    "form submissions missing",
+    "form emails",
+    "inquiry form",
+    "didn't get form",
+    "form not sending"
+   ],
+   "cat": "Forms",
+   "a": "1. Check your **spam or junk folder** and mark any form emails as **Not spam**.\n2. Send a **test message** through the form yourself.\n3. Check the form is sending to the right address: log in, open your form plugin (for example **WPForms** or **Contact**), open the form's **Notifications** or **Mail** settings, and confirm the email address.\n4. Save and test again."
+  },
+  {
+   "id": "k37",
+   "q": "We're getting spam through our contact form",
+   "alt": [
+    "form spam",
+    "spam submissions",
+    "junk form entries",
+    "bots filling form",
+    "spam messages form"
+   ],
+   "cat": "Forms",
+   "a": "1. Log in and open your form plugin's settings (for example **WPForms** or **Contact**).\n2. Turn on the built-in **anti-spam** or **CAPTCHA** option.\n3. Save and send yourself a test message to make sure the form still works.\n\nThis blocks most automated spam. If it keeps coming, send us a request and we'll add stronger protection."
+  },
+  {
+   "id": "k38",
+   "q": "How do I change who gets form emails, or edit the form?",
+   "alt": [
+    "change form email",
+    "form recipient",
+    "add form field",
+    "update form",
+    "new form",
+    "registration form",
+    "updated form"
+   ],
+   "cat": "Forms",
+   "a": "1. Log in and open your form plugin (for example **WPForms** or **Contact**).\n2. Click the form to edit it.\n3. **To add a question:** drag a new field onto the form and give it a label.\n4. **To change who receives it:** open **Notifications** (or the **Mail** tab) and change the email address.\n5. Save, then send a test message."
+  },
+  {
+   "id": "k39",
+   "q": "How do I add an event?",
+   "alt": [
+    "add event",
+    "calendar event",
+    "new event",
+    "event calendar",
+    "post event",
+    "upcoming events",
+    "create event",
+    "schedule event"
+   ],
+   "cat": "Events",
+   "a": "1. Log in and go to **M.E. Calendar → Add Event** in the left menu.\n2. Type the event name and description.\n3. Set the **start and end date and time** (or tick **All day**).\n4. Add a location and a featured image if you like.\n5. Click **Publish**.\n\nYour event appears on the calendar straight away.",
+   "video": "https://www.loom.com/share/d53f59b8b4524e40b05378a1774123f0"
+  },
+  {
+   "id": "k40",
+   "q": "My event isn't showing on the calendar",
+   "alt": [
+    "calendar not working",
+    "calendar broken",
+    "event not showing",
+    "event missing calendar",
+    "calendar view",
+    "event view in calendar",
+    "event wrong date",
+    "event disappeared"
+   ],
+   "cat": "Events",
+   "a": "1. Go to **M.E. Calendar → All Events** and check the event says **Published**, not Draft.\n2. Open it and check the **date and time**, including the year.\n3. Make sure the end date isn't before the start date.\n4. Refresh the calendar page in a **private/incognito** window."
+  },
+  {
+   "id": "k41",
+   "q": "Can we sell tickets or take registrations for events?",
+   "alt": [
+    "event tickets",
+    "sell tickets",
+    "event registration",
+    "event payment",
+    "booking form",
+    "rsvp"
+   ],
+   "cat": "Events",
+   "a": "Yes, the calendar has a booking feature:\n\n1. Go to **M.E. Calendar → Settings** and turn on **Booking**, then save.\n2. Set up **Booking Form** (the questions people answer) and **Payment Gateways** (for example Stripe or PayPal) if you charge.\n3. Open your event and add tickets in its booking section, then click **Update**.",
+   "video": "https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600"
+  },
+  {
+   "id": "k42",
+   "q": "I can't log in to my website",
+   "alt": [
+    "login issue",
+    "password reset",
+    "can't log in",
+    "forgot password",
+    "login not working",
+    "reset password",
+    "wp-admin",
+    "can't sign in"
+   ],
+   "cat": "Login & users",
+   "a": "1. Go to your login page: your web address followed by **/wp-login.php** (for example yourchurch.org/wp-login.php).\n2. Click **Lost your password?**\n3. Enter your username or email and click **Get New Password**.\n4. Open the email (check spam) and follow the link to set a new password."
+  },
+  {
+   "id": "k43",
+   "q": "It says I'm locked out",
+   "alt": [
+    "locked out",
+    "too many login attempts",
+    "blocked login",
+    "access denied login"
+   ],
+   "cat": "Login & users",
+   "a": "The security system blocks logins after several wrong passwords.\n\n1. Wait about **1 hour**, then try again.\n2. Use **Lost your password?** on the login page to reset it instead of guessing.\n3. Try from your phone using mobile data if you need in sooner."
+  },
+  {
+   "id": "k44",
+   "q": "How do I add a login for a new staff member?",
+   "alt": [
+    "add user",
+    "new staff login",
+    "give access",
+    "create account",
+    "user account",
+    "editor access",
+    "new user"
+   ],
+   "cat": "Login & users",
+   "a": "You need to be an Administrator to do this.\n\n1. Log in and go to **Users → Add New**.\n2. Enter their username, email and name.\n3. Choose a **Role**: **Editor** can edit pages and events; **Administrator** can change everything (only give this when needed).\n4. Click **Add New User**. They'll get an email to set their password."
+  },
+  {
+   "id": "k45",
+   "q": "How do I change my password?",
+   "alt": [
+    "change password",
+    "update password",
+    "new password"
+   ],
+   "cat": "Login & users",
+   "a": "1. Log in and go to **Users → Profile** (or click your name at the top right).\n2. Scroll to **Account Management** and click **Set New Password**.\n3. Type your new password and click **Update Profile**."
+  },
+  {
+   "id": "k46",
+   "q": "How do I remove a user who left?",
+   "alt": [
+    "remove user",
+    "delete user",
+    "staff left",
+    "revoke access"
+   ],
+   "cat": "Login & users",
+   "a": "1. Log in as an Administrator and go to **Users**.\n2. Hover over the person and click **Delete**.\n3. When asked, choose to **attribute their content to another user** so their pages aren't lost.\n4. Click **Confirm Deletion**."
+  },
+  {
+   "id": "k47",
+   "q": "Can I get FTP access?",
+   "alt": [
+    "ftp",
+    "ftp access",
+    "sftp",
+    "server access",
+    "file access",
+    "cpanel"
+   ],
+   "cat": "Login & users",
+   "a": "FTP gives direct access to your website's files, so it's usually only needed by a developer. Most changes can be made from your WordPress dashboard instead.\n\nIf you do need it, send us a request with the name and email of the person who needs access and why, and we'll share login details securely."
+  },
+  {
+   "id": "k48",
+   "q": "What do these Wordfence emails mean?",
+   "alt": [
+    "wordfence",
+    "security alert",
+    "wordfence alert",
+    "critical alert",
+    "problems found",
+    "security email",
+    "wordfence activity"
+   ],
+   "cat": "Security & updates",
+   "a": "Wordfence is the security system protecting your website. Most emails are just reports (blocked logins, weekly summaries) and need no action.\n\n**To get fewer emails:** log in, go to **Wordfence → All Options → Email Alert Preferences**, untick the alerts you don't need, and click **Save Changes**.\n\nIf an email says **Critical** or **Problems found**, forward it to us."
+  },
+  {
+   "id": "k49",
+   "q": "Should I update plugins myself?",
+   "alt": [
+    "update plugins",
+    "update wordpress",
+    "plugin updates",
+    "should i update",
+    "updates available",
+    "update theme"
+   ],
+   "cat": "Security & updates",
+   "a": "Updates keep your site safe, but occasionally one can cause a conflict. If you update yourself:\n\n1. Make sure a **backup** exists first.\n2. Go to **Dashboard → Updates** and update a few plugins at a time.\n3. Check your homepage and a couple of key pages afterwards.\n\nIf anything looks wrong after an update, send us a request."
+  },
+  {
+   "id": "k50",
+   "q": "Our church email isn't working",
+   "alt": [
+    "email not working",
+    "can't send email",
+    "email problem",
+    "not receiving email",
+    "email account",
+    "mailbox"
+   ],
+   "cat": "Email",
+   "a": "1. Try logging in to your email on the web (for example Gmail or Outlook in a browser). If it works there, the issue is your email app; remove and re-add the account.\n2. Check your **mailbox isn't full**; delete old emails with large attachments.\n3. Make sure your **password hasn't changed** or expired.\n4. Check the **domain renewal**; if the domain expired, email stops too."
+  },
+  {
+   "id": "k51",
+   "q": "We're getting a lot of spam email",
+   "alt": [
+    "spam",
+    "spam email",
+    "junk mail",
+    "phishing",
+    "suspicious email"
+   ],
+   "cat": "Email",
+   "a": "1. Don't click links or open attachments in suspicious emails.\n2. Mark them as **Spam** or **Junk** in your email; this trains the filter.\n3. Never reply with passwords; we will never ask for yours by email.\n\nIf spam is coming through your website's contact form, turn on the form's anti-spam option (ask \"form spam\" for steps)."
+  },
+  {
+   "id": "k52",
+   "q": "How do I renew our domain name?",
+   "alt": [
+    "change domain",
+    "org to com",
+    "domain change",
+    "domain renewal",
+    "domain expiring",
+    "renew domain",
+    "domain name",
+    "transfer domain",
+    "domain expired"
+   ],
+   "cat": "Domain & stats",
+   "a": "1. Find the renewal email from your domain company (search your email for your domain name and \"renew\").\n2. Log in to that company's website and renew the domain.\n3. Turn on **auto-renew** so it doesn't expire in future.\n\nNot sure who your domain is with? Send us a request and we'll check."
+  },
+  {
+   "id": "k53",
+   "q": "How many people visit our website?",
+   "alt": [
+    "website statistics",
+    "visitors",
+    "analytics",
+    "traffic",
+    "google analytics",
+    "site stats",
+    "how many visitors"
+   ],
+   "cat": "Domain & stats",
+   "a": "1. Log in to your website.\n2. Look for **Site Kit** (Google) or **Jetpack → Stats** in the left menu. Either shows visitors and popular pages.\n3. If you use Google Analytics directly, log in at analytics.google.com.\n\nIf you don't see any of these, send us a request and we can set up visitor stats or send you a report."
+  },
+  {
+   "id": "k54",
+   "q": "How do I set up online giving?",
+   "alt": [
+    "online giving",
+    "donations",
+    "square payment",
+    "payment plugin",
+    "accept payments",
+    "tithe",
+    "donate",
+    "give online"
+   ],
+   "cat": "Domain & stats",
+   "a": "The simplest way is a **Give** button that links to your giving page:\n\n1. Copy the link to your online giving page (from your giving provider).\n2. Open your page with **Edit with Cornerstone** and add a **Button**.\n3. Type \"Give Online\", paste the link, and click **Save**.\n4. Add a **Give** link to your menu too (**Appearance → Menus**).\n\nWant giving built into a form on your site, for example with Square? Send us a request."
+  },
+  {
+   "id": "k55",
+   "q": "How do I make an urgent request?",
+   "alt": [
+    "urgent",
+    "emergency",
+    "asap",
+    "need help now",
+    "critical issue",
+    "report an outage",
+    "outage"
+   ],
+   "cat": "Getting help",
+   "a": "If your website is down, click **Submit a ticket** below and tick **My website is down (urgent)**. Your request is marked **URGENT**, and down sites go to the front of the line.\n\nYou can also email **support@reachrightstudios.com** with **URGENT** in the subject line.",
+   "handoff": true
+  },
+  {
+   "id": "k56",
+   "q": "What should I include when I ask for help?",
+   "alt": [
+    "support request",
+    "what to send",
+    "help request",
+    "how to contact support",
+    "speed things up"
+   ],
+   "cat": "Getting help",
+   "a": "Include these and we can fix it faster:\n\n1. Your **church name**.\n2. The **page address** (copy it from your browser's address bar).\n3. **What's wrong**, or exactly what you'd like changed.\n4. A **screenshot**, if you have one."
+  },
+  {
+   "id": "k57",
+   "q": "How fast will I hear back?",
+   "alt": [
+    "response time",
+    "how long",
+    "when will you reply",
+    "support hours",
+    "business hours",
+    "weekend"
+   ],
+   "cat": "Getting help",
+   "a": "Within one business day, and usually faster. Our support team works **Monday to Friday, 9:00 to 5:00 Central**. If you write in over the weekend, you'll hear from us on Monday."
+  },
+  {
+   "id": "k58",
+   "q": "Can I edit our website myself?",
+   "alt": [
+    "edit myself",
+    "do it myself",
+    "backend access",
+    "make my own changes",
+    "self edit"
+   ],
+   "cat": "Getting help",
+   "a": "Yes. You have full access to your website's dashboard. Ask this chat how to do something (for example \"how do I update the footer\") for step-by-step instructions.\n\nIf you'd rather we handle it, submit a ticket and we'll take care of it."
+  },
+  {
+   "id": "k59",
+   "q": "How do I update our card or bank details?",
+   "alt": [
+    "update credit card",
+    "change card",
+    "bank account",
+    "payment method",
+    "billing portal",
+    "update payment"
+   ],
+   "cat": "Billing",
+   "a": "Use the billing portal. It takes about two minutes:\n\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\n2. Enter your **billing email**.\n3. Click the secure link we email you (no password needed).\n4. Update your payment method. It applies to your next invoice automatically."
+  },
+  {
+   "id": "k60",
+   "q": "Where do I find our invoices and receipts?",
+   "alt": [
+    "invoices",
+    "receipts",
+    "payment history",
+    "download invoice",
+    "billing history"
+   ],
+   "cat": "Billing",
+   "a": "Every invoice and receipt is in the billing portal:\n\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\n2. Enter your **billing email** and click the secure link we send you.\n3. View or download your full payment history."
+  },
+  {
+   "id": "k61",
+   "q": "I have a billing question or want to change our plan",
+   "alt": [
+    "billing question",
+    "change plan",
+    "cancel plan",
+    "upgrade plan",
+    "billing email",
+    "accounting"
+   ],
+   "cat": "Billing",
+   "a": "Most billing tasks can be done in the [billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00): updating your card, downloading invoices, and changing your billing email.\n\nFor plan changes or anything the portal can't do, email **accounting@reachrightstudios.com**."
+  }
+ ],
+ "resources": [
+  {
+   "id": "g01",
+   "q": "Cornerstone won't load or freezes on the loading screen",
+   "alt": [
+    "builder not loading",
+    "cornerstone stuck",
+    "builder frozen",
+    "spinning",
+    "edit with cornerstone not working",
+    "builder won't open",
+    "cornerstone not working",
+    "chrome cornerstone"
+   ],
+   "a": "The help guides say a frozen builder is usually caused by another plugin clashing with it. To find it:\n\n1. Go to **Dashboard → Plugins** and deactivate your other plugins (leave Cornerstone active if it's listed as a plugin).\n2. Try opening the builder again.\n3. If it works, turn your plugins back on **one at a time**, checking the builder each time. The one that breaks it is the cause.\n4. Also make sure your theme and Cornerstone are **updated** to the latest version.\n\nTry a different browser too (for example Chrome or Firefox), with browser extensions turned off.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g02",
+   "q": "The builder shows a preview error",
+   "alt": [
+    "preview error",
+    "preview not loading",
+    "conflict prevented the preview",
+    "builder warning",
+    "preview url"
+   ],
+   "a": "The help guides suggest these steps for preview errors:\n\n1. **Update** your theme and Cornerstone. Newer versions show a clearer error message.\n2. Try the builder with your **other plugins turned off** (Dashboard → Plugins), then turn them back on one by one.\n3. If your site is a **staging copy**, check **Settings → General** and make sure both web addresses point to the staging site, not the live one.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g03",
+   "q": "My changes won't save",
+   "alt": [
+    "save failed",
+    "can't save",
+    "changes not saving",
+    "saving error",
+    "won't publish"
+   ],
+   "a": "When saving fails, the help guides point to three common causes:\n\n1. **A plugin conflict.** Turn off other plugins, try saving, then turn them back on one at a time.\n2. **Security or caching plugins** blocking the save. Pause them briefly and try again.\n3. **Low server memory.** Your web host can raise the \"PHP memory limit\" for you (the guides recommend at least 256MB).",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g04",
+   "q": "My website looks broken or unstyled after an update",
+   "alt": [
+    "broken after update",
+    "unstyled",
+    "styles missing",
+    "spacing wrong",
+    "layout broke",
+    "looks weird after update"
+   ],
+   "a": "The help guides explain this is almost always leftover saved files, in three places:\n\n1. **Style cache:** go to **Cornerstone → Settings** and click **Clear Style Cache**.\n2. **Caching plugin or hosting cache:** purge it completely.\n3. **Cloudflare or other CDN:** purge its cache. If Cloudflare's **Auto Minify** for CSS is on, turn it off, because it can cut the site's styles short.\n\nWhile you're making lots of changes, turning on Cloudflare's **Development Mode** stops it from showing old versions.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g05",
+   "q": "Changes aren't showing on the live site",
+   "alt": [
+    "changes not showing",
+    "old version showing",
+    "cache",
+    "not updating",
+    "still see old"
+   ],
+   "a": "The help guides recommend clearing every layer of saved copies:\n\n1. In **Cornerstone → Settings**, click **Clear Style Cache**.\n2. Purge your **caching plugin** and any **hosting cache**.\n3. Purge **Cloudflare** or your CDN if you use one.\n4. Refresh your browser with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\n\nWhile editing a lot, you can pause the caching plugin, then turn it back on when you're done.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g06",
+   "q": "Pages or links show \"Page not found\"",
+   "alt": [
+    "404",
+    "page not found",
+    "broken link",
+    "broken links",
+    "link not working",
+    "permalinks"
+   ],
+   "a": "The help guides suggest resetting your website's link settings:\n\n1. Go to **Settings → Permalinks**.\n2. Click **Save Changes** without changing anything.\n\nThen check the menu link itself: in **Appearance → Menus**, open the item and make sure it points to a page that still exists (renamed or deleted pages leave broken links).",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g07",
+   "q": "How do I build or change a footer?",
+   "alt": [
+    "footer builder",
+    "edit footer",
+    "new footer",
+    "footer edits",
+    "different footer",
+    "change footer"
+   ],
+   "a": "From the help guides on the Footer Builder:\n\n1. Open **Cornerstone** and go to **Footers**.\n2. Click an existing footer to edit it, or create a new one.\n3. Add or edit text, links, logos and social icons like any page.\n4. Use the footer's **assignment** settings to choose where it shows: the whole site, or only certain pages.\n5. Click **Save**.\n\nThis also lets you use a simpler footer on landing pages.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g08",
+   "q": "How do I build or change a header?",
+   "alt": [
+    "header builder",
+    "edit header",
+    "change logo",
+    "new header",
+    "header",
+    "top bar"
+   ],
+   "a": "From the help guides on the Header Builder:\n\n1. Open **Cornerstone** and go to **Headers**.\n2. Click your header to edit it, or create a new one.\n3. Click the logo to swap the image, and click text or buttons to change them.\n4. Use the header's **assignment** settings to choose which pages it appears on.\n5. Click **Save**.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g09",
+   "q": "My menu isn't showing or updating in the header",
+   "alt": [
+    "navigation",
+    "menu not showing",
+    "menu not updating",
+    "nav bar",
+    "set up navigation",
+    "menu missing"
+   ],
+   "a": "The help guides explain that the header shows a menu through a **navigation element**:\n\n1. Make your menu in **Appearance → Menus** and click **Save Menu**.\n2. Open **Cornerstone → Headers** and click the navigation in your header.\n3. In its settings, choose the **menu** it should display.\n4. Click **Save**, then clear your cache and refresh.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g10",
+   "q": "Drop-down menus aren't working",
+   "alt": [
+    "dropdown not working",
+    "submenu not opening",
+    "navigation dropdown",
+    "menu dropdown issue"
+   ],
+   "a": "Try these steps from the help guides:\n\n1. In **Appearance → Menus**, check the sub-items are **indented** under their parent item, then save.\n2. Clear your caches (Cornerstone style cache, caching plugin, CDN).\n3. Test with other plugins turned off, in case one is interfering with menus.\n4. Check on both desktop and phone, since mobile menus are set up separately in the header.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/3a5d3a6285a24c4b9faf42488b6653fd"
+  },
+  {
+   "id": "g11",
+   "q": "How do I add something to a page (text, image, button)?",
+   "alt": [
+    "add element",
+    "add content",
+    "drag and drop",
+    "elements library",
+    "add section"
+   ],
+   "a": "From the help guides on adding elements:\n\n1. Open the page with **Edit with Cornerstone**.\n2. Click the **+** button to open the elements library.\n3. Search for what you need (Text, Image, Button, Video and more).\n4. Drag it onto the page where you want it.\n5. Change its settings on the left, then click **Save**.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g12",
+   "q": "How do I duplicate, move or undo things in the builder?",
+   "alt": [
+    "undo",
+    "duplicate",
+    "copy section",
+    "keyboard shortcuts",
+    "right click",
+    "move element"
+   ],
+   "a": "The help guides list these shortcuts:\n\n- **Right-click** any element for options like **Duplicate**, **Copy**, **Paste** and **Delete**.\n- **Ctrl + Z** (or **Cmd + Z** on a Mac) undoes your last change.\n- Drag elements to move them, or use the **Outline** view to see and reorder everything on the page.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g13",
+   "q": "How do I make the page look right on phones?",
+   "alt": [
+    "responsive",
+    "mobile styles",
+    "breakpoints",
+    "phone layout",
+    "tablet",
+    "mobile view",
+    "looks wrong on mobile"
+   ],
+   "a": "From the help guides on responsive styling:\n\n1. In the builder, use the **screen size buttons** at the top to preview phone, tablet and desktop.\n2. While previewing a size, click an element and adjust it (text size, spacing, columns). Changes made there apply to that screen size.\n3. Check each size, then click **Save**.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g14",
+   "q": "How do I hide a section on certain devices?",
+   "alt": [
+    "hide on mobile",
+    "hide on desktop",
+    "show only on phone",
+    "device visibility"
+   ],
+   "a": "From the help guides:\n\n1. Open the page in Cornerstone and click the section or element.\n2. In its settings, find the **hide** options for screen sizes.\n3. Choose the sizes to hide it on, then click **Save**.\n\nA common approach is to make one version for desktop and a simpler one for phones, and hide each on the other.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g15",
+   "q": "How do I reuse a section on many pages?",
+   "alt": [
+    "components",
+    "global block",
+    "reuse section",
+    "same section everywhere",
+    "template"
+   ],
+   "a": "The help guides recommend **Components** for this: build a section once and place it on many pages. When you edit the Component, every page using it updates automatically.\n\nYou can also save any section as a **template** and add it to other pages from the template library. Templates are copies, so later edits don't spread to the other pages.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g16",
+   "q": "How do I use ready-made designs?",
+   "alt": [
+    "design cloud",
+    "templates",
+    "premade",
+    "layout ideas",
+    "template library"
+   ],
+   "a": "The help guides describe **Design Cloud**, a library of ready-made pages, sections and styles:\n\n1. Open a page in Cornerstone and open the **template library**.\n2. Browse and click a design to add it.\n3. Replace the sample text and photos with your own, then click **Save**.\n\nA validated license is needed to use it.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g17",
+   "q": "How do I change fonts across the site?",
+   "alt": [
+    "font manager",
+    "change font",
+    "google fonts",
+    "custom font",
+    "typography"
+   ],
+   "a": "From the help guides on the **Font Manager**:\n\n1. Open **Cornerstone** and go to the Font Manager.\n2. Add the fonts you want (Google Fonts or uploaded fonts) and name them, for example \"Headings\" and \"Body\".\n3. Choose those fonts in your site settings and elements.\n\nChange a saved font later and it updates everywhere it's used.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g18",
+   "q": "How do I change brand colors across the site?",
+   "alt": [
+    "color manager",
+    "brand colors",
+    "global colors",
+    "site colors"
+   ],
+   "a": "From the help guides on the **Color Manager**:\n\n1. Open **Cornerstone** and go to the Color Manager.\n2. Add your brand colors and give them names.\n3. Pick those saved colors when styling elements.\n\nWhen you edit a saved color, every element using it changes too.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g19",
+   "q": "How do I add a pop-up window?",
+   "alt": [
+    "pop-up",
+    "popup",
+    "modal",
+    "announcement",
+    "pop up alert"
+   ],
+   "a": "The help guides cover the **Modal** element, which makes pop-ups:\n\n1. Open the page in Cornerstone and add a **Modal** element.\n2. Put your message, image or button inside it.\n3. Choose what opens it, for example clicking a button or link.\n4. Click **Save** and test it on the live page.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/fdfd7e727002421c98dea237cc2e3f91"
+  },
+  {
+   "id": "g20",
+   "q": "How do I add a video?",
+   "alt": [
+    "add video",
+    "youtube",
+    "vimeo",
+    "embed video",
+    "sermon video",
+    "video not playing"
+   ],
+   "a": "From the help guides on the **Video** element:\n\n1. Open the page in Cornerstone and add a **Video** element.\n2. Paste your YouTube or Vimeo link (or embed code) into its settings.\n3. Adjust the size and options, then click **Save**.\n\nIf a video won't play, check it's set to **Public** or **Unlisted** (not Private) on YouTube or Vimeo.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/a5a307665e354a208745628adcbe66f5"
+  },
+  {
+   "id": "g21",
+   "q": "How do I add or fix images and galleries?",
+   "alt": [
+    "image",
+    "photo",
+    "gallery",
+    "picture blurry",
+    "upload photo",
+    "media upload problem",
+    "trouble uploading media"
+   ],
+   "a": "From the help guides:\n\n1. Click an **Image** element in Cornerstone and choose a picture from the Media Library, or upload a new one.\n2. For several photos, use a gallery or slider element and add images to it.\n3. If an upload fails, the file may be too large; resize it to about 2000 pixels wide and try again.\n4. If a photo looks blurry, upload a larger original instead of a small or screenshot version.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g22",
+   "q": "How do I change a slider?",
+   "alt": [
+    "slider",
+    "carousel",
+    "slideshow",
+    "slides"
+   ],
+   "a": "From the help guides on sliders:\n\n1. Open the page (or header/footer) in Cornerstone and click the slider.\n2. Each slide is listed on the left. Click one to change its image or text.\n3. Use **+** to add a slide, or delete ones you don't need.\n4. Adjust timing and arrows in the slider settings, then click **Save**.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/64abe0bf24bf4e258c3f2e98f8558dc2"
+  },
+  {
+   "id": "g23",
+   "q": "How do I add events to the calendar?",
+   "alt": [
+    "add event",
+    "events calendar",
+    "modern events calendar",
+    "create event",
+    "calendar not working",
+    "event not showing"
+   ],
+   "a": "The help guides cover the Modern Events Calendar included with your site:\n\n1. If you don't see **M.E. Calendar** in your dashboard menu, go to your dashboard's **Validation** page, find Modern Events Calendar and click **Install**, then **Activate**. You can skip its purchase-code screen.\n2. Go to **M.E. Calendar → Add Event**, fill in the dates, times and details, and click **Publish**.\n3. Events show at yoursite.com/events by default.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/d53f59b8b4524e40b05378a1774123f0"
+  },
+  {
+   "id": "g24",
+   "q": "How do I customize the events page?",
+   "alt": [
+    "events page",
+    "event list",
+    "calendar page",
+    "event shortcode",
+    "calendar look"
+   ],
+   "a": "From the help guides: create a normal page in Cornerstone, design it how you like, and add the calendar with one of its **shortcodes** (found under **M.E. Calendar → Shortcodes**). Paste the shortcode into a text or shortcode element and click **Save**.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g25",
+   "q": "How do I take event registrations or payments?",
+   "alt": [
+    "event tickets",
+    "event registration",
+    "booking",
+    "event payment"
+   ],
+   "a": "From the help guides:\n\n1. In the **M.E. Calendar** settings, turn on the **booking** option and save.\n2. New sections appear for the **Booking Form** (questions people answer) and **Payment Gateways** (Stripe or PayPal).\n3. Each event can use its own booking form if needed.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600"
+  },
+  {
+   "id": "g26",
+   "q": "How do I put a form on a page?",
+   "alt": [
+    "add form",
+    "form element",
+    "contact form on page",
+    "embed form",
+    "form not showing",
+    "prayer form"
+   ],
+   "a": "The help guides explain you can place any form from your form plugin on a page:\n\n1. In your form plugin (for example WPForms or Contact Form 7), copy the form's **shortcode**.\n2. Open the page in Cornerstone and add a **text** or **shortcode** element (or the form integration element).\n3. Paste the shortcode and click **Save**.",
+   "src": "cornerstone",
+   "video": "https://www.loom.com/share/b7e37e36fd0744b0b86c4b2db1f9dd9c"
+  },
+  {
+   "id": "g27",
+   "q": "My license or validation isn't working",
+   "alt": [
+    "validation",
+    "license",
+    "already used",
+    "could not establish a connection",
+    "not validated"
+   ],
+   "a": "From the help guides:\n\n- **\"Already used on another site\"** means the license is linked to a different web address, usually after moving the site. The license's location needs updating in the license account.\n- **\"Could not establish a connection\"** means your server couldn't reach the license server. Your web host can check that outgoing connections aren't blocked.\n\nBoth are quick fixes for our team, so a support ticket is the fastest route.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g28",
+   "q": "How do I update the theme safely?",
+   "alt": [
+    "update theme",
+    "update cornerstone",
+    "updates",
+    "latest version"
+   ],
+   "a": "The help guides recommend:\n\n1. **Back up** your site first.\n2. Update the theme and Cornerstone **together**, so their versions match.\n3. Afterwards, click **Clear Style Cache** in **Cornerstone → Settings**, then purge your caching plugin and CDN.\n4. Check your homepage and a few key pages.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g29",
+   "q": "Icons are missing or showing as squares",
+   "alt": [
+    "icons missing",
+    "font awesome",
+    "icons not showing",
+    "squares instead of icons"
+   ],
+   "a": "Missing icons are usually caused by old saved files or a clash with another plugin that loads its own icons. Try:\n\n1. **Clear Style Cache** in **Cornerstone → Settings**, then purge your caching plugin and CDN.\n2. Turn off other plugins one at a time to see if one is replacing the icons.\n3. Make sure your theme and Cornerstone are updated.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "g30",
+   "q": "How can I make my website faster?",
+   "alt": [
+    "site speed",
+    "slow website",
+    "performance",
+    "page speed",
+    "loading slowly"
+   ],
+   "a": "The help guides' performance tips:\n\n1. Use a **caching plugin**.\n2. **Resize and compress images** before uploading.\n3. Remove plugins you don't use.\n4. Avoid putting many sliders or videos on one page.\n5. Good hosting makes a big difference for speed.",
+   "src": "cornerstone"
+  },
+  {
+   "id": "w01",
+   "q": "How do I change the site title or tagline?",
+   "alt": [
+    "site title",
+    "tagline",
+    "site name",
+    "browser tab name",
+    "change site name"
+   ],
+   "a": "1. Go to **Settings → General**.\n2. Change the **Site Title** and **Tagline**.\n3. Click **Save Changes** at the bottom.\n\nThe title shows in browser tabs and Google results. Your header logo is separate; change it in **Cornerstone → Headers**.",
+   "src": "wp"
+  },
+  {
+   "id": "w02",
+   "q": "How do I choose which page is the homepage?",
+   "alt": [
+    "homepage",
+    "home page",
+    "front page",
+    "set homepage",
+    "blog page",
+    "posts page",
+    "reading settings"
+   ],
+   "a": "1. Go to **Settings → Reading**.\n2. Under **Your homepage displays**, choose **A static page**.\n3. Pick your **Homepage** (and a **Posts page** if you have a blog or news page).\n4. Click **Save Changes**.",
+   "src": "wp"
+  },
+  {
+   "id": "w03",
+   "q": "Our website isn't showing up on Google",
+   "alt": [
+    "not on google",
+    "search engines",
+    "discourage search engines",
+    "seo",
+    "google search",
+    "indexing"
+   ],
+   "a": "1. Go to **Settings → Reading**.\n2. Make sure **Discourage search engines from indexing this site** is **not ticked**.\n3. Click **Save Changes**.\n\nNew websites can take a few weeks to appear in Google. Sharing your link on social media and your church's listings helps Google find it sooner.",
+   "src": "wp"
+  },
+  {
+   "id": "w04",
+   "q": "How do I change the admin email address?",
+   "alt": [
+    "admin email",
+    "administration email",
+    "change site email",
+    "notification email"
+   ],
+   "a": "1. Go to **Settings → General**.\n2. Change the **Administration Email Address**.\n3. Click **Save Changes**.\n4. WordPress emails the new address a confirmation link. The change only takes effect after you click it.",
+   "src": "wp"
+  },
+  {
+   "id": "w05",
+   "q": "The times on posts or events are wrong",
+   "alt": [
+    "wrong time",
+    "timezone",
+    "time zone",
+    "date wrong",
+    "scheduled wrong time",
+    "event time wrong"
+   ],
+   "a": "1. Go to **Settings → General**.\n2. Under **Timezone**, choose a **city in your time zone** (for example Chicago), rather than a UTC offset, so daylight saving is handled automatically.\n3. Click **Save Changes**.\n\nThen check the time on the post or event again.",
+   "src": "wp"
+  },
+  {
+   "id": "w06",
+   "q": "How do I schedule a post to publish later?",
+   "alt": [
+    "schedule post",
+    "publish later",
+    "future post",
+    "schedule announcement"
+   ],
+   "a": "1. Open the post in the editor.\n2. In the right sidebar, click the **Publish** date (it says \"Immediately\").\n3. Pick the date and time.\n4. Click **Schedule**.\n\nIt publishes automatically at that time. Check **Settings → General** has the right time zone first.",
+   "src": "wp"
+  },
+  {
+   "id": "w07",
+   "q": "How do I use categories and tags?",
+   "alt": [
+    "categories",
+    "tags",
+    "organize posts",
+    "post category",
+    "add category"
+   ],
+   "a": "**Categories** are broad groups (for example News, Sermons, Youth). **Tags** are optional keywords.\n\n1. Go to **Posts → Categories**, type a name and click **Add New Category**.\n2. When editing a post, tick its category in the right sidebar.\n3. Click **Update**.",
+   "src": "wp"
+  },
+  {
+   "id": "w08",
+   "q": "How do I approve, delete or turn off comments?",
+   "alt": [
+    "comments",
+    "moderate comments",
+    "turn off comments",
+    "disable comments",
+    "approve comment"
+   ],
+   "a": "**To manage comments:** go to **Comments**, hover over one and choose **Approve**, **Spam** or **Trash**.\n\n**To turn comments off for new posts:** go to **Settings → Discussion**, untick **Allow people to submit comments on new posts**, and click **Save Changes**.\n\nFor posts that already exist, open the post, find **Discussion** in the right sidebar, and untick **Allow comments**.",
+   "src": "wp"
+  },
+  {
+   "id": "w09",
+   "q": "We're getting spam comments",
+   "alt": [
+    "spam comments",
+    "comment spam",
+    "junk comments",
+    "bot comments"
+   ],
+   "a": "1. Go to **Settings → Discussion**.\n2. Tick **Comment must be manually approved**, so nothing appears until you approve it.\n3. Click **Save Changes**.\n4. In **Comments**, select the spam and choose **Mark as Spam**.\n\nIf you don't use comments at all, turning them off (ask \"turn off comments\") stops the spam completely.",
+   "src": "wp"
+  },
+  {
+   "id": "w10",
+   "q": "How do I edit widgets in the sidebar or footer?",
+   "alt": [
+    "widgets",
+    "sidebar",
+    "widget area",
+    "footer widgets",
+    "edit widget"
+   ],
+   "a": "1. Go to **Appearance → Widgets**.\n2. Click the widget area you want to change (for example Sidebar or Footer).\n3. Click **+** to add a block, or click an existing one to edit or remove it.\n4. Click **Update**.\n\nIf your footer is built in Cornerstone, edit it in **Cornerstone → Footers** instead.",
+   "src": "wp"
+  },
+  {
+   "id": "w11",
+   "q": "How do I bring back an older version of a page or post?",
+   "alt": [
+    "revisions",
+    "restore older version",
+    "go back to previous version",
+    "undo changes after saving",
+    "version history"
+   ],
+   "a": "For pages and posts written in the WordPress editor:\n\n1. Open the page or post.\n2. In the right sidebar, click **Revisions**.\n3. Use the slider to compare versions.\n4. Click **Restore This Revision**.\n\nFor pages built with Cornerstone, older versions may not be kept this way; send a ticket and we can restore from a backup.",
+   "src": "wp"
+  },
+  {
+   "id": "w12",
+   "q": "How do I recover something I deleted?",
+   "alt": [
+    "deleted page",
+    "deleted post",
+    "trash",
+    "restore deleted",
+    "accidentally deleted"
+   ],
+   "a": "1. Go to **Pages** (or **Posts**).\n2. Click **Trash** at the top of the list.\n3. Hover over the item and click **Restore**.\n\nItems stay in the Trash for **30 days**, then they're deleted for good. For deleted photos or older items, send a ticket and we can check a backup.",
+   "src": "wp"
+  },
+  {
+   "id": "w13",
+   "q": "How do I preview a page before publishing?",
+   "alt": [
+    "preview",
+    "draft",
+    "save draft",
+    "see before publishing"
+   ],
+   "a": "1. While editing, click **Save draft** so your work is kept but not public.\n2. Click **Preview** to see how it will look.\n3. When you're happy, click **Publish** (or **Update** for pages that are already live).",
+   "src": "wp"
+  },
+  {
+   "id": "w14",
+   "q": "How do I password-protect a page?",
+   "alt": [
+    "password protect",
+    "private page",
+    "members only",
+    "hide page",
+    "protected page"
+   ],
+   "a": "1. Open the page in the WordPress editor.\n2. In the right sidebar, click the **Visibility** setting (it usually says Public).\n3. Choose **Password protected** and type a password.\n4. Click **Update**.\n\nChoose **Private** instead if only logged-in staff should see it.",
+   "src": "wp",
+   "video": "https://www.loom.com/share/06b62c61698b4839a0bc79a836b68c17"
+  },
+  {
+   "id": "w15",
+   "q": "How do I change a page's web address?",
+   "alt": [
+    "change url",
+    "page slug",
+    "page address",
+    "permalink of page",
+    "rename url"
+   ],
+   "a": "1. Go to **Pages** and hover over the page.\n2. Click **Quick Edit**.\n3. Change the **Slug** (the last part of the address, for example **youth-ministry**).\n4. Click **Update**.\n\nAfterwards, check your menu link still works, and set up a redirect from the old address if people have shared it.",
+   "src": "wp"
+  },
+  {
+   "id": "w16",
+   "q": "How do I make a page a sub-page of another?",
+   "alt": [
+    "parent page",
+    "sub page",
+    "child page",
+    "page hierarchy",
+    "nested page"
+   ],
+   "a": "1. Open the page, or use **Quick Edit** from the Pages list.\n2. In **Page Attributes** (or **Parent**), choose the parent page.\n3. Click **Update**.\n\nThis changes the address (for example /ministries/youth/). To show it as a drop-down in the menu, arrange it in **Appearance → Menus**.",
+   "src": "wp"
+  },
+  {
+   "id": "w17",
+   "q": "What can each user role do?",
+   "alt": [
+    "user roles",
+    "editor vs administrator",
+    "roles",
+    "permissions",
+    "author contributor",
+    "new staff login",
+    "staff access",
+    "which role",
+    "add user"
+   ],
+   "a": "- **Administrator:** full control, including plugins, users and settings.\n- **Editor:** can publish and edit all pages and posts.\n- **Author:** can publish and edit their own posts.\n- **Contributor:** can write posts but can't publish them.\n- **Subscriber:** can only manage their own profile.\n\n**Editor** suits most church staff. Keep Administrator accounts to a minimum.",
+   "src": "wp"
+  },
+  {
+   "id": "w18",
+   "q": "How do I change my name or email on my login?",
+   "alt": [
+    "change my email",
+    "display name",
+    "my profile",
+    "update profile"
+   ],
+   "a": "1. Go to **Users → Profile**.\n2. Change your **First Name**, **Last Name** or **Email**, and choose how your name displays.\n3. Click **Update Profile**.\n\nIf you change your email, WordPress sends a confirmation to the new address.",
+   "src": "wp"
+  },
+  {
+   "id": "w19",
+   "q": "I still can't get into the dashboard",
+   "alt": [
+    "can't log in",
+    "login not working",
+    "login problem",
+    "can't sign in",
+    "wp-admin not working",
+    "password not working"
+   ],
+   "a": "Try these in order:\n\n1. Check **Caps Lock** is off and try typing the password rather than pasting it.\n2. Try a **private/incognito window** or a different browser. Old saved login data sometimes gets in the way.\n3. Use **Lost your password?** on the login page to set a new one (check spam for the email).\n4. If it says you're **locked out**, the security system blocked too many attempts; wait an hour or ask us to unlock it.",
+   "src": "wp"
+  },
+  {
+   "id": "w20",
+   "q": "How do I share a PDF or document on the site?",
+   "alt": [
+    "pdf",
+    "bulletin",
+    "newsletter",
+    "upload document",
+    "link to pdf",
+    "share file"
+   ],
+   "a": "1. Go to **Media → Add New Media File** and upload the file.\n2. Click the uploaded file and click **Copy URL to clipboard**.\n3. Open the page, highlight the words or button that should link to it, and paste the address as the link.\n4. Save the page.\n\nTo replace a weekly bulletin, upload the new file and update the link the same way.",
+   "src": "wp",
+   "video": "https://www.loom.com/share/0f8984580a5e43a2971690c5362b6b0d"
+  },
+  {
+   "id": "w21",
+   "q": "How do I crop or rotate a photo?",
+   "alt": [
+    "crop image",
+    "rotate photo",
+    "resize image",
+    "edit image",
+    "image sideways"
+   ],
+   "a": "1. Go to **Media → Library** and click the photo.\n2. Click **Edit Image**.\n3. Use the **crop**, **rotate** or **scale** tools.\n4. Click **Save**, then update any page using the photo if needed.",
+   "src": "wp"
+  },
+  {
+   "id": "w22",
+   "q": "How do I add alt text to images?",
+   "alt": [
+    "alt text",
+    "image description",
+    "accessibility images",
+    "alternative text"
+   ],
+   "a": "Alt text describes a photo for people using screen readers, and helps Google.\n\n1. Go to **Media → Library** and click the photo.\n2. Fill in **Alternative Text** with a short description (for example \"Children singing at Christmas service\").\n3. Changes save automatically.",
+   "src": "wp"
+  },
+  {
+   "id": "w23",
+   "q": "I get an error that my file is too large to upload",
+   "alt": [
+    "file too large",
+    "exceeds maximum upload size",
+    "upload failed",
+    "upload error",
+    "maximum upload"
+   ],
+   "a": "1. Make the file smaller: resize photos to about **2000 pixels wide**, or compress them with a free tool such as TinyPNG.\n2. For PDFs, use a \"compress PDF\" tool.\n3. Try uploading again.\n\nIf you regularly need bigger files (like audio sermons), send a ticket and we can raise the upload limit or suggest a better way to host them.",
+   "src": "wp"
+  },
+  {
+   "id": "w24",
+   "q": "How do I delete old photos and files?",
+   "alt": [
+    "delete media",
+    "clean up media library",
+    "remove photos",
+    "unused images"
+   ],
+   "a": "1. Go to **Media → Library** and switch to **list view** (the icon at the top left).\n2. Tick the files you want to remove.\n3. Choose **Delete permanently** from Bulk actions and click **Apply**.\n\nMake sure a file isn't used on a page first, or that page will show a broken image.",
+   "src": "wp"
+  },
+  {
+   "id": "w25",
+   "q": "How do I install or turn off a plugin?",
+   "alt": [
+    "install plugin",
+    "add plugin",
+    "deactivate plugin",
+    "remove plugin",
+    "new plugin"
+   ],
+   "a": "**To install:** go to **Plugins → Add New Plugin**, search, click **Install Now**, then **Activate**.\n\n**To turn one off:** go to **Plugins** and click **Deactivate** under its name. Click **Delete** only if you're sure you don't need it.\n\nPlugins can clash with each other, so check with us before adding one to a live church site.",
+   "src": "wp"
+  },
+  {
+   "id": "w26",
+   "q": "Where can I see if something's wrong with the site?",
+   "alt": [
+    "site health",
+    "site problems",
+    "health check",
+    "recommended improvements"
+   ],
+   "a": "Go to **Tools → Site Health**. It lists **critical issues** and **recommended improvements**, such as out-of-date plugins or security settings. Click an item to see what it means.\n\nNot sure what to do about one? Send a ticket with a screenshot.",
+   "src": "wp"
+  },
+  {
+   "id": "w27",
+   "q": "How do I update WordPress?",
+   "alt": [
+    "update wordpress",
+    "wordpress update",
+    "new version of wordpress",
+    "core update"
+   ],
+   "a": "1. Make sure a **backup** exists.\n2. Go to **Dashboard → Updates**.\n3. Click **Update to version…** and wait until it finishes (don't close the page).\n4. Check your homepage and a few key pages afterwards.",
+   "src": "wp"
+  },
+  {
+   "id": "w28",
+   "q": "The site says \"There has been a critical error on this website\"",
+   "alt": [
+    "critical error",
+    "technical issue",
+    "site crashed",
+    "fatal error",
+    "there has been a critical error"
+   ],
+   "a": "1. Check the **admin email inbox** (including spam) for a message titled **Your Site is Experiencing a Technical Issue**.\n2. It names the plugin or theme causing the problem and includes a special **recovery mode** login link.\n3. Use that link to log in, then deactivate the plugin it mentions.\n\nIf you can't find the email, send an urgent ticket and we'll fix it.",
+   "src": "wp"
+  },
+  {
+   "id": "w29",
+   "q": "The site says \"Briefly unavailable for scheduled maintenance\"",
+   "alt": [
+    "briefly unavailable",
+    "scheduled maintenance",
+    "maintenance mode",
+    "stuck updating"
+   ],
+   "a": "This shows while WordPress is updating and usually disappears within a minute or two.\n\n1. Wait a few minutes and refresh.\n2. If it's still there after 10 minutes, the update got stuck. Send an urgent ticket and we'll clear it (it needs a file removed from the server).",
+   "src": "wp"
+  },
+  {
+   "id": "w30",
+   "q": "How do I use the WordPress block editor?",
+   "alt": [
+    "block editor",
+    "gutenberg",
+    "add block",
+    "edit post",
+    "wordpress editor"
+   ],
+   "a": "1. Click **+** to add a block (paragraph, image, heading, button and more), or type **/** followed by the block name.\n2. Click any block to edit it; its settings appear in the right sidebar.\n3. Drag the handle (six dots) to move blocks.\n4. Click **Update** or **Publish**.\n\nPages built with Cornerstone should be edited with **Edit with Cornerstone** instead.",
+   "src": "wp"
+  },
+  {
+   "id": "w31",
+   "q": "How do I add a link to text?",
+   "alt": [
+    "add link",
+    "hyperlink",
+    "link text",
+    "insert link"
+   ],
+   "a": "1. Highlight the words you want to link.\n2. Click the **link** icon (or press **Ctrl + K**, **Cmd + K** on a Mac).\n3. Paste the web address, or type a page name to search your site.\n4. Press **Enter**, then save the page.\n\nTurn on **Open in new tab** for links to other websites.",
+   "src": "wp"
+  },
+  {
+   "id": "w32",
+   "q": "How do I download a copy of our content?",
+   "alt": [
+    "export",
+    "backup content",
+    "download content",
+    "export posts",
+    "copy of website"
+   ],
+   "a": "Go to **Tools → Export**, choose **All content**, and click **Download Export File**. This saves your pages, posts and comments as one file.\n\nIt isn't a full backup (it doesn't include the design, photos or settings). For a complete backup, send a ticket.",
+   "src": "wp"
+  }
+ ]
+}

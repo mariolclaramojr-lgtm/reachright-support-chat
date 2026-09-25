@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Support chat admin | REACHRIGHT</title>
+<style>
+  :root{--c:#1f6feb;--ink:#1d2330;--mute:#5d6678;--line:#dfe3ea;--bg:#fff;--soft:#f5f7fa;--warn:#9a5b00;--warnbg:#fff6e5;--ok:#1a7f37;--field:#fff;--over:#eef4ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--c:#4c8dff;--ink:#e6e9ef;--mute:#a3abba;--line:#323846;--bg:#1b1f27;--soft:#12151b;--warn:#f0b35a;--warnbg:#2e2412;--ok:#4cc26a;--field:#232833;--over:#1d2a44}}
+  :root[data-theme="dark"]{--c:#4c8dff;--ink:#e6e9ef;--mute:#a3abba;--line:#323846;--bg:#1b1f27;--soft:#12151b;--warn:#f0b35a;--warnbg:#2e2412;--ok:#4cc26a;--field:#232833;--over:#1d2a44}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--soft)}
+  main{max-width:1080px;margin:0 auto;padding:32px 20px 80px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
+  .lede{color:var(--mute);margin:0 0 28px;max-width:70ch}
+  section{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px}
+  section[aria-disabled="true"]{opacity:.5;pointer-events:none}
+  h2{font-size:17px;margin:0 0 4px;display:flex;gap:10px;align-items:center}
+  h2 .n{width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-size:13px;display:grid;place-items:center;flex:none}
+  .hint{color:var(--mute);font-size:14px;margin:0 0 16px 36px;max-width:75ch}
+  .body{margin-left:36px}
+  .drop{border:2px dashed var(--line);border-radius:10px;padding:28px;text-align:center;cursor:pointer;color:var(--mute)}
+  .drop.over{border-color:var(--c);background:var(--over)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600}
+  select,input[type=text],input[type=number],textarea{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink);width:100%}
+  textarea{resize:vertical}
+  .checks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:6px}
+  .checks label{font-size:14px;display:flex;gap:6px;align-items:center}
+  button{font:inherit;cursor:pointer;border-radius:8px;padding:9px 16px;border:1px solid var(--line);background:var(--field);color:var(--ink)}
+  button.primary{background:var(--c);border-color:var(--c);color:#fff;font-weight:600}
+  button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.drop:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .stat{font-size:14px;color:var(--mute)}
+  .note{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:12px 14px;font-size:14px;margin:14px 0 0}
+  .entries{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+  .entry{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;grid-template-columns:auto 1fr;gap:10px}
+  .entry.off{opacity:.45}
+  .entry .meta{font-size:12px;color:var(--mute)}
+  .entry .fields{display:flex;flex-direction:column;gap:6px}
+  .entry input.q{font-weight:600}
+  .pager{display:flex;gap:8px;align-items:center;margin-top:14px}
+  .ok{color:var(--ok);font-weight:600}
+  .srcbox{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--soft);font-size:14px}
+  .srcbox strong{font-size:15px}
+  .threadmap{margin-top:14px;border:1px solid var(--c);border-radius:10px;padding:16px}
+  .fbpanel{border-color:var(--c)}
+  .fbrow{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .tk{border-top:1px solid var(--line);padding:10px 0;display:grid;gap:2px}
+  .tk b{color:var(--ink)}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--soft);border:1px solid var(--line);margin-left:6px}
+  .badge.urgent{background:#fde8e8;border-color:#f5b5b5;color:#9b1c1c}
+  code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Support chat admin</h1>
+  <p class="lede">Edit the chat's answers and publish them to Firebase. Every website using the chat updates within about 10 minutes. Ticket files you drop in stay in this browser tab; only the answers you publish are saved.</p>
+
+  <section id="s0" class="fbpanel">
+    <div class="fbrow">
+      <div><h2 style="margin:0">Firebase</h2><p class="stat" id="fbStatus" style="margin:4px 0 0">Connecting…</p></div>
+      <div class="row">
+        <button type="button" id="fbSignIn">Sign in with Google</button>
+        <button type="button" class="primary" id="fbPublish" hidden>Publish to Firebase</button>
+        <button type="button" id="fbSignOut" hidden>Sign out</button>
+      </div>
+    </div>
+    <p class="stat" id="fbMsg" style="margin:10px 0 0"></p>
+    <details id="fbInbox" hidden style="margin-top:14px"><summary style="cursor:pointer;font-weight:600">Recent tickets from the chat</summary><div id="fbTickets" class="stat" style="margin-top:10px">Loading…</div></details>
+  </section>
+
+  <section id="s1">
+    <h2><span class="n">1</span>Your Zoho Desk tickets</h2>
+    <p class="hint">Optional: build answers from your team's real replies. Drop a Zoho ticket export, then the Threads file from a Zoho <strong>Data Backup</strong>. Files stay in this browser tab and aren't uploaded.</p>
+    <div class="body">
+      <div class="srcbox" id="srcBox"></div>
+      <div class="drop" id="drop" tabindex="0" role="button" style="margin-top:14px">Drop the <strong>Threads</strong> file from your Zoho Data Backup here to add your team's replies<br><span style="font-size:13px">You can also drop a newer ticket export, or a kb.json to keep editing it</span></div>
+      <input type="file" id="file" accept=".csv,.json,text/csv,application/json" hidden>
+      <div id="threadMap" class="threadmap" hidden>
+        <p style="margin:0 0 10px"><strong>Match replies to tickets</strong>. Check these were detected correctly:</p>
+        <div class="grid">
+          <label class="f">Ticket ID column <select id="thId"></select></label>
+          <label class="f">Message text column <select id="thBody"></select></label>
+          <label class="f">Who sent it (column) <select id="thWho"></select></label>
+          <label class="f">It's a team reply when that column contains <input type="text" id="thAgent" value="out"></label>
+        </div>
+        <div class="row" style="margin-top:14px"><button type="button" class="primary" id="thGo">Match replies and build answers</button><span class="stat" id="thStat"></span></div>
+      </div>
+      <details style="margin-top:14px"><summary class="stat" style="cursor:pointer">How to get the Data Backup from Zoho Desk</summary>
+        <ol class="stat" style="margin:8px 0 0;padding-left:20px">
+          <li>In Zoho Desk, go to <strong>Setup → Data Administration → Data Backup</strong> (you need admin access).</li>
+          <li>Start a backup and download it when Zoho emails you that it's ready.</li>
+          <li>Unzip it and drop the file with the ticket <strong>threads</strong> (the email conversations) into the box above.</li>
+        </ol>
+        <p class="stat" style="margin:8px 0 0">Don't see Data Backup? Email support@zohodesk.com and ask for a data backup that includes ticket threads.</p>
+      </details>
+      <div class="row" style="margin-top:14px"><button type="button" id="demo">Try with demo data</button><button type="button" id="addStarter" hidden></button><button type="button" id="addDocs" hidden></button></div>
+      <p class="stat" id="loadStat"></p>
+    </div>
+  </section>
+
+  <section id="s2" aria-disabled="true">
+    <h2><span class="n">2</span>Build answers from your tickets</h2>
+    <p class="hint">This step turns on once your team's replies are added in step 1. Each ticket's subject becomes the question, and your team's reply becomes the answer. Automated alerts (Wordfence, MySQL notices) are left out.</p>
+    <div class="body">
+      <div class="grid">
+        <label class="f">Question <select id="colQ"></select></label>
+        <label class="f">Answer <select id="colA"></select></label>
+        <label class="f">Category (optional) <select id="colCat"></select></label>
+        <label class="f">Status (optional) <select id="colStatus"></select></label>
+        <label class="f">Ticket ID (optional) <select id="colId"></select></label>
+        <label class="f">Extra keywords (optional) <select id="colKw"></select></label>
+      </div>
+      <div id="statusBox" style="margin-top:16px" hidden>
+        <strong style="font-size:13px">Only include tickets with status</strong>
+        <div class="checks" id="statusChecks"></div>
+      </div>
+      <div style="margin-top:16px">
+        <strong style="font-size:13px">Cleaning</strong>
+        <div class="checks">
+          <label><input type="checkbox" id="optPii" checked> Remove emails and phone numbers</label>
+          <label><input type="checkbox" id="optGreet" checked> Remove greetings and sign-offs</label>
+          <label><input type="checkbox" id="optDom" checked> Remove church website addresses</label>
+          <label><input type="checkbox" id="optDedupe" checked> Merge duplicate questions</label>
+          <label>Skip answers shorter than <input type="number" id="optMin" value="25" min="0" style="width:70px"> characters</label>
+        </div>
+      </div>
+      <div class="row" style="margin-top:18px"><button class="primary" id="build">Build entries</button><span class="stat" id="buildStat"></span></div>
+    </div>
+  </section>
+
+  <section id="s3" aria-disabled="true">
+    <h2><span class="n">3</span>Review and edit</h2>
+    <p class="hint">Rewrite questions the way a customer would ask them, tidy answers, and untick anything specific to one customer. Add alternate phrasings (comma-separated) to help matching.</p>
+    <div class="body">
+      <div class="row">
+        <input type="text" id="filter" placeholder="Filter entries…" style="max-width:320px">
+        <button id="addEntry">Add entry</button>
+        <span class="stat" id="count"></span>
+      </div>
+      <div class="entries" id="entries"></div>
+      <div class="pager"><button id="prev">Previous</button><span class="stat" id="page"></span><button id="next">Next</button></div>
+    </div>
+  </section>
+
+  <section id="s4" aria-disabled="true">
+    <h2><span class="n">4</span>Download kb.json</h2>
+    <p class="hint">Upload the file next to the widget (or in the WordPress plugin settings). It includes your answers above plus 62 help-guide answers (30 Cornerstone, 32 WordPress), which the chat uses as its second response when the first fix doesn't work.</p>
+    <div class="body">
+      <div class="row"><button class="primary" id="download">Download kb.json</button><button type="button" id="testChat">Test the chat</button><span class="stat" id="dlStat"></span></div>
+      <p class="stat" id="testStat" style="margin:10px 0 0">"Test the chat" opens the real chat widget in the corner of this page using the entries above, so you can try questions before installing it.</p>
+      <p class="note">The knowledge file is public: anyone can open it in their browser, just like an image on your site. Review entries for customer names, order numbers, or private details before publishing.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var rows = [], headers = [], entries = [], pageNo = 0, PER = 40;
+  var downloads = null;
+  try { if (window.claude && window.claude.use) window.claude.use("downloads").then(function(d){ downloads = d; }).catch(function(){}); } catch (e) {}
+
+  /* ---------- CSV parsing (quotes, escaped quotes, multiline cells, BOM) ---------- */
+  function parseCSV(text){
+    text = text.replace(/^\uFEFF/, "");
+    var out = [], row = [], cell = "", q = false, i, c, delim = ",";
+    var firstLine = text.slice(0, text.indexOf("\n") > -1 ? text.indexOf("\n") : text.length);
+    if ((firstLine.match(/;/g)||[]).length > (firstLine.match(/,/g)||[]).length) delim = ";";
+    if ((firstLine.match(/\t/g)||[]).length > (firstLine.match(/,/g)||[]).length) delim = "\t";
+    for (i = 0; i < text.length; i++){
+      c = text[i];
+      if (q){
+        if (c === '"'){ if (text[i+1] === '"'){ cell += '"'; i++; } else q = false; }
+        else cell += c;
+      } else if (c === '"') q = true;
+      else if (c === delim){ row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r"){
+        if (c === "\r" && text[i+1] === "\n") i++;
+        row.push(cell); cell = "";
+        if (row.length > 1 || row[0] !== "") out.push(row);
+        row = [];
+      } else cell += c;
+    }
+    if (cell !== "" || row.length){ row.push(cell); out.push(row); }
+    return out;
+  }
+
+  /* ---------- Cleaning ---------- */
+  function htmlToText(s){
+    if (!/[<&]/.test(s)) return s;
+    s = s.replace(/<\s*br\s*\/?>/gi, "\n").replace(/<\/(p|div|li|h\d|tr)>/gi, "\n").replace(/<li[^>]*>/gi, "• ");
+    var doc = new DOMParser().parseFromString("<body>" + s + "</body>", "text/html"); // inert, scripts don't run
+    doc.querySelectorAll("script,style,blockquote.zmail_extra,.gmail_quote").forEach(function(n){ n.remove(); });
+    return doc.body.textContent || "";
+  }
+  function tidy(s){
+    return s.replace(/\u00a0/g, " ").replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  function stripPII(s){
+    // protect web links (e.g. Loom video IDs) from the phone-number filter
+    var keep = [];
+    s = s.replace(/https?:\/\/[^\s<>"')\]]+/g, function(u){ keep.push(u); return "\u0001" + (keep.length - 1) + "\u0001"; });
+    return stripPIIText(s).replace(/\u0001(\d+)\u0001/g, function(_, i){ return keep[+i]; });
+  }
+  function stripPIIText(s){
+    return s
+      .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[email removed]")
+      .replace(/(\+?63[\s-]?|0)9\d{2}[\s-]?\d{3}[\s-]?\d{4}\b/g, "[phone removed]")
+      .replace(/\+?\d[\d\s().-]{8,}\d/g, function(m){ return (m.replace(/\D/g,"").length >= 9) ? "[phone removed]" : m; });
+  }
+  function stripGreeting(s){
+    // drop quoted earlier replies
+    s = s.split(/\n(?:On .{5,120} wrote:|-{2,} ?Original Message ?-{2,}|From: .+\nSent: )/i)[0];
+    // leading "Hi Maria," / "Dear Mr. Santos," / "Good day,"
+    s = s.replace(/^\s*(hi|hello|hey|dear|greetings|good (day|morning|afternoon|evening))\b[^\n.!?,]{0,30}[,!.]?\s*\n+/i, "")
+         .replace(/^\s*(hi|hello|hey|dear|greetings|good (day|morning|afternoon|evening))\b[^\n.!?,]{0,30}[,!]\s+/i, "");
+    s = s.replace(/^\s*(thank you|thanks) for (reaching out|contacting|getting in touch|your (patience|message|email))[^\n]*\n+/i, "");
+    // trailing sign-off block
+    s = s.replace(/\n+\s*(best regards|kind regards|warm regards|regards|best|thanks|thank you|sincerely|cheers|cordially)\s*[,!.]?\s*\n[\s\S]{0,300}$/i, "");
+    return s;
+  }
+  var DOMAIN = /\b(?:https?:\/\/)?(?:www\.)?[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*\.(?:org|com|net|church|us|info|co|ph|ca|uk|tv|io|site|online)(?:\/[^\s,)]*)?/gi;
+  function stripDomains(t, isQuestion){
+    if (isQuestion) return t.replace(DOMAIN, "").replace(/\s*[-–:|]\s*$/, "").replace(/\s+(for|on|at)\s*$/i, "").replace(/\s{2,}/g, " ").trim();
+    return t.replace(DOMAIN, function(m){ return /reachrightstudios|stripe\.com|google\.com|youtube\.com|youtu\.be|vimeo\.com|loom\.com|wordpress\.org/i.test(m) ? m : "your website"; });
+  }
+  function norm(s){ return s.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function tokenSet(s){ var o = {}; norm(s).split(" ").forEach(function(w){ if (w.length > 2) o[w] = 1; }); return o; }
+  function jaccard(a, b){
+    var ka = Object.keys(a), kb = Object.keys(b), inter = 0;
+    if (!ka.length || !kb.length) return 0;
+    ka.forEach(function(k){ if (b[k]) inter++; });
+    return inter / (ka.length + kb.length - inter);
+  }
+
+  /* ---------- Step 1: load ---------- */
+  var drop = $("drop"), file = $("file");
+  drop.addEventListener("click", function(){ file.click(); });
+  drop.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); file.click(); } });
+  ["dragenter","dragover"].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add("over"); }); });
+  ["dragleave","drop"].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove("over"); }); });
+  drop.addEventListener("drop", function(e){ if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); });
+  file.addEventListener("change", function(){ if (file.files[0]) load(file.files[0]); file.value = ""; });
+
+  function load(f){
+    var reader = new FileReader();
+    reader.onload = function(){ handleText(String(reader.result), f.name); };
+    reader.readAsText(f);
+  }
+  function handleText(text, name){
+    var f = { name: name };
+    {
+      if (/\.json$/i.test(f.name) || /^\s*[\[{]/.test(text)) return loadJson(text, f.name);
+      var data = parseCSV(text);
+      if (data.length < 2){ $("loadStat").textContent = "That file has no rows. Check that it's a CSV file with a header row."; return; }
+      if (looksLikeThreads(data[0])) {
+        threadHeaders = data[0].map(function(h){ return h.trim(); }); threadRows = data.slice(1);
+        showThreadMap(f.name); return;
+      }
+      if (data[0].some(function(h){ return /^subject$/i.test(h.trim()); })) {
+        // a newer ticket export replaces the preloaded tickets
+        preload = { source: f.name, headers: data[0].map(function(h){ return h.trim(); }), rows: data.slice(1) };
+        usePreload();
+        $("loadStat").innerHTML = '<span class="ok">Using ' + preload.rows.length + " tickets from " + escapeHtml(f.name) + ".</span>";
+        return;
+      }
+      headers = data[0].map(function(h){ return h.trim(); });
+      rows = data.slice(1);
+      $("loadStat").innerHTML = '<span class="ok">Loaded ' + rows.length + " tickets</span> from " + escapeHtml(f.name) + " with " + headers.length + " columns.";
+      setupColumns();
+      enable("s2", true);
+      $("s2").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  }
+  $("demo").addEventListener("click", function(){
+    handleText(document.getElementById("demoCsv").textContent ? JSON.parse(document.getElementById("demoCsv").textContent) : "", "cornerstone-demo-tickets.csv");
+  });
+  $("addStarter").addEventListener("click", function(){
+    var btn = $("addStarter");
+    var list = JSON.parse(JSON.parse(document.getElementById("starterKb").textContent)).entries;
+    list.forEach(function(e){
+      entries.push({ id: e.id, q: e.q, a: e.a, cat: e.cat || "", alt: (e.alt || []).join(", "), on: true, src: "starter", handoff: !!e.handoff, video: e.video || "" });
+    });
+    btn.disabled = true; btn.textContent = "Starter answers added";
+    $("loadStat").innerHTML = '<span class="ok">Added ' + list.length + " starter answers.</span> Add the Themeco docs answers too, or go straight to Test the chat.";
+    showReview();
+  });
+  $("addDocs").addEventListener("click", function(){
+    var btn = $("addDocs");
+    var list = JSON.parse(JSON.parse(document.getElementById("docsKb").textContent)).entries;
+    list.forEach(function(e){
+      entries.push({ id: e.id, q: e.q, a: e.a, cat: e.cat || "", alt: (e.alt || []).join(", "), on: true, src: "docs" });
+    });
+    btn.disabled = true; btn.textContent = "Themeco docs answers added";
+    $("loadStat").innerHTML = '<span class="ok">Added ' + list.length + " answers from Themeco docs.</span> You can also load a CSV to add your own tickets.";
+    showReview();
+  });
+  function loadJson(text, name){
+    try {
+      var data = JSON.parse(text);
+      var list = Array.isArray(data) ? data : data.entries;
+      if (!Array.isArray(list)) throw new Error("no entries");
+      list.forEach(function(e){
+        entries.push({ id: e.id || "", q: e.q || "", a: e.a || "", cat: e.cat || "", alt: (e.alt || []).join(", "), on: true, handoff: !!e.handoff, video: e.video || "" });
+      });
+      $("loadStat").innerHTML = '<span class="ok">Added ' + list.length + " existing entries</span> from " + escapeHtml(name) + ". Load a CSV too if you want to add new tickets.";
+      showReview();
+    } catch (err){
+      $("loadStat").textContent = "That JSON file isn't a knowledge file this tool recognizes.";
+    }
+  }
+
+  /* ---------- Step 2: columns ---------- */
+  function guess(re){ for (var i = 0; i < headers.length; i++) if (re.test(headers[i])) return i; return -1; }
+  function fillSelect(sel, idx, optional){
+    sel.innerHTML = (optional ? '<option value="-1">— none —</option>' : "") +
+      headers.map(function(h, i){ return '<option value="' + i + '">' + escapeHtml(h || "Column " + (i+1)) + "</option>"; }).join("");
+    sel.value = String(idx >= 0 ? idx : (optional ? -1 : 0));
+  }
+  function setupColumns(){
+    fillSelect($("colQ"), guess(/^subject$|subject|question|title/i), false);
+    fillSelect($("colA"), guess(/resolution|solution|answer|agent.?response|reply/i) >= 0 ? guess(/resolution|solution|answer|agent.?response|reply/i) : guess(/description/i), false);
+    fillSelect($("colCat"), guess(/category|classification|department|product/i), true);
+    fillSelect($("colStatus"), guess(/^status$|status/i), true);
+    fillSelect($("colId"), guess(/ticket.?(id|number|no)|request.?id|^id$/i), true);
+    fillSelect($("colKw"), guess(/tags?|keywords?|sub.?category/i), true);
+    $("colStatus").onchange = setupStatus;
+    setupStatus();
+  }
+  function setupStatus(){
+    var idx = +$("colStatus").value, box = $("statusBox"), wrap = $("statusChecks");
+    if (idx < 0){ box.hidden = true; return; }
+    var counts = {};
+    rows.forEach(function(r){ var v = (r[idx] || "").trim() || "(blank)"; counts[v] = (counts[v] || 0) + 1; });
+    var keys = Object.keys(counts).sort(function(a,b){ return counts[b]-counts[a]; });
+    var anyClosed = keys.some(function(k){ return /closed|resolved|solved/i.test(k); });
+    wrap.innerHTML = keys.map(function(k){
+      var on = !anyClosed || /closed|resolved|solved/i.test(k);
+      return '<label><input type="checkbox" value="' + escapeHtml(k) + '"' + (on ? " checked" : "") + "> " + escapeHtml(k) + " (" + counts[k] + ")</label>";
+    }).join("");
+    box.hidden = false;
+  }
+
+  $("build").addEventListener("click", function(){
+    var ansHeader = headers[+$("colA").value] || "";
+    if (!headers.some(function(h){ return /resolution|solution|answer|reply/i.test(h); }) && /^(id|request id|ticket id)$/i.test(ansHeader.trim())) {
+      $("buildStat").innerHTML = "Your tickets don't include your team's replies yet. Add the Threads file from a Zoho Data Backup in step 1, and the answers will be built from your actual solutions. Until then, the chat uses the starter answers.";
+      return;
+    }
+    var cQ = +$("colQ").value, cA = +$("colA").value, cCat = +$("colCat").value, cSt = +$("colStatus").value,
+        cId = +$("colId").value, cKw = +$("colKw").value, minLen = +$("optMin").value || 0;
+    var pii = $("optPii").checked, greet = $("optGreet").checked, dedupe = $("optDedupe").checked;
+    var allowed = null;
+    if (cSt >= 0){
+      allowed = {};
+      $("statusChecks").querySelectorAll("input:checked").forEach(function(i){ allowed[i.value] = 1; });
+    }
+    var skipped = { status: 0, empty: 0, short: 0, dup: 0, auto: 0 }, fresh = [];
+    var AUTO = /wordfence|mysql|share your feedback|backup (report|complete|failed)|updraft|jetpack|uptime|auto.?update|security scan|delivery status notification|undeliverable/i;
+    rows.forEach(function(r){
+      if (AUTO.test(r[cQ] || "")) { skipped.auto++; return; }
+      if (allowed && !allowed[(r[cSt] || "").trim() || "(blank)"]) { skipped.status++; return; }
+      var q = tidy(htmlToText(r[cQ] || "")).replace(/^(re|fw|fwd)\s*:\s*/i, "");
+      var a = tidy(htmlToText(r[cA] || ""));
+      if (greet) a = tidy(stripGreeting(a));
+      if (pii){ a = stripPII(a); q = stripPII(q); }
+      if ($("optDom").checked){ q = stripDomains(q, true); a = stripDomains(a, false); }
+      if (!q || !a){ skipped.empty++; return; }
+      if (a.length < minLen){ skipped.short++; return; }
+      fresh.push({
+        id: cId >= 0 ? (r[cId] || "").trim() : "",
+        q: q, a: a,
+        cat: cCat >= 0 ? (r[cCat] || "").trim() : "",
+        alt: cKw >= 0 ? (r[cKw] || "").replace(/[;|]/g, ",").trim() : "",
+        on: true, src: "csv", sol: true, handoff: false
+      });
+    });
+    if (dedupe){
+      var kept = [];
+      fresh.forEach(function(e){
+        var ts = tokenSet(e.q), match = null;
+        for (var i = 0; i < kept.length; i++){
+          if (norm(kept[i].q) === norm(e.q) || jaccard(kept[i]._ts, ts) >= 0.8){ match = kept[i]; break; }
+        }
+        if (!match){ e._ts = ts; kept.push(e); return; }
+        skipped.dup++;
+        if (e.a.length > match.a.length) match.a = e.a;       // keep the fuller answer
+        if (norm(match.q) !== norm(e.q)) match.alt = [match.alt, e.q].filter(Boolean).join(", ");
+      });
+      fresh = kept;
+    }
+    fresh.forEach(function(e){ delete e._ts; });
+    // Rebuilding replaces the previous build instead of adding a second copy; manual and kb.json entries stay.
+    var before = entries.length;
+    entries = entries.filter(function(e){ return e.src !== "csv"; });
+    var replaced = before - entries.length;
+    entries = fresh.concat(entries);   // answers from real tickets come first
+    $("buildStat").innerHTML = '<span class="ok">' + fresh.length + " entries built.</span> Skipped: " +
+      skipped.status + " by status, " + skipped.empty + " missing question or answer, " +
+      skipped.short + " too short, " + skipped.dup + " merged as duplicates, " + skipped.auto + " automated alerts." +
+      (replaced ? " Replaced the " + replaced + " entries from your previous build." : "");
+    if (!fresh.length && skipped.empty > rows.length / 2){
+      $("buildStat").innerHTML = "Your tickets don't include your team's replies yet. Add the Threads file from a Zoho Data Backup in step 1, and the answers will be built from your actual solutions. Until then, the chat uses the starter answers.";
+    }
+    pageNo = 0;
+    showReview();
+  });
+
+  /* ---------- Step 3: review ---------- */
+  function showReview(){ enable("s3", true); enable("s4", true); render(); $("s3").scrollIntoView({behavior:"smooth", block:"start"}); }
+  function filtered(){
+    var f = norm($("filter").value);
+    return entries.map(function(e, i){ return { e: e, i: i }; })
+      .filter(function(x){ return !f || norm(x.e.q + " " + x.e.a + " " + x.e.alt).indexOf(f) > -1; });
+  }
+  function render(){
+    var list = filtered(), pages = Math.max(1, Math.ceil(list.length / PER));
+    if (pageNo >= pages) pageNo = pages - 1;
+    var slice = list.slice(pageNo * PER, pageNo * PER + PER);
+    $("entries").innerHTML = slice.map(function(x){
+      var e = x.e;
+      return '<div class="entry' + (e.on ? "" : " off") + '" data-i="' + x.i + '">' +
+        '<input type="checkbox" data-k="on" aria-label="Include this entry"' + (e.on ? " checked" : "") + ">" +
+        '<div class="fields">' +
+          '<div class="meta">' + (e.src === "fb" ? "Published answer" : e.src === "docs" ? "From Themeco docs" : e.src === "starter" ? "Starter answer (used until your real replies cover this)" : e.id ? "From ticket #" + escapeHtml(e.id) : "Manual entry") + (e.cat ? " in " + escapeHtml(e.cat) : "") + "</div>" +
+          '<input type="text" class="q" data-k="q" aria-label="Question" value="' + escapeHtml(e.q) + '">' +
+          '<textarea rows="3" data-k="a" aria-label="Answer">' + escapeHtml(e.a) + "</textarea>" +
+          '<input type="text" data-k="alt" aria-label="Other ways to ask" placeholder="Other ways to ask, comma-separated" value="' + escapeHtml(e.alt) + '">' +
+          '<input type="text" data-k="video" aria-label="Loom video link" placeholder="Loom video link (optional), e.g. https://www.loom.com/share/…" value="' + escapeHtml(e.video || "") + '">' +
+          '<label class="meta" style="display:flex;gap:6px;align-items:center"><input type="checkbox" data-k="handoff"' + (e.handoff ? " checked" : "") + '> Show the Submit a ticket button right away (for urgent issues like a site being down)</label>' +
+        "</div></div>";
+    }).join("") || '<p class="stat">No entries match that filter.</p>';
+    var on = entries.filter(function(e){ return e.on; }).length;
+    $("count").textContent = on + " of " + entries.length + " entries included";
+    $("page").textContent = "Page " + (pageNo + 1) + " of " + pages;
+    $("prev").disabled = pageNo === 0; $("next").disabled = pageNo >= pages - 1;
+  }
+  $("entries").addEventListener("input", function(ev){
+    var t = ev.target, box = t.closest(".entry"); if (!box) return;
+    var e = entries[+box.dataset.i], k = t.dataset.k;
+    if (k === "handoff"){ e.handoff = t.checked; return; }
+    if (k === "on"){ e.on = t.checked; box.classList.toggle("off", !t.checked); $("count").textContent = entries.filter(function(x){ return x.on; }).length + " of " + entries.length + " entries included"; }
+    else e[k] = t.value;
+  });
+  $("filter").addEventListener("input", function(){ pageNo = 0; render(); });
+  $("prev").addEventListener("click", function(){ pageNo--; render(); });
+  $("next").addEventListener("click", function(){ pageNo++; render(); });
+  $("addEntry").addEventListener("click", function(){
+    entries.unshift({ id: "", q: "", a: "", cat: "", alt: "", on: true });
+    $("filter").value = ""; pageNo = 0; enable("s4", true); render();
+    var first = $("entries").querySelector("input.q"); if (first) first.focus();
+  });
+
+  /* ---------- Step 4: download ---------- */
+  function guideList(){ if (window.__fbResources) return window.__fbResources; try { return JSON.parse(JSON.parse(document.getElementById("starterKb").textContent)).resources || []; } catch (e) { return []; } }
+  function currentOut(){
+    return entries.filter(function(e){ return e.on && e.q.trim() && e.a.trim(); }).map(function(e, n){
+      var o = { id: e.id || "m" + (n + 1), q: e.q.trim(), a: e.a.trim() };
+      var alt = e.alt.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      if (alt.length) o.alt = alt;
+      if (e.cat) o.cat = e.cat;
+      if (e.handoff) o.handoff = true;
+      if (e.src === "csv") o.src = "ticket";
+      if (e.video && /^https:\/\/(www\.)?loom\.com\/(share|embed)\/[a-f0-9]{16,40}/i.test(e.video.trim())) o.video = e.video.trim();
+      return o;
+    });
+  }
+  $("testChat").addEventListener("click", function(){
+    var out = currentOut();
+    if (!out.length){ $("testStat").textContent = "Add or include at least one entry first, then click Test the chat."; return; }
+    var old = document.getElementById("support-chat-root");
+    if (old) old.remove();
+    window.__supportChatLoaded = false;
+    window.SupportChatConfig = {
+      kbData: { entries: out, resources: guideList() }, persist: "false", 
+      subtitle: "Test mode, " + out.length + " answers loaded",
+      suggestions: out.slice(0, 3).map(function(e){ return e.q; }),
+      supportEmail: "support@reachrightstudios.com", ticketEndpoint: "test", contactLabel: "Submit a ticket"
+    };
+    var sc = document.createElement("script");
+    sc.textContent = document.getElementById("widgetSrc").textContent;
+    document.body.appendChild(sc);
+    setTimeout(function(){ if (window.SupportChat) window.SupportChat.open(); }, 50);
+    $("testStat").innerHTML = '<span class="ok">Chat opened in the bottom-right corner</span> with ' + out.length + ' entries. Edit entries and click Test the chat again to reload it.';
+  });
+
+  $("download").addEventListener("click", function(){
+    var out = entries.filter(function(e){ return e.on && e.q.trim() && e.a.trim(); }).map(function(e, n){
+      var o = { id: e.id || "m" + (n + 1), q: e.q.trim(), a: e.a.trim() };
+      var alt = e.alt.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      if (alt.length) o.alt = alt;
+      if (e.cat) o.cat = e.cat;
+      if (e.handoff) o.handoff = true;
+      if (e.src === "csv") o.src = "ticket";
+      if (e.video && /^https:\/\/(www\.)?loom\.com\/(share|embed)\/[a-f0-9]{16,40}/i.test(e.video.trim())) o.video = e.video.trim();
+      return o;
+    });
+    if (!out.length){ $("dlStat").textContent = "Nothing to download yet. Include at least one entry with a question and answer."; return; }
+    var guides = guideList();
+    var json = JSON.stringify({ meta: { source: "Zoho Desk tickets + Cornerstone and WordPress help guides", generated: new Date().toISOString().slice(0,10), count: out.length, resources: guides.length }, entries: out, resources: guides }, null, 1);
+    var blob = new Blob([json], { type: "application/json" });
+    var done = function(){ $("dlStat").innerHTML = '<span class="ok">Saved kb.json</span> with ' + out.length + " entries (" + Math.ceil(blob.size / 1024) + " KB)."; };
+    if (downloads){
+      downloads.save({ filename: "kb.json", data: blob }).then(done).catch(function(err){
+        var code = err && err.code;
+        $("dlStat").textContent = code === "declined" ? "Save cancelled. Click Download kb.json to try again."
+          : code === "rate_limited" ? "A save prompt is already open. Finish or close it, then try again."
+          : "This view can't save files. Open the builder file from the download package instead.";
+      });
+      return;
+    }
+    if (window.claude){ $("dlStat").textContent = "Saving isn't available in this view yet. Wait a moment and click again, or use the builder file from the download package."; return; }
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "kb.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    done();
+  });
+
+
+  /* ---------- Preloaded tickets + Data Backup threads ---------- */
+  var preload = null; // filled from the embedded ticket export once the page has loaded
+  var ticketIndex = {};           // ticket ID or Request Id -> row index in preload
+  var threadRows = [], threadHeaders = [];
+  function indexTickets(){
+    ticketIndex = {};
+    var iId = preload.headers.indexOf("ID"), iReq = preload.headers.indexOf("Request Id");
+    preload.rows.forEach(function(r, i){
+      if (iId > -1 && r[iId]) ticketIndex[String(r[iId]).trim()] = i;
+      if (iReq > -1 && r[iReq]) ticketIndex["#" + String(r[iReq]).trim()] = i;
+    });
+  }
+  function usePreload(){
+    if (!preload.rows.length) {
+      headers = []; rows = []; ticketIndex = {};
+      $("srcBox").innerHTML = "<strong>No tickets loaded.</strong> Drop a Zoho ticket export here to build answers from your tickets (optional).";
+      enable("s2", false);
+      return;
+    }
+    headers = preload.headers.slice(); rows = preload.rows.map(function(r){ return r.slice(); });
+    indexTickets();
+    var iT = headers.indexOf("Created Time"), times = rows.map(function(r){ return r[iT] || ""; }).filter(Boolean).sort();
+    var hasAnswers = headers.indexOf("Resolution") > -1;
+    var answered = hasAnswers ? rows.filter(function(r){ return (r[headers.indexOf("Resolution")] || "").trim(); }).length : 0;
+    $("srcBox").innerHTML = "<strong>" + rows.length + " tickets loaded</strong> from " + escapeHtml(preload.source) +
+      (times.length ? " (" + times[0].slice(0, 10) + " to " + times[times.length - 1].slice(0, 10) + ")" : "") + "<br>" +
+      (hasAnswers ? '<span class="ok">' + answered + " tickets matched with your team's replies.</span>"
+                  : "Your team's replies: <strong>not added yet</strong>. Until they are, the chat uses the starter answers below.");
+    setupColumns(); enable("s2", hasAnswers);
+  }
+  function looksLikeThreads(h){
+    var hasId = h.some(function(x){ return /ticket.?id|case.?id|entity.?id|parent.?id|request.?id/i.test(x); });
+    var hasBody = h.some(function(x){ return /content|plain.?text|body|message|summary/i.test(x); });
+    var hasSubject = h.some(function(x){ return /^subject$/i.test(x.trim()); });
+    return hasId && hasBody && !hasSubject;
+  }
+  function pick(sel, re, optional){
+    var idx = -1; for (var i = 0; i < threadHeaders.length; i++) if (re.test(threadHeaders[i])) { idx = i; break; }
+    sel.innerHTML = (optional ? '<option value="-1">— none —</option>' : "") + threadHeaders.map(function(h, i){ return '<option value="' + i + '">' + escapeHtml(h) + "</option>"; }).join("");
+    sel.value = String(idx > -1 ? idx : (optional ? -1 : 0));
+    return idx;
+  }
+  function showThreadMap(name){
+    pick($("thId"), /ticket.?id|case.?id|entity.?id|parent.?id|request.?id/i);
+    pick($("thBody"), /plain.?text|content|body|message|summary/i);
+    var w = pick($("thWho"), /direction|is.?outgoing|from.?type|author.?type|^type$|^from$|from.?email|sender|author/i, true);
+    var sample = w > -1 ? threadRows.slice(0, 50).map(function(r){ return (r[w] || "").toLowerCase(); }).join(" ") : "";
+    $("thAgent").value = /\bout(going)?\b/.test(sample) ? "out" : /agent/.test(sample) ? "agent" : "reachright";
+    $("threadMap").hidden = false;
+    $("loadStat").innerHTML = '<span class="ok">Loaded ' + threadRows.length + " messages</span> from " + escapeHtml(name) + ". Check the columns, then click Match replies.";
+    $("threadMap").scrollIntoView({behavior:"smooth", block:"center"});
+  }
+  var ACK = /(we (have|'ve) received|has been (received|created|logged)|ticket (number|#)|request (#|number|id)|auto.?reply|this is an automated|thank you for (contacting|reaching out)[^.]*\.\s*$)/i;
+  $("thGo").addEventListener("click", function(){
+    var cId = +$("thId").value, cBody = +$("thBody").value, cWho = +$("thWho").value, agentWord = $("thAgent").value.trim().toLowerCase();
+    var replies = {}, videosFor = {}, matched = 0, unmatched = 0;
+    threadRows.forEach(function(r){
+      var raw = String(r[cId] || "").trim(), idx = ticketIndex[raw];
+      if (idx === undefined) idx = ticketIndex["#" + raw.replace(/^#/, "")];
+      if (idx === undefined) { unmatched++; return; }
+      if (cWho > -1 && agentWord && String(r[cWho] || "").toLowerCase().indexOf(agentWord) === -1) return;
+      var t = tidy(stripGreeting(tidy(htmlToText(String(r[cBody] || "")))));
+      var looms = t.match(/https?:\/\/(?:www\.)?loom\.com\/(?:share|embed)\/[a-f0-9]{16,40}/gi) || [];
+      if (looms.length) { var lv = (videosFor[idx] = videosFor[idx] || []); looms.forEach(function(u){ if (lv.indexOf(u) === -1) lv.push(u); }); }
+      if (t.length < 40 || (t.length < 260 && ACK.test(t))) return;
+      matched++;
+      (replies[idx] = replies[idx] || []).push(t);
+    });
+    // The fullest team reply on each ticket is usually the actual solution.
+    var iRes = preload.headers.indexOf("Resolution");
+    if (iRes === -1) { preload.headers.push("Resolution"); iRes = preload.headers.length - 1; }
+    var withReply = 0, withVideo = 0;
+    preload.rows.forEach(function(r, i){
+      while (r.length < preload.headers.length) r.push("");
+      var list = replies[i];
+      if (list && list.length) {
+        var best = list.sort(function(a, b){ return b.length - a.length; })[0].slice(0, 2500);
+        (videosFor[i] || []).forEach(function(u){ if (best.indexOf(u) === -1) best += "\n\nVideo walkthrough: " + u; });
+        r[iRes] = best; withReply++; withVideo += (videosFor[i] || []).length ? 1 : 0;
+      }
+    });
+    usePreload();
+    $("thStat").innerHTML = '<span class="ok">' + withReply + " tickets now have your team's reply</span>" + (withVideo ? ", " + withVideo + " with a Loom video," : "") + " (" + matched + " replies used" + (unmatched ? ", " + unmatched + " messages didn't match a loaded ticket" : "") + ").";
+    if (!withReply) { $("thStat").innerHTML = "No team replies matched. Check the Ticket ID column and the \"team reply\" setting above."; return; }
+    $("colA").value = String(headers.indexOf("Resolution"));
+    $("build").click();
+  });
+
+  function enable(id, on){ $(id).setAttribute("aria-disabled", on ? "false" : "true"); }
+  window.__builder = {
+    output: function(){ return { entries: currentOut(), resources: guideList() }; },
+    load: function(data){
+      var list = (data && data.entries) || [];
+      entries = list.map(function(e){
+        return { id: e.id || "", q: e.q || "", a: e.a || "", cat: e.cat || "", alt: (e.alt || []).join(", "), on: true,
+                 src: e.src === "ticket" ? "csv" : "fb", handoff: !!e.handoff, video: e.video || "" };
+      });
+      window.__fbResources = (data && data.resources) || null;
+      $("addStarter").disabled = true;
+      $("filter").value = ""; pageNo = 0;
+      enable("s3", true); enable("s4", true); render();
+    }
+  };
+  function init(){
+    preload = JSON.parse(document.getElementById("preloadTickets").textContent);
+    usePreload();
+    $("addStarter").click();
+    $("loadStat").textContent = "";
+    setTimeout(function(){ window.scrollTo({ top: 0, behavior: "auto" }); }, 400);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+})();
+</script>
+<script type="application/json" id="demoCsv">"Ticket Id,Subject,Description,Status,Category,Resolution\n3101,Cornerstone stuck on loading screen,\"Hi, when I click Edit with Cornerstone the builder just keeps loading forever. My email is mark.reyes@gmail.com\",Closed,Builder,\"<p>Hi Mark,<\/p><p>A builder that freezes on the loading screen is almost always a plugin conflict. Please go to <b>Dashboard \u2192 Plugins<\/b> and deactivate all plugins (keep Cornerstone active if it's installed as a plugin). Then open the builder again.<\/p><p>If it loads, reactivate your plugins one at a time until the problem comes back; the last one you turned on is the cause. Also make sure your theme and Cornerstone are updated to the latest version.<\/p><p>Best regards,<br>Jun<br>Support Team<\/p>\"\n3102,\"Builder won't load, spinning forever\",\"Page builder spinning, cannot edit\",Closed,Builder,\"Hello! This is usually caused by a conflict with another plugin, often caching, minify, or security plugins. Deactivate your other plugins, test the builder, then turn them back on one by one to find the culprit. Call us at 0917 555 0142 if you need help.\"\n3103,Changes not showing on live site after saving,I saved in Cornerstone but the live page still shows the old design,Closed,Saving & publishing,\"<p>Good day,<\/p><p>Your changes are saved, but a cache is showing the old version. Please clear your caching plugin, your hosting cache (many hosts have a \"\"Purge cache\"\" button), and your CDN such as Cloudflare. Then reload the page in a private browser window.<\/p><p>If it still looks old, temporarily disable the caching plugin to confirm.<\/p><p>Kind regards,<br>Ana<\/p>\"\n3104,Save failed error in Cornerstone,Every time I click save I get an error that saving failed,Closed,Saving & publishing,\"<p>Hi there,<\/p><p>When saving fails, the request is often being blocked by a server firewall or security rule (for example ModSecurity or a security plugin) or the server is running out of memory. Please:<\/p><p>1. Temporarily disable security/firewall plugins and try saving again.<br>2. Ask your host to check the server firewall log for blocked requests from the Cornerstone editor.<br>3. Increase the PHP memory limit to at least 256M.<\/p><p>Regards,<br>Jun<\/p>\"\n3105,How do I increase PHP memory limit?,Support told me memory is too low,Closed,Hosting & server,\"You can raise the memory limit by adding this line to your wp-config.php file, above the line that says \"\"That's all, stop editing\"\":\n\ndefine( 'WP_MEMORY_LIMIT', '256M' );\n\nIf your host caps memory lower than that, the change won't apply. In that case ask your hosting provider to raise the PHP memory limit for you.\"\n3106,Preview error: conflict on the front end prevented preview from loading,Getting a message that a conflict prevented the preview from loading,Closed,Builder,\"<p>Hi,<\/p><p>That message is a general preview error. First update your theme and Cornerstone to the latest version, since newer versions show a more specific error. Then turn on WordPress debug mode to see the actual error, switch from your child theme to the parent theme to rule out custom code, and test for a plugin conflict.<\/p><p>Thanks,<br>Ana<br>Support<\/p>\"\n3107,Builder broken on staging site,Cornerstone works on live but not on my staging copy,Closed,Hosting & server,\"Staging copies sometimes keep URLs from the live site in places the staging tool can't rewrite, which breaks the builder preview. Check Settings \u2192 General and make sure both the WordPress Address and Site Address use the staging URL. Then run a search-and-replace of the live URL with the staging URL in the database, and clear all caches.\"\n3108,Where do I add custom CSS?,I want to add my own CSS to change the button colors,Closed,Customization,\"You can add custom CSS in two places:\n\n**Site-wide:** open Theme Options and use the global CSS editor. It applies to every page.\n**One page only:** open the page in Cornerstone and use that page's CSS editor in the page settings.\n\nAvoid editing theme files directly, since updates will overwrite them. For bigger customizations, use a child theme.\"\n3109,Add custom JavaScript / tracking code,Where can I put my Facebook pixel or custom JS?,Closed,Customization,\"Custom JavaScript can go in the global JS editor in Theme Options (for every page) or in a single page's JS editor in Cornerstone. For tracking codes like Google Analytics or Meta Pixel that must be in the <head>, a header-scripts plugin or your child theme's functions.php is more reliable.\"\n3110,Should I use a child theme?,Do I need a child theme for my website?,Closed,Customization,\"Use a child theme if you plan to edit PHP templates or add code to functions.php. It keeps your changes safe when the theme updates. If you only use Cornerstone's settings and the CSS/JS editors, a child theme isn't required. Download the child theme from your license account, install it, then activate it (keep the parent theme installed).\"\n3111,Layout looks different on mobile,My columns look fine on desktop but are messed up on phones,Closed,Responsive design,\"<p>Hello Carla,<\/p><p>Cornerstone lets you set different values for each screen size. In the builder, switch the preview to the phone breakpoint, select the element, and change its settings there (for example, set columns to stack, reduce padding, or lower the font size). Values set on mobile only affect that breakpoint.<\/p><p>You can also hide an element on certain screen sizes using its visibility settings.<\/p><p>Best,<br>Jun<\/p>\"\n3112,Hide section on mobile,How to hide a section only on phones?,Closed,Responsive design,\"Select the section in Cornerstone, open its settings, and find the visibility/hide options. Choose to hide it on the smallest breakpoints. Preview using the phone view to confirm.\"\n3113,Change fonts across the whole site,How do I change the font everywhere at once?,Closed,Design,\"Use the global Font Manager in Cornerstone to define your site fonts (including Google Fonts or custom uploaded fonts), then pick those fonts in Theme Options and in elements. When you change a global font later, every element using it updates automatically.\"\n3114,Set brand colors globally,Can I set my brand colors once and reuse them?,Closed,Design,\"Yes. Add your brand colors in Cornerstone's global Color Manager. Then choose those saved colors when styling elements. If you update a global color, it changes everywhere it's used, which makes rebranding much faster.\"\n3115,How do I edit the header?,I can't figure out how to change the menu and logo in the header,Closed,Headers & footers,\"On your website, open Cornerstone and go to Layouts \u2192 Headers. Create or edit a header, add your logo, navigation, and buttons, then set where it should display using the assignment conditions.\"\n3116,Different footer on some pages,I want a different footer on my landing pages,Closed,Headers & footers,\"Create a second footer in Cornerstone under Layouts \u2192 Footers. Then use its assignment conditions to show it only on the landing pages you choose, while your main footer stays on the rest of the site.\"\n3117,WooCommerce shop page won't edit in Cornerstone,Edit with Cornerstone doesn't change my shop page,Closed,WooCommerce,\"The WooCommerce shop page doesn't display content from the page editor; WooCommerce replaces it with its product archive template. To customize it, create a Shop/Archive layout in Cornerstone and assign it to the shop page, or style the product archive through Theme Options.\"\n3118,Product not showing in looper,My looper shows no products,Closed,WooCommerce,\"An empty looper usually means the Looper Provider's query returns nothing. Check the provider settings: post type should be Products, and remove any category, tag, or status filters to test. Make sure the Looper Consumer (the element that repeats) sits inside the provider.\"\n3119,License says not validated,My site shows a notice that the theme is not validated,Closed,Account & license,\"Open your theme's Validation page in WordPress and enter your license code to validate the site. If it says the code is already in use, log in to your license account and remove the old site from the license first, then validate again. Validation gives you automatic updates and access to templates.\"\n3120,\"Moving site to a new domain, license\",We moved to a new domain and now validation fails,Closed,Account & license,\"Log in to your license account, open your licenses, and revoke the license from the old domain. Then enter the code again on the new domain's Validation page. Also clear caches after moving so old URLs aren't served.\"\n3121,404 errors on new pages,New pages give 404 not found,Closed,Hosting & server,This is usually a permalink issue. Go to Settings \u2192 Permalinks and click Save Changes without changing anything. That rebuilds WordPress's link rules and normally fixes 404s on new pages.\n3122,Cloudflare breaking the builder,Since enabling Cloudflare the builder behaves strangely,Closed,Hosting & server,\"CDN optimizations such as Rocket Loader and JavaScript minification can break the builder. Turn off Rocket Loader and auto-minify for JavaScript, or add a page rule to bypass cache for /wp-admin/ and the Cornerstone editor URL. Purge the Cloudflare cache afterward.\"\n3123,How to update my theme and Cornerstone,What is the safest way to update?,Closed,Account & license,\"Back up your site first. Then, with your site validated, go to Dashboard \u2192 Updates and update the theme and Cornerstone together, since versions are designed to match. After updating, clear all caches. If you use a child theme, your customizations stay in place.\"\n3124,Refund request for my license,I want a refund,Open,Account & license,\n3125,Cornerstone not loading on edit,Cornerstone editor will not open,Closed,Builder,\"Please test for a plugin conflict: deactivate all other plugins and see if the builder opens. If it does, turn them back on one at a time to find the one causing it.\"\n3126,Site looks broken after update,\"After updating, some styles look wrong\",Closed,Saving & publishing,\"After an update, old cached CSS can make the site look broken. Clear your caching plugin, hosting cache, CDN, and browser cache. If it's still wrong, check whether any custom CSS targets classes that changed, and test with your child theme's custom code temporarily removed.\"\n3127,Import a template,How do I use one of the premade templates?,Closed,Design,\"Open a page in Cornerstone, open the template library, browse the available templates or sections, and click to add one to your page. You can then edit text, images, and colors like any other element. A validated license gives access to the full template library.\"\n3128,Can I use Cornerstone with another theme?,Does Cornerstone work with any theme?,Closed,Getting started,\"Yes. Cornerstone is also available as a standalone plugin that works with third-party themes. Install and activate the Cornerstone plugin, then edit pages with it. Some features that depend on the original theme's structure may behave differently with other themes.\"\n"</script>
+<script type="text/plain" id="widgetSrc">/*!
+ * Support Chat Widget — self-contained, no API.
+ * Answers come from a local knowledge file (kb.json) built from your Zoho Desk ticket export.
+ *
+ * Embed:
+ *   <script src="/support-chat/support-chat.js"
+ *           data-kb="/support-chat/kb.json"
+ *           data-title="Help center"
+ *           data-color="#1f6feb" defer><\/script>
+ *
+ * Or set window.SupportChatConfig = {...} before the script loads (used by the WordPress plugin).
+ */
+(function () {
+  "use strict";
+  if (window.__supportChatLoaded) return;
+  window.__supportChatLoaded = true;
+
+  /* ------------------------------------------------------------------ *
+   * Config
+   * ------------------------------------------------------------------ */
+  var script = document.currentScript;
+  var ds = (script && script.dataset) || {};
+  var user = window.SupportChatConfig || {};
+  function pick(key, fallback) {
+    if (user[key] !== undefined && user[key] !== "") return user[key];
+    if (ds[key] !== undefined && ds[key] !== "") return ds[key];
+    return fallback;
+  }
+  var CFG = {
+    kb: pick("kb", "kb.json"),                 // URL of kb.json (same site = no external call)
+    kbData: user.kbData || null,               // or pass the knowledge object inline
+    title: pick("title", "Website support"),
+    subtitle: pick("subtitle", ""),            // optional line under the title
+    greeting: pick("greeting", "Hi! Ask me how to update your website or fix a problem, and I'll walk you through it step by step."),
+    color: pick("color", "#0e78a8"),          // buttons (readable with white text)
+    accent: pick("accent", "#189ad0"),        // brand blue for marks and highlights
+    logo: pick("logo", ""),                   // optional header icon URL; defaults to the built-in REACHRIGHT mark
+    launcherLabel: pick("launcherLabel", "Need help?"),
+    position: pick("position", "right"),        // "right" | "left"
+    contactUrl: pick("contactUrl", ""),        // e.g. your Zoho Desk help-center ticket form
+    contactEmail: pick("contactEmail", ""),    // mailto fallback, transcript prefilled
+    contactLabel: pick("contactLabel", "Submit a ticket"),
+    supportEmail: pick("supportEmail", ""),     // where ticket-form requests go (shown to visitors, used for mailto fallback)
+    ticketEndpoint: pick("ticketEndpoint", ""), // same-site URL that emails the form (WordPress plugin or send.php); "test" = preview only
+    suggestions: parseList(pick("suggestions", "")), // starter chips, "a|b|c"
+    threshold: parseFloat(pick("threshold", "0.35")), // 0–1, higher = stricter matching
+    maxTries: pick("maxTries", "2"),           // failed fixes before suggesting a ticket
+    persist: pick("persist", "true") !== "false"
+  };
+  function parseList(v) {
+    if (Array.isArray(v)) return v;
+    return String(v || "").split("|").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Search engine: BM25 + typo tolerance, fully in-browser
+   * ------------------------------------------------------------------ */
+  var STOP = {};
+  ("a an and are as at be been but by can could do does did for from had has have how i im i'm if in into is it its " +
+   "me my of on or our please so that the their them then there these they this to was we were what when where which " +
+   "who why will with would you your hi hello hey thanks thank need want get got help know tell about just " +
+   "website websites site web issue issues problem problems question questions stuff thing things working work again another our us change changing edit editing").split(" ")
+    .forEach(function (w) { STOP[w] = 1; });
+
+  function norm(s) {
+    return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+  function stem(w) {
+    if (w.length <= 3) return w;
+    return w.replace(/(ingly|edly|ing|ies|ied|ed|ly|es|s)$/, function (m) {
+      return m === "ies" || m === "ied" ? "y" : "";
+    }) || w;
+  }
+  function tokens(s) {
+    var out = [];
+    norm(s).split(/[^a-z0-9]+/).forEach(function (w) {
+      if (w && !STOP[w] && (w.length > 1 || /\d/.test(w))) out.push(stem(w));
+    });
+    return out;
+  }
+  function lev(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur, i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur = [i];
+      var rowMin = i;
+      for (j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (cur[j] < rowMin) rowMin = cur[j];
+      }
+      if (rowMin > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+
+  function Engine(entries) {
+    var self = this;
+    this.docs = [];
+    this.df = {};
+    this.vocab = [];
+    var totalLen = 0;
+    entries.forEach(function (e, idx) {
+      if (!e || !e.a) return;
+      var qText = [e.q].concat(e.alt || [], e.tags || [], e.cat ? [e.cat] : []).join(" ");
+      var qt = tokens(qText), at = tokens(e.a);
+      var tf = {};
+      qt.forEach(function (t) { tf[t] = (tf[t] || 0) + 2.0; });   // question/keywords weigh most
+      at.forEach(function (t) { tf[t] = (tf[t] || 0) + 0.4; });   // answer text helps a little
+      var len = qt.length * 2 + at.length * 0.4;
+      totalLen += len;
+      var qset = {};
+      qt.forEach(function (t) { qset[t] = 1; });
+      Object.keys(tf).forEach(function (t) { self.df[t] = (self.df[t] || 0) + 1; });
+      var phrases = [e.q].concat(e.alt || []).map(function (x) { return tokens(x).join(" "); }).filter(Boolean);
+      self.docs.push({ e: e, tf: tf, len: len, qset: qset, idx: idx, phrases: phrases });
+    });
+    this.avgLen = this.docs.length ? totalLen / this.docs.length : 1;
+    this.vocab = Object.keys(this.df);
+    this.fixCache = {};
+  }
+  Engine.prototype.correct = function (t) {
+    if (this.df[t] || t.length < 4 || /\d/.test(t)) return t;
+    if (this.fixCache[t] !== undefined) return this.fixCache[t];
+    var max = t.length > 7 ? 2 : 1, best = null, bestD = max + 1, bestDf = 0;
+    for (var i = 0; i < this.vocab.length; i++) {
+      var v = this.vocab[i];
+      if (Math.abs(v.length - t.length) > max) continue;
+      var d = lev(t, v, max);
+      if (d < bestD || (d === bestD && this.df[v] > bestDf)) { best = v; bestD = d; bestDf = this.df[v]; }
+    }
+    return (this.fixCache[t] = bestD <= max ? best : t);
+  };
+  Engine.prototype.search = function (query, limit) {
+    var self = this, N = this.docs.length, k1 = 1.4, b = 0.7;
+    var qt = tokens(query).map(function (t) { return self.correct(t); });
+    var uniq = qt.filter(function (t, i) { return qt.indexOf(t) === i; });
+    if (!uniq.length || !N) return [];
+    var maxIdf = 0;
+    var idf = {};
+    uniq.forEach(function (t) {
+      var df = self.df[t] || 0;
+      idf[t] = Math.log(1 + (N - df + 0.5) / (df + 0.5));
+      maxIdf += idf[t];
+    });
+    var results = [];
+    var qPhrase = " " + qt.join(" ") + " ";
+    this.docs.forEach(function (d) {
+      var s = 0, hitIdf = 0, qHits = 0;
+      uniq.forEach(function (t) {
+        var f = d.tf[t];
+        if (!f) return;
+        s += idf[t] * (f * (k1 + 1)) / (f + k1 * (1 - b + b * d.len / self.avgLen));
+        hitIdf += idf[t];
+        if (d.qset[t]) qHits++;
+      });
+      if (s > 0) {
+        // confidence: how much of the (weighted) query this entry covers, favoring question matches
+        var coverage = hitIdf / maxIdf;
+        var conf = coverage * (0.6 + 0.4 * (qHits / uniq.length));
+        // answers built from real ticket solutions win close calls over starter answers
+        if (d.e.src === "ticket") conf += 0.05;
+        // exact phrase match with the question or a listed "other way to ask" wins ties
+        for (var p = 0; p < d.phrases.length; p++) {
+          if (d.phrases[p] && qPhrase.indexOf(" " + d.phrases[p] + " ") > -1) { conf += 0.15 * Math.min(1, d.phrases[p].split(" ").length / uniq.length); break; }
+        }
+        results.push({ entry: d.e, score: s, conf: conf, qHits: qHits, qRatio: qHits / uniq.length });
+      }
+    });
+    results.sort(function (a, b) { return b.conf - a.conf || b.score - a.score; });
+    return results.slice(0, limit || 3);
+  };
+
+  /* ------------------------------------------------------------------ *
+   * Small talk / intents that don't need the knowledge base
+   * ------------------------------------------------------------------ */
+  function intent(text) {
+    var t = norm(text).trim();
+    if (/^(hi|hello|hey|good (morning|afternoon|evening)|yo|kumusta|hola)\b[!. ]*$/.test(t)) return "greet";
+    if (/^(thanks|thank you|ty|thx|salamat|great|perfect|ok(ay)?|cool)\b/.test(t) && t.length < 30) return "thanks";
+    if (/\b(human|agent|person|representative|real person|talk to (someone|support)|contact (you|support|us)|open a ticket|submit a ticket)\b/.test(t)) return "human";
+    return null;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Helpers
+   * ------------------------------------------------------------------ */
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function formatAnswer(s) {
+    var links = [];
+    // [link text](https://...) and bare URLs / emails become links; everything else is escaped text
+    var text = String(s).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, function (_, label, url) {
+      links.push('<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + "</a>");
+      return "\u0000" + (links.length - 1) + "\u0000";
+    });
+    var html = esc(text)
+      .replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/(^|[\s(>*])([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, '$1<a href="mailto:$2">$2</a>')
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\u0000(\d+)\u0000/g, function (_, i) { return links[+i]; });
+    return html.split(/\n{2,}/).map(function (p) { return "<p>" + p.replace(/\n/g, "<br>") + "</p>"; }).join("");
+  }
+  var LOOM = /https?:\/\/(?:www\.)?loom\.com\/(?:share|embed)\/([a-f0-9]{16,40})[^\s)\]]*/gi;
+  function splitVideos(text, extra) {
+    var ids = [];
+    var add = function (id) { id = id.toLowerCase(); if (ids.indexOf(id) === -1) ids.push(id); };
+    var clean = String(text || "").replace(/\[([^\]]*)\]\((https?:\/\/(?:www\.)?loom\.com\/[^)]+)\)/gi, "$2") // [label](loom) -> bare
+      .replace(LOOM, function (_, id) { add(id); return ""; });
+    (Array.isArray(extra) ? extra : extra ? [extra] : []).forEach(function (u) { String(u).replace(LOOM, function (_, id) { add(id); return ""; }); });
+    // tidy leftovers like "Video walkthrough:" or "Here's a video:" with nothing after them
+    clean = clean.replace(/^[^\n]{0,60}(video|loom|walkthrough|watch)[^\n]{0,40}:\s*$/gim, "").replace(/\(\s*\)/g, "").replace(/\n{3,}/g, "\n\n").trim();
+    return { text: clean, ids: ids };
+  }
+  var ICON_PLAY = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+  function videoCards(ids) {
+    return ids.map(function (id, i) {
+      return '<button type="button" class="vid" data-vid="' + esc(id) + '"><span class="play">' + ICON_PLAY + "</span><span><strong>" +
+        (ids.length > 1 ? "Watch video walkthrough " + (i + 1) : "Watch the video walkthrough") + "</strong><small>Loom video · plays right here</small></span></button>";
+    }).join("");
+  }
+  function renderAnswer(a, video) {
+    var v = splitVideos(a, video);
+    return { html: formatAnswer(v.text) + videoCards(v.ids), hasVideo: v.ids.length > 0 };
+  }
+  function store(key, val) {
+    if (!CFG.persist) return null;
+    try {
+      if (val === undefined) return JSON.parse(sessionStorage.getItem(key) || "null");
+      sessionStorage.setItem(key, JSON.stringify(val));
+    } catch (e) { /* storage blocked: chat still works, just not across pages */ }
+    return null;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * UI (Shadow DOM so the host site's CSS can't break it)
+   * ------------------------------------------------------------------ */
+  var SIDE = CFG.position === "left" ? "left" : "right";
+  var CSS = [
+    ":host{all:initial}",
+    "*{box-sizing:border-box}",
+    ".wrap{--c:" + CFG.color + ";--accent:" + CFG.accent + ";--ink:#040707;--text:#1c2226;--mute:#5b656c;--line:#e2e7ea;--bg:#fff;--soft:#f3f6f8;--me:#040707;--meText:#fff;--chipText:" + CFG.color + ";",
+    "position:fixed;bottom:20px;" + SIDE + ":20px;z-index:2147483000;",
+    "font:15px/1.5 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}",
+    "@media (prefers-color-scheme:dark){.wrap{--text:#e7ecef;--mute:#9aa6ae;--line:#2a3237;--bg:#151a1d;--soft:#0d1113;--me:#2a3237;--chipText:" + CFG.accent + "}}",
+    /* launcher: black pill with the brand mark */
+    ".launch{display:flex;align-items:center;gap:10px;height:54px;padding:0 20px 0 16px;border:0;border-radius:999px;background:var(--ink);color:#fff;cursor:pointer;",
+    "font:800 15px/1 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.01em;box-shadow:0 10px 28px rgba(4,7,7,.28);transition:transform .15s,box-shadow .15s;margin-left:auto}",
+    ".launch:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(4,7,7,.34)}",
+    ".launch .mk{width:22px;height:25px;flex:none}",
+    ".launch.open{width:54px;padding:0;justify-content:center}",
+    ".launch.open .lbl,.launch.open .mk{display:none}",
+    ".launch .x{display:none}.launch.open .x{display:block}",
+    "button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}",
+    /* panel */
+    ".panel{position:absolute;bottom:70px;" + SIDE + ":0;width:380px;height:600px;max-height:calc(100vh - 110px);background:var(--bg);border-radius:18px;overflow:hidden;",
+    "display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(4,7,7,.28);border:1px solid var(--line);transform-origin:bottom " + SIDE + ";transition:opacity .18s,transform .18s}",
+    ".panel[hidden]{display:flex;opacity:0;transform:scale(.95) translateY(10px);pointer-events:none;visibility:hidden}",
+    ".head{background:var(--ink);color:#fff;padding:18px 18px 16px;border-bottom:3px solid var(--accent);display:flex;align-items:center;gap:14px}",
+    ".head .icon{width:30px;height:34px;flex:none;margin-top:1px;object-fit:contain}",
+    ".head h2{margin:0;font-size:17px;font-weight:800;line-height:1.2;letter-spacing:-.005em}",
+    ".head p{margin:3px 0 0;font-size:13px;color:#b9c3c9}",
+
+    ".head .x{margin-left:auto;background:transparent;border:0;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid;opacity:.8}",
+    ".head .x:hover{background:rgba(255,255,255,.12);opacity:1}",
+    /* messages */
+    ".log{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;background:var(--soft)}",
+    ".msg{max-width:88%;padding:11px 14px;border-radius:16px;word-wrap:break-word}",
+    ".msg p{margin:0 0 8px}.msg p:last-child{margin:0}",
+    ".msg a{color:var(--c);font-weight:600}",
+    ".msg strong{color:inherit;font-weight:700}",
+    ".bot{background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}",
+    ".me{background:var(--me);color:var(--meText);border-bottom-right-radius:5px;align-self:flex-end}",
+    ".me a{color:#fff}",
+    ".src{display:block;margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}",
+    ".chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}",
+    ".chip{background:var(--bg);border:1.5px solid var(--line);color:var(--text);border-radius:999px;padding:7px 13px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:border-color .12s,color .12s}",
+    ".chip:hover{border-color:var(--accent);color:var(--chipText)}",
+    ".cta{display:inline-block;margin-top:6px;background:var(--c);color:#fff !important;text-decoration:none !important;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700}",
+    ".cta:hover{filter:brightness(1.08)}",
+    ".vid{display:flex;align-items:center;gap:12px;width:100%;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--soft);color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:border-color .12s}",
+    ".vid:hover{border-color:var(--accent)}",
+    ".vid .play{width:40px;height:40px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}",
+    "@media (prefers-color-scheme:dark){.vid .play{background:var(--c)}}",
+    ".vid strong{display:block;font-size:14px;font-weight:700}",
+    ".vid small{display:block;font-size:12px;color:var(--mute)}",
+    ".vframe{position:relative;width:100%;padding-top:62.5%;margin-top:10px;border-radius:12px;overflow:hidden;background:#000}",
+    ".vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}",
+    ".vopen{display:inline-block;margin-top:6px;font-size:12px}",
+    ".msg.hasvid{max-width:92%}",
+    ".typing{display:flex;gap:5px;padding:15px}",
+    ".typing i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:b 1s infinite}",
+    ".typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}",
+    "@keyframes b{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}",
+    /* composer */
+    "form.comp{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--bg)}",
+    "form.comp textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);max-height:110px}",
+    "form.comp textarea:focus{border-color:var(--accent);outline:none}",
+    ".send{border:0;background:var(--ink);color:#fff;border-radius:12px;width:46px;cursor:pointer;display:grid;place-items:center}",
+    "@media (prefers-color-scheme:dark){.send{background:var(--c)}}",
+    ".send:disabled{opacity:.35;cursor:default}",
+    ".foot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 10px;background:var(--bg);font-size:12px;color:var(--mute)}",
+    ".foot button{background:none;border:0;color:var(--mute);font:inherit;cursor:pointer;text-decoration:underline;padding:0}",
+    /* ticket form */
+    ".tform{display:flex;flex-direction:column;gap:9px;width:100%}",
+    ".tform .ttl{margin:0;font-weight:800;font-size:15px}",
+    ".tform .sub{margin:-4px 0 2px;font-size:13px;color:var(--mute)}",
+    ".tform label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600}",
+    ".tform input,.tform textarea{font:inherit;font-weight:400;font-size:14px;padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);width:100%}",
+    ".tform input:focus,.tform textarea:focus{border-color:var(--accent);outline:none}",
+    ".tform .chk{flex-direction:row;align-items:flex-start;gap:8px;font-weight:400;line-height:1.35}",
+    ".tform .chk input{width:auto;margin:2px 0 0;accent-color:var(--c)}",
+    ".tform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}",
+    ".tform .row{display:flex;gap:10px;align-items:center;margin-top:2px}",
+    ".tform .cta{margin-top:0;border:0;cursor:pointer;font:inherit;font-weight:700}",
+    ".tform .cancel{background:none;border:0;color:var(--mute);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline}",
+    ".tform .err{color:#c62828;font-size:13px;margin:0}",
+    ".msg.wide{max-width:100%;width:100%}",
+    "@media (max-width:480px){.wrap{bottom:14px;" + SIDE + ":14px}.panel{position:fixed;inset:0;width:auto;height:auto;max-height:none;border-radius:0;bottom:0}}",
+    "@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}"
+  ].join("");
+
+  var MARK = '<svg class="mk" viewBox="0 0 34 38" aria-hidden="true"><g fill="' + CFG.accent + '"><polygon points="8,1 16.2,1 13.7,11.6 11.1,11.6"/><path d="M25.2,9H30.6C31.6,9 31.9,9.8 31.6,10.9L30.3,15.6C30,16.6 29.3,17.1 28.4,17.1H23L24.1,10.4C24.3,9.5 24.7,9 25.2,9Z"/><path d="M6.3,20.6H12L10.9,27.3C10.7,28.2 10.2,28.6 9.6,28.6H4.4C3.4,28.6 3.1,27.8 3.4,26.8L4.7,22C5,21.1 5.5,20.6 6.3,20.6Z"/><polygon points="21,26.2 24.2,26.2 27.1,37.6 18.9,37.6"/></g></svg>';
+  var ICON_X = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  var ICON_SEND = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
+
+  function mount() {
+    var host = document.createElement("div");
+    host.id = "support-chat-root";
+    document.body.appendChild(host);
+    var root = host.attachShadow ? host.attachShadow({ mode: "open" }) : host;
+    root.innerHTML =
+      "<style>" + CSS + "</style>" +
+      '<div class="wrap">' +
+        '<section class="panel" role="dialog" aria-label="' + esc(CFG.title) + '" hidden>' +
+          '<header class="head">' +
+            (CFG.logo ? '<img class="icon" src="' + esc(CFG.logo) + '" alt="">' : MARK.replace('class="mk"', 'class="icon"')) +
+            "<div><h2>" + esc(CFG.title) + "</h2>" + (CFG.subtitle ? "<p>" + esc(CFG.subtitle) + "</p>" : "") + "</div>" +
+          '<button class="x" type="button" aria-label="Close chat">' + ICON_X + "</button></header>" +
+          '<div class="log" aria-live="polite"></div>' +
+          '<form class="comp"><textarea rows="1" placeholder="Ask a question…" aria-label="Your question"></textarea>' +
+          '<button class="send" type="submit" aria-label="Send" disabled>' + ICON_SEND + "</button></form>" +
+          '<div class="foot"><span>Step-by-step website help</span><button type="button" class="reset">Start over</button></div>' +
+        "</section>" +
+        '<button class="launch" type="button" aria-label="Open support chat" aria-expanded="false">' + MARK + '<span class="lbl">' + esc(CFG.launcherLabel) + '</span><span class="x">' + ICON_X + "</span></button>" +
+      "</div>";
+
+    var $ = function (s) { return root.querySelector(s); };
+    var panel = $(".panel"), log = $(".log"), form = $("form.comp"), input = $("textarea"),
+        send = $(".send"), launch = $(".launch");
+    var engine = null, guides = null, history = store("sc_history") || [], busy = false;
+
+    /* --- rendering --- */
+    function scroll() { log.scrollTop = log.scrollHeight; }
+    function addMsg(who, html, save) {
+      var el = document.createElement("div");
+      el.className = "msg " + who;
+      el.innerHTML = html;
+      log.appendChild(el);
+      if (save !== false) { history.push({ w: who, h: html }); store("sc_history", history.slice(-60)); }
+      scroll();
+      return el;
+    }
+    function addChips(list, onPick) {
+      var box = document.createElement("div");
+      box.className = "chips";
+      list.forEach(function (label) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "chip"; b.textContent = label;
+        b.addEventListener("click", function () { box.remove(); onPick(label); });
+        box.appendChild(b);
+      });
+      log.appendChild(box);
+      scroll();
+    }
+    function ticketFormOn() { return !!(CFG.ticketEndpoint || CFG.supportEmail); }
+    function contactHtml(lead) {
+      var html = lead ? "<p>" + lead + "</p>" : "";
+      if (ticketFormOn()) {
+        html += '<button type="button" class="cta" data-action="ticket" style="border:0;cursor:pointer;font:inherit;font-weight:600">' + esc(CFG.contactLabel) + "</button>";
+      } else if (CFG.contactUrl) {
+        html += '<a class="cta" href="' + esc(CFG.contactUrl) + '" target="_blank" rel="noopener">' + esc(CFG.contactLabel) + "</a>";
+      } else if (CFG.contactEmail) {
+        var transcript = history.filter(function (m) { return m.w === "me"; })
+          .map(function (m) { return "- " + m.h.replace(/<[^>]+>/g, ""); }).join("\n");
+        var href = "mailto:" + encodeURIComponent(CFG.contactEmail) +
+          "?subject=" + encodeURIComponent("Support request from chat") +
+          "&body=" + encodeURIComponent("My questions:\n" + transcript + "\n\nDetails:\n");
+        html += '<a class="cta" href="' + esc(href) + '">Email support</a>';
+      }
+      return html;
+    }
+
+    /* --- ticket form (emails your support address through your own site) --- */
+    function lastQuestion() {
+      for (var i = history.length - 1; i >= 0; i--) {
+        if (history[i].w === "me") {
+          var t = history[i].h.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+          if (!/^(yes, all good|yes, that helped|not quite|no|something else|none of these)$/i.test(t)) return t;
+        }
+      }
+      return "";
+    }
+    function transcriptText() {
+      return history.map(function (m) {
+        var t = m.h.replace(/<button[\s\S]*?<\/button>/g, "").replace(/<a class="cta"[\s\S]*?<\/a>/g, "").replace(/<span class="src">[\s\S]*?<\/span>/g, "").replace(/<p style="margin-top:10px">Still need help\?<\/p>/g, "").replace(/<br>/g, "\n").replace(/<\/p>/g, "\n").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+        return (m.w === "me" ? "Visitor: " : "Chat: ") + t;
+      }).join("\n\n").slice(-8000);
+    }
+    function openTicketForm() {
+      var old = log.querySelector(".tform");
+      if (old) { old.querySelector("input[name=name]").focus(); return; }
+      var el = document.createElement("div");
+      el.className = "msg bot wide";
+      el.innerHTML =
+        '<form class="tform" novalidate>' +
+          '<p class="ttl">Send a request to our support team</p>' +
+          '<p class="sub">A real person replies within one business day (Mon–Fri, 9–5 Central).</p>' +
+          '<label>Your name<input name="name" autocomplete="name" required></label>' +
+          '<label>Your email<input name="email" type="email" autocomplete="email" required></label>' +
+          '<label>Church name and website<input name="website" autocomplete="organization" placeholder="Grace Church, www.gracechurch.org"></label>' +
+          '<label>How can we help?<textarea name="message" rows="4" required></textarea></label>' +
+          '<label class="chk"><input type="checkbox" name="urgent"> My website is down (urgent)</label>' +
+          '<label class="chk"><input type="checkbox" name="include" checked> Include this chat conversation</label>' +
+          '<label class="hp" aria-hidden="true">Leave empty<input name="company_site" tabindex="-1" autocomplete="off"></label>' +
+          '<p class="err" hidden></p>' +
+          '<div class="row"><button type="submit" class="cta">Send request</button><button type="button" class="cancel">Cancel</button></div>' +
+        "</form>";
+      log.appendChild(el);
+      var f = el.querySelector("form"), F = f.elements, err = el.querySelector(".err"), opened = Date.now();
+      F.message.value = (thread && thread.q) || lastQuestion();
+      if (/\b(down|not loading|offline|white screen|urgent)\b/i.test(F.message.value)) F.urgent.checked = true;
+      f.querySelector(".cancel").addEventListener("click", function () { el.remove(); input.focus(); });
+      f.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var name = F.name.value.trim(), email = F.email.value.trim(), msg = F.message.value.trim();
+        err.hidden = true;
+        if (!name) return showErr("Enter your name.", F.name);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showErr("Enter a valid email address so we can reply.", F.email);
+        if (msg.length < 5) return showErr("Tell us a little about what you need.", F.message);
+        var data = {
+          name: name, email: email, website: F.website.value.trim(), message: msg,
+          transcript: F.include.checked ? transcriptText() : "",
+          urgent: F.urgent.checked ? "1" : "",
+          page: location.href, company_site: F.company_site.value, elapsed: String(Date.now() - opened)
+        };
+        var btn = f.querySelector("button[type=submit]");
+        btn.disabled = true; btn.textContent = "Sending…";
+        sendTicket(data).then(function (mode) {
+          el.remove();
+          if (mode === "test") {
+            addMsg("bot", "<p><strong>Test mode:</strong> on your live site, this request would be emailed to " + esc(CFG.supportEmail || "your support address") + " with the visitor's details and this chat attached.</p>");
+          } else {
+            addMsg("bot", "<p>Thanks, " + esc(name.split(" ")[0]) + "! Your request is with our support team. We'll reply to <strong>" + esc(email) + "</strong> within one business day" + (data.urgent ? ", and urgent requests go to the front of the line" : "") + ".</p>");
+          }
+        }).catch(function () {
+          btn.disabled = false; btn.textContent = "Send request";
+          var fallback = CFG.supportEmail ? ' You can also email us at <a href="mailto:' + esc(CFG.supportEmail) + "?subject=" + encodeURIComponent("Support request") + "&body=" + encodeURIComponent(msg + "\n\n" + name + (data.website ? "\n" + data.website : "")) + '">' + esc(CFG.supportEmail) + "</a>." : "";
+          err.innerHTML = "The request couldn't be sent. Check your connection and try again." + fallback;
+          err.hidden = false;
+        });
+      });
+      function showErr(t, field) { err.textContent = t; err.hidden = false; field.focus(); }
+      scroll();
+      F.name.focus();
+    }
+    function sendTicket(data) {
+      if (!CFG.ticketEndpoint || CFG.ticketEndpoint === "test") return Promise.resolve("test");
+      var body = new FormData();
+      Object.keys(data).forEach(function (k) { body.append(k, data[k]); });
+      return fetch(CFG.ticketEndpoint, { method: "POST", body: body, credentials: "same-origin" })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j || j.success === false) throw new Error("send failed"); return "sent"; }); });
+    }
+    log.addEventListener("click", function (ev) {
+      var t = ev.target.closest && ev.target.closest('[data-action="ticket"]');
+      if (t) { ev.preventDefault(); openTicketForm(); return; }
+      var v = ev.target.closest && ev.target.closest(".vid");
+      if (v) {
+        var id = v.getAttribute("data-vid");
+        if (!/^[a-f0-9]{16,40}$/.test(id)) return;
+        var box = document.createElement("div");
+        box.innerHTML = '<div class="vframe"><iframe src="https://www.loom.com/embed/' + id + '?hide_owner=true&hide_share=true&hide_title=true" allow="fullscreen" allowfullscreen title="Video walkthrough"></iframe></div>' +
+          '<a class="vopen" href="https://www.loom.com/share/' + id + '" target="_blank" rel="noopener noreferrer">Open in Loom</a>';
+        v.replaceWith(box);
+        var m = box.closest(".msg"); if (m) m.classList.add("wide");
+      }
+    });
+
+    /* --- answering: answer, check in, try the next closest fix, then offer a ticket --- */
+    var MAX_TRIES = Math.max(1, parseInt(CFG.maxTries, 10) || 2);
+    var thread = null;   // { q, hits, shown, tries, cat }
+    var misses = 0;      // questions in a row with no match
+    function vary(list) { return list[Math.floor(Math.random() * list.length)]; }
+    function entryKey(e) { return e.id || e.q; }
+    function isNo(t) {
+      t = norm(t).trim();
+      return /^(no|nope|nah|not (really|quite|yet|working)|didn'?t (work|help|fix)|doesn'?t (work|help)|it didn'?t|that didn'?t|still (not|doesn'?t|isn'?t|broken|the same|having|getting|down)|same (problem|issue|thing)|nothing changed|none of (these|those)|something else)\b/.test(t);
+    }
+    function isYes(t) {
+      t = norm(t).trim();
+      return t.length < 45 && /^(yes|yep|yeah|yup|it worked|that worked|worked|fixed|solved|all good|perfect|great|awesome|thanks|thank you|ty|salamat|got it|that did it|that helped)\b/.test(t);
+    }
+    function showEntry(e, lead) {
+      var cta = "";
+      if (e.handoff && (ticketFormOn() || CFG.contactUrl || CFG.contactEmail)) {
+        cta = '<p style="margin-top:10px">If this doesn\'t fix it, let us know right away:</p>' + contactHtml("");
+      }
+      var r = renderAnswer(e.a, e.video);
+      var el = addMsg("bot", (lead ? "<p>" + lead + "</p>" : "") + r.html + cta);
+      if (r.hasVideo) el.classList.add("hasvid");
+      if (thread) { thread.shown[entryKey(e)] = 1; if (!thread.cat) thread.cat = e.cat || ""; if (!thread.firstText) thread.firstText = e.a || ""; }
+      checkIn();
+    }
+    function checkIn() {
+      addMsg("bot", "<p>" + vary(["Did that fix it?", "Did that solve it for you?", "Is it all good now?", "Did that do the trick?"]) + "</p>");
+      addChips(["Yes, all good", "Not quite"], ask);
+    }
+    function resolved() {
+      thread = null; misses = 0;
+      addMsg("bot", "<p>" + vary(["Great, glad that's sorted!", "Awesome, happy that worked!", "Perfect, glad we got it fixed!"]) + " Anything else I can help with?</p>");
+    }
+    function suggestTicket(lead) {
+      addMsg("bot", contactHtml(lead || "Sorry we couldn't fix this here. It sounds like this one needs a closer look from our team. Send a support ticket and a real person will reply within one business day."));
+    }
+    function nextAlternative() {
+      var th = CFG.threshold;
+      // follow-ups must match the question itself (not just common words like "Save" in the steps)
+      var rest = thread.hits.filter(function (h) { return !thread.shown[entryKey(h.entry)] && h.conf >= th * 0.8 && h.qRatio >= 0.5; });
+      rest.sort(function (a, b) {
+        var sa = a.conf + (thread.cat && a.entry.cat === thread.cat ? 0.2 : 0);
+        var sb = b.conf + (thread.cat && b.entry.cat === thread.cat ? 0.2 : 0);
+        return sb - sa;
+      });
+      return rest[0];
+    }
+    function guideName(e) { return e && e.src === "wp" ? "WordPress help guides" : "Cornerstone help guides"; }
+    function fromGuides() {
+      if (!guides || thread.usedGuides) return null;
+      var hits = guides.search(thread.q, 6).filter(function (h) { return h.conf >= CFG.threshold * 0.6 && h.qHits > 0 && !thread.shown["g:" + entryKey(h.entry)]; });
+      // prefer the guide library that fits the first answer (Cornerstone steps -> Cornerstone guides)
+      var lean = /cornerstone/i.test(thread.firstText || "") ? "cornerstone" : /(settings|appearance|users|media|posts|tools|plugins) →/i.test(thread.firstText || "") ? "wp" : "";
+      hits.sort(function (a, b) {
+        return (b.conf + (lean && b.entry.src === lean ? 0.12 : 0)) - (a.conf + (lean && a.entry.src === lean ? 0.12 : 0));
+      });
+      return hits[0] || null;
+    }
+    function notQuite() {
+      thread.tries++;
+      if (thread.tries >= MAX_TRIES) return suggestTicket();
+      // second response: search the Cornerstone help guides
+      var g = fromGuides();
+      if (g) {
+        thread.usedGuides = true;
+        thread.shown["g:" + entryKey(g.entry)] = 1;
+        var gn = guideName(g.entry);
+        addMsg("bot", "<p>" + vary([
+          "Sorry about that. I searched the " + gn + ", and here's what they suggest:",
+          "Let's try another angle. Here's what the " + gn + " recommend:",
+          "Okay, I looked this up in the " + gn + ". Try this:"
+        ]) + "</p>" + renderAnswer(g.entry.a, g.entry.video).html + '<span class="src">From the ' + gn + ": " + esc(g.entry.q) + "</span>");
+        return checkIn();
+      }
+      var alt = nextAlternative();
+      if (!alt) return suggestTicket("Sorry about that. I don't have another fix for this one, so it's best to have our team take a look. Send a support ticket and a real person will reply within one business day.");
+      showEntry(alt.entry, vary([
+        "Sorry about that. Let's try this instead:",
+        "Okay, here's another fix that often solves it:",
+        "Got it. This is the next closest match to your issue:"
+      ]));
+    }
+    function answer(q) {
+      if (thread && /^something else$/i.test(q.trim())) {
+        thread.tries++;
+        if (thread.tries >= MAX_TRIES) return suggestTicket("No problem. Our team can take a closer look: send a support ticket and a real person will reply within one business day.");
+        return addMsg("bot", "<p>No problem. Could you describe it another way? For example, which page it's on or what you see on the screen.</p>");
+      }
+      // replies to "Did that fix it?"
+      if (thread && isNo(q)) return notQuite();
+      if (thread && isYes(q)) return resolved();
+
+      var kind = intent(q);
+      if (kind === "greet") return addMsg("bot", "<p>Hello! What can I help you with today?</p>");
+      if (kind === "thanks") return addMsg("bot", "<p>You're welcome! Anything else I can help with?</p>");
+      if (kind === "human") return addMsg("bot", contactHtml("Sure. Send us a request and a real person on our support team will reply by email."));
+      if (!engine) return addMsg("bot", contactHtml("The help library didn't load, so I can't search answers right now."));
+
+      var hits = engine.search(q, 8);
+      var top = hits[0];
+      // Your own answers come first. The help guides answer first only when they're a clearly better match.
+      var g = guides ? guides.search(q, 1)[0] : null;
+      if (g && g.conf >= CFG.threshold && (!top || g.conf >= top.conf + 0.3)) {
+        misses = 0;
+        thread = { q: q, hits: hits, shown: {}, tries: 0, cat: "", usedGuides: true };
+        thread.shown["g:" + entryKey(g.entry)] = 1;
+        addMsg("bot", "<p>I searched the " + guideName(g.entry) + " for this. Here's what they suggest:</p>" + renderAnswer(g.entry.a, g.entry.video).html +
+          '<span class="src">From the ' + guideName(g.entry) + ": " + esc(g.entry.q) + "</span>");
+        checkIn();
+      } else if (top && top.conf >= CFG.threshold) {
+        misses = 0;
+        thread = { q: q, hits: hits, shown: {}, tries: 0, cat: "" };
+        showEntry(top.entry);
+      } else if (hits.length && hits[0].conf >= CFG.threshold * 0.5) {
+        misses = 0;
+        thread = { q: q, hits: hits, shown: {}, tries: 0, cat: "" };
+        addMsg("bot", "<p>I want to make sure I get this right. Which of these is closest to your issue?</p>");
+        addChips(hits.slice(0, 3).map(function (h) { return h.entry.q; }).concat(["Something else"]), function (label) {
+          if (label === "Something else") return ask(label);
+          var h = hits.filter(function (x) { return x.entry.q === label; })[0];
+          addMsg("me", esc(label));
+          if (h) showEntry(h.entry);
+        });
+      } else {
+        misses++;
+        if (thread) thread.tries++;
+        if (misses >= MAX_TRIES || (thread && thread.tries >= MAX_TRIES)) {
+          suggestTicket("I'm not finding an answer for this one. Our team can help: send a support ticket and a real person will reply within one business day.");
+        } else {
+          addMsg("bot", "<p>" + vary(["Hmm, I'm not sure I have an answer for that yet.", "I couldn't find an answer for that one."]) +
+            " Could you describe it another way? For example, which page it's on or what you see on the screen.</p>");
+        }
+      }
+    }
+    function ask(q) {
+      q = String(q || "").trim();
+      if (!q || busy) return;
+      busy = true;
+      root.querySelectorAll(".chips").forEach(function (c) { c.remove(); });
+      addMsg("me", esc(q));
+      var t = document.createElement("div");
+      t.className = "msg bot typing";
+      t.innerHTML = "<i></i><i></i><i></i>";
+      log.appendChild(t); scroll();
+      setTimeout(function () { t.remove(); answer(q); busy = false; }, 350 + Math.random() * 300);
+    }
+
+    /* --- start / restore --- */
+    function greet() {
+      addMsg("bot", "<p>" + esc(CFG.greeting) + "</p>");
+      if (CFG.suggestions.length) addChips(CFG.suggestions, ask);
+    }
+    if (history.length) history.forEach(function (m) { addMsg(m.w, m.h, false); });
+    else greet();
+
+    /* --- events --- */
+    function toggle(open) {
+      var isOpen = open !== undefined ? open : panel.hidden;
+      panel.hidden = !isOpen;
+      launch.setAttribute("aria-expanded", String(isOpen));
+      launch.classList.toggle("open", isOpen);
+      launch.setAttribute("aria-label", isOpen ? "Close support chat" : "Open support chat");
+      store("sc_open", isOpen);
+      if (isOpen) setTimeout(function () { input.focus(); scroll(); }, 60);
+    }
+    launch.addEventListener("click", function () { toggle(); });
+    $(".x").addEventListener("click", function () { toggle(false); launch.focus(); });
+    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggle(false); launch.focus(); } });
+    input.addEventListener("input", function () {
+      send.disabled = !input.value.trim();
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 110) + "px";
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); }
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = input.value; input.value = ""; input.style.height = "auto"; send.disabled = true;
+      ask(v);
+    });
+    $(".reset").addEventListener("click", function () {
+      history = []; store("sc_history", []); log.innerHTML = ""; thread = null; misses = 0; greet();
+    });
+    if (store("sc_open")) toggle(true);
+
+    /* --- load knowledge (same-site static file or inline object) --- */
+    function useKb(data) {
+      var entries = Array.isArray(data) ? data : (data && data.entries) || [];
+      engine = new Engine(entries);
+      guides = new Engine((data && data.resources) || []);
+    }
+    if (CFG.kbData) useKb(CFG.kbData);
+    else {
+      fetch(CFG.kb, { credentials: "same-origin" })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(useKb)
+        .catch(function (err) { console.warn("[support-chat] Could not load knowledge file:", CFG.kb, err); });
+    }
+
+    window.SupportChat = { open: function () { toggle(true); }, close: function () { toggle(false); }, ask: function (q) { toggle(true); ask(q); } };
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+
+  // exposed for testing
+  window.__SupportChatEngine = Engine;
+})();
+</script>
+<script type="application/json" id="docsKb">"{\n \"meta\": {\n  \"source\": \"Summaries based on theme.co/docs, written for the support chat\",\n  \"generated\": \"2026-09-24\",\n  \"count\": 25\n },\n \"entries\": [\n  {\n   \"id\": \"doc01\",\n   \"q\": \"How do I add events to my website?\",\n   \"alt\": [\n    \"add event\",\n    \"events calendar\",\n    \"create event\",\n    \"event plugin\",\n    \"modern events calendar\",\n    \"schedule event\",\n    \"new event\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"On your website, you can add events with the Modern Events Calendar plugin, which is included as a bundled extension.\\n\\n1. In your WordPress dashboard, open your theme's **Validation** page, find Modern Events Calendar, and click **Install**, then **Activate**.\\n2. A new **M.E. Calendar** menu appears. Go to **M.E. Calendar \u2192 Add Event**, fill in the dates, times and details, and click **Publish**.\\n\\nYou can skip the plugin's purchase-code screen, since it's already included.\\n\\nFull guide: https://theme.co/docs/modern-events-calendar\"\n  },\n  {\n   \"id\": \"doc02\",\n   \"q\": \"Where do my events show? Can I customize the events page?\",\n   \"alt\": [\n    \"events page\",\n    \"events archive\",\n    \"event list page\",\n    \"event shortcode\",\n    \"customize events\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"On your website, events appear at yoursite.com/events by default. To give that page your own look, create a normal page in Cornerstone, design it however you like, and add one of the calendar's shortcodes to it. You'll find them under **M.E. Calendar \u2192 Shortcodes**.\\n\\nFull guide: https://theme.co/docs/modern-events-calendar\"\n  },\n  {\n   \"id\": \"doc03\",\n   \"q\": \"Can I sell tickets or take bookings for events?\",\n   \"alt\": [\n    \"event tickets\",\n    \"sell tickets\",\n    \"event payment\",\n    \"paypal stripe events\",\n    \"booking form\",\n    \"event registration\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"Yes. On your website, you can take event bookings and payments. In the Modern Events Calendar settings, turn on the booking module and save. Two new sections appear, **Booking Form** and **Payment Gateways**, where you choose the form fields and connect Stripe or PayPal. Each event can have its own booking form if needed.\\n\\nFull guide: https://theme.co/docs/modern-events-calendar\"\n  },\n  {\n   \"id\": \"doc04\",\n   \"q\": \"My license says it's already used on another site\",\n   \"alt\": [\n    \"already been used\",\n    \"validation failed\",\n    \"license in use\",\n    \"moved site validation\",\n    \"change license url\"\n   ],\n   \"cat\": \"License\",\n   \"a\": \"Your license is linked to one exact website address. If you moved your website (for example from a subfolder to the main domain, or to a new domain), log in to your license account, find the license, and update its **Location** so it matches the new address exactly. Then validate again.\\n\\nFull guide: https://theme.co/docs/problems-with-product-validation\"\n  },\n  {\n   \"id\": \"doc05\",\n   \"q\": \"Validation error: could not establish a connection\",\n   \"alt\": [\n    \"could not establish a connection\",\n    \"could not retrieve extensions\",\n    \"validation connection error\",\n    \"firewall blocking\",\n    \"ssl error validation\"\n   ],\n   \"cat\": \"License\",\n   \"a\": \"This means your website's server couldn't reach the license server. Try these in order:\\n\\n1. Force a fresh check by adding **&force-check=1** to the end of the Extensions page address in your browser.\\n2. Make sure your theme and Cornerstone are on the latest version.\\n3. If it still fails, ask your web host to allow outgoing connections to theme.co, confirm cURL and allow_url_fopen are enabled, and update the server's root certificates.\\n\\nFull guide: https://theme.co/docs/problems-with-product-validation\"\n  },\n  {\n   \"id\": \"doc06\",\n   \"q\": \"How do I validate my license?\",\n   \"alt\": [\n    \"validate license\",\n    \"purchase code\",\n    \"activate theme\",\n    \"enter license key\",\n    \"validation\"\n   ],\n   \"cat\": \"License\",\n   \"a\": \"On your website, open your theme's **Validation** page in the WordPress dashboard, enter your license key, and submit. Validating unlocks automatic updates, bundled extensions and support. Each license covers one website address.\\n\\nFull guide: https://theme.co/docs/installation-and-validation\"\n  },\n  {\n   \"id\": \"doc07\",\n   \"q\": \"My website looks broken after updating\",\n   \"alt\": [\n    \"broken after update\",\n    \"unstyled after update\",\n    \"styles missing\",\n    \"spacing wrong after update\",\n    \"layout broke update\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"After an update, old cached files are almost always the cause. On your website, clear three things:\\n\\n1. **Style cache:** go to **Cornerstone \u2192 Settings** and click **Clear Style Cache**.\\n2. **Caching plugin or hosting cache:** purge it completely.\\n3. **Cloudflare or other CDN:** purge the cache. If Cloudflare's CSS auto-minify is on, turn it off, since it can cut styles short.\\n\\nFull guide: https://theme.co/docs/site-appears-broken-after-updates\"\n  },\n  {\n   \"id\": \"doc08\",\n   \"q\": \"How do I clear the style cache?\",\n   \"alt\": [\n    \"clear style cache\",\n    \"regenerate css\",\n    \"styles not updating\",\n    \"element styles wrong\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"On your website, go to **Cornerstone \u2192 Settings** and click **Clear Style Cache** on the right. Styles are rebuilt the next time each page is viewed. Then purge your caching plugin and CDN so visitors see the fresh version.\\n\\nFull guide: https://theme.co/docs/site-appears-broken-after-updates\"\n  },\n  {\n   \"id\": \"doc09\",\n   \"q\": \"Cornerstone freezes on the loading screen\",\n   \"alt\": [\n    \"builder stuck loading\",\n    \"cornerstone not loading\",\n    \"builder won't open\",\n    \"infinite loading\",\n    \"spinning\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"This usually means another plugin is conflicting with the builder. On your website, go to **Dashboard \u2192 Plugins** and deactivate your other plugins (keep Cornerstone active if it's installed as a plugin). If the builder now opens, turn plugins back on one at a time until it breaks again; that plugin is the cause. Also make sure your theme and Cornerstone are fully updated.\\n\\nFull guide: https://theme.co/docs/common-issues\"\n  },\n  {\n   \"id\": \"doc10\",\n   \"q\": \"Preview error in the builder: a conflict prevented the preview from loading\",\n   \"alt\": [\n    \"preview error\",\n    \"preview not loading\",\n    \"conflict on the front end\",\n    \"builder warning\",\n    \"preview url\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"First update your theme and Cornerstone, because newer versions show a more specific error. Then turn on WordPress debug mode to see the actual error, switch from your child theme to the parent theme to rule out custom code, and test for a plugin conflict. On a staging copy of your website, check that the site addresses point to the staging URL.\\n\\nFull guide: https://theme.co/docs/warnings-in-the-builders\"\n  },\n  {\n   \"id\": \"doc11\",\n   \"q\": \"How do I increase the PHP memory limit?\",\n   \"alt\": [\n    \"php memory\",\n    \"memory limit\",\n    \"out of memory\",\n    \"allowed memory size exhausted\",\n    \"wp_memory_limit\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"On your website, add this line to the wp-config.php file, above the line that says \\\"That's all, stop editing\\\":\\n\\ndefine( 'WP_MEMORY_LIMIT', '256M' );\\n\\nIf your host caps memory lower, the change won't take effect. In that case, ask your host to raise the PHP memory limit.\\n\\nFull guide: https://theme.co/docs/how-to-increase-php-memory-limit\"\n  },\n  {\n   \"id\": \"doc12\",\n   \"q\": \"How do I update my theme and Cornerstone?\",\n   \"alt\": [\n    \"update theme\",\n    \"update cornerstone\",\n    \"latest version\",\n    \"automatic updates\"\n   ],\n   \"cat\": \"Getting started\",\n   \"a\": \"Back up your website first. Once your license is validated, updates appear in **Dashboard \u2192 Updates** like any WordPress update. If Cornerstone is installed as a separate plugin, update it together with the theme so their versions match. Clear all caches afterwards.\\n\\nFull guide: https://theme.co/docs/how-to-update\"\n  },\n  {\n   \"id\": \"doc13\",\n   \"q\": \"Which versions of my theme and Cornerstone go together?\",\n   \"alt\": [\n    \"version compatibility\",\n    \"compatible versions\",\n    \"which cornerstone version\"\n   ],\n   \"cat\": \"Getting started\",\n   \"a\": \"There's a version compatibility table listing which theme and Cornerstone versions are meant to be used together. Check it before updating anything manually.\\n\\nFull guide: https://theme.co/docs/version-compatibility\"\n  },\n  {\n   \"id\": \"doc14\",\n   \"q\": \"How do I build a custom header?\",\n   \"alt\": [\n    \"header builder\",\n    \"edit header\",\n    \"create header\",\n    \"change menu\",\n    \"navbar\",\n    \"logo in header\"\n   ],\n   \"cat\": \"Layouts\",\n   \"a\": \"On your website, you can design headers with Cornerstone's **Header Builder**. Add your logo, navigation and buttons as elements, then assign the header to the pages where it should appear. You can create several headers for different pages.\\n\\nFull guide: https://theme.co/docs/header-builder\"\n  },\n  {\n   \"id\": \"doc15\",\n   \"q\": \"How do I build a custom footer?\",\n   \"alt\": [\n    \"footer builder\",\n    \"edit footer\",\n    \"different footer\"\n   ],\n   \"cat\": \"Layouts\",\n   \"a\": \"On your website, you can design footers with Cornerstone's **Footer Builder** and assign each footer to the whole site or to specific pages, for example a simpler footer on landing pages.\\n\\nFull guide: https://theme.co/docs/footer-builder\"\n  },\n  {\n   \"id\": \"doc16\",\n   \"q\": \"How do I show or hide content on mobile, tablet or desktop?\",\n   \"alt\": [\n    \"hide on mobile\",\n    \"show only desktop\",\n    \"responsive visibility\",\n    \"device size\",\n    \"hide section phone\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, you can hide any element at specific screen sizes. In Cornerstone, select the element, open its visibility options, and choose which device sizes to hide it on. Preview each size in the builder to check.\\n\\nFull guide: https://theme.co/docs/hide-or-show-content-by-device-size\"\n  },\n  {\n   \"id\": \"doc17\",\n   \"q\": \"How do I set different styles for different screen sizes?\",\n   \"alt\": [\n    \"responsive styling\",\n    \"breakpoints\",\n    \"mobile styles\",\n    \"tablet layout\",\n    \"font size mobile\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, you can style each screen size separately. In Cornerstone, switch the preview to a screen size, then change the element's settings. Values you set while previewing a screen size apply to that size, so desktop stays as it was.\\n\\nFull guide: https://theme.co/docs/responsive-styling\"\n  },\n  {\n   \"id\": \"doc18\",\n   \"q\": \"Where can I add custom CSS or JavaScript?\",\n   \"alt\": [\n    \"custom css\",\n    \"custom js\",\n    \"code editor\",\n    \"add css\",\n    \"tracking code\"\n   ],\n   \"cat\": \"Customization\",\n   \"a\": \"On your website, Cornerstone has built-in code editors: a global CSS/JS editor that applies to every page, and a per-page editor for changes on a single page. For PHP changes or larger customizations, use a child theme.\\n\\nFull guide: https://theme.co/docs/code-editors\"\n  },\n  {\n   \"id\": \"doc19\",\n   \"q\": \"Should I use a child theme?\",\n   \"alt\": [\n    \"child theme\",\n    \"functions.php\",\n    \"custom php\"\n   ],\n   \"cat\": \"Customization\",\n   \"a\": \"Use a child theme if you need to edit PHP templates or add code to functions.php; it keeps your changes safe when the theme updates. If you only use Cornerstone and its CSS/JS editors, you don't need one.\\n\\nFull guide: https://theme.co/docs/child-themes\"\n  },\n  {\n   \"id\": \"doc20\",\n   \"q\": \"How do I manage fonts across my website?\",\n   \"alt\": [\n    \"font manager\",\n    \"google fonts\",\n    \"custom fonts\",\n    \"change font everywhere\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, you can set up fonts once in Cornerstone's **Font Manager**, including Google Fonts or your own uploaded fonts. Then choose them in your site settings and elements. Changing a managed font updates it everywhere it's used.\\n\\nFull guide: https://theme.co/docs/font-manager\"\n  },\n  {\n   \"id\": \"doc21\",\n   \"q\": \"How do I manage brand colors across my website?\",\n   \"alt\": [\n    \"color manager\",\n    \"brand colors\",\n    \"global colors\",\n    \"color palette\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, you can save your brand colors in Cornerstone's **Color Manager** and pick them when styling elements. Update a saved color once and it changes across the whole site.\\n\\nFull guide: https://theme.co/docs/color-manager\"\n  },\n  {\n   \"id\": \"doc22\",\n   \"q\": \"What are Components (formerly Global Blocks)?\",\n   \"alt\": [\n    \"components\",\n    \"global blocks\",\n    \"reusable section\",\n    \"edit once update everywhere\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, Components let you build a section once and reuse it on many pages. When you edit the Component, every place it's used updates automatically. They replace the older Global Blocks feature.\\n\\nFull guide: https://theme.co/docs/component-builder-overview\"\n  },\n  {\n   \"id\": \"doc23\",\n   \"q\": \"How do I use ready-made templates?\",\n   \"alt\": [\n    \"design cloud\",\n    \"templates\",\n    \"import template\",\n    \"premade design\"\n   ],\n   \"cat\": \"Design\",\n   \"a\": \"On your website, you can use Design Cloud, a library of ready-made site, page, header, footer and element templates. Browse the templates inside Cornerstone, pick one, and add it, then edit it like any other content. A validated license is required.\\n\\nFull guide: https://theme.co/docs/design-cloud\"\n  },\n  {\n   \"id\": \"doc24\",\n   \"q\": \"My website is slow. How can I make it faster?\",\n   \"alt\": [\n    \"site speed\",\n    \"performance\",\n    \"slow website\",\n    \"page speed\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"Start with a good caching plugin, properly sized and compressed images, and removing plugins you don't use. The full performance guide also covers hosting and other optimizations.\\n\\nFull guide: https://theme.co/docs/how-to-improve-site-performance\"\n  },\n  {\n   \"id\": \"doc25\",\n   \"q\": \"New pages show 404 not found\",\n   \"alt\": [\n    \"404\",\n    \"page not found\",\n    \"permalinks\"\n   ],\n   \"cat\": \"Troubleshooting\",\n   \"a\": \"On your website, go to **Settings \u2192 Permalinks** and click **Save Changes** without changing anything. This rebuilds WordPress's link rules and usually fixes 404 errors on new pages.\\n\\nFull guide: https://theme.co/docs/common-issues\"\n  }\n ]\n}"</script>
+<script type="application/json" id="starterKb">"{\n \"meta\": {\n  \"source\": \"ReachRight support answers, based on 358 Zoho Desk ticket topics\",\n  \"generated\": \"2026-09-24\",\n  \"count\": 61,\n  \"resources\": 62\n },\n \"entries\": [\n  {\n   \"id\": \"k01\",\n   \"q\": \"How do I edit text on a page?\",\n   \"alt\": [\n    \"change to website\",\n    \"changes to website\",\n    \"edit page\",\n    \"change text\",\n    \"update page\",\n    \"correction needed\",\n    \"fix typo\",\n    \"website update\",\n    \"edit website\",\n    \"make changes\",\n    \"revisions\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in to your website (add **/wp-admin** to the end of your web address, for example yourchurch.org/wp-admin).\\n2. Go to **Pages** and find the page you want to change.\\n3. Hover over it and click **Edit with Cornerstone**.\\n4. Click the text on the page and type your changes.\\n5. Click **Save** in the bottom-left corner.\\n\\nOpen the page in a new tab to check it. If you still see the old text, press **Ctrl + F5** (or **Cmd + Shift + R** on a Mac) to refresh.\"\n  },\n  {\n   \"id\": \"k02\",\n   \"q\": \"How do I add a new page?\",\n   \"alt\": [\n    \"new page\",\n    \"create page\",\n    \"add page\",\n    \"make a page\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in and go to **Pages \u2192 Add New**.\\n2. Type a title for the page and click **Publish**.\\n3. Click **Edit with Cornerstone** to design the page. You can add text, images and buttons from the elements panel.\\n4. Click **Save**.\\n5. To show it in your menu, go to **Appearance \u2192 Menus**, tick the new page, click **Add to Menu**, then **Save Menu**.\"\n  },\n  {\n   \"id\": \"k03\",\n   \"q\": \"How do I add or replace a photo?\",\n   \"alt\": [\n    \"trouble uploading media\",\n    \"media upload\",\n    \"upload images\",\n    \"add photos\",\n    \"replace image\",\n    \"change picture\",\n    \"upload photos\",\n    \"update image\",\n    \"banner image\",\n    \"picture not right\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Open the page with **Edit with Cornerstone**.\\n2. Click the photo you want to change.\\n3. In the left panel, click the image box to open your **Media Library**.\\n4. Choose an existing photo, or click **Upload Files** to add a new one from your computer.\\n5. Click **Select**, then **Save**.\\n\\n**Tips:** use JPG or PNG files, choose wide photos for banners, and avoid huge files straight from a camera (resize to about 2000 pixels wide first).\"\n  },\n  {\n   \"id\": \"k04\",\n   \"q\": \"How do I change the photos in a slider or carousel?\",\n   \"alt\": [\n    \"carousel\",\n    \"slider images\",\n    \"update carousel\",\n    \"slideshow\",\n    \"footer carousel\",\n    \"rotating images\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Open the page with **Edit with Cornerstone**.\\n2. Click the slider. In the left panel you'll see each slide listed.\\n3. Click a slide to change its photo or text. Use the **+** button to add a slide, or the trash icon to remove one.\\n4. Click **Save**.\\n\\nIf the slider is in your header or footer, edit it from **Cornerstone \u2192 Headers** or **Footers** instead of the page.\",\n   \"video\": \"https://www.loom.com/share/64abe0bf24bf4e258c3f2e98f8558dc2\"\n  },\n  {\n   \"id\": \"k05\",\n   \"q\": \"How do I update the footer?\",\n   \"alt\": [\n    \"address correction\",\n    \"update address\",\n    \"footer edits\",\n    \"change footer\",\n    \"footer information\",\n    \"address in footer\",\n    \"service times\",\n    \"phone number footer\",\n    \"copyright year\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"The footer is the section at the bottom of every page.\\n\\n1. Log in and open **Cornerstone** from the left menu.\\n2. Go to **Footers** and click the footer your site uses.\\n3. Click the text you want to change (address, phone, service times, links) and type the new information.\\n4. Click **Save**. The change appears on every page.\"\n  },\n  {\n   \"id\": \"k06\",\n   \"q\": \"How do I update the header or change the logo?\",\n   \"alt\": [\n    \"edit header\",\n    \"change logo\",\n    \"update logo\",\n    \"header\",\n    \"top of website\",\n    \"new logo\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in and open **Cornerstone** from the left menu.\\n2. Go to **Headers** and click the header your site uses.\\n3. To change the logo, click it and choose a new image from the Media Library (a PNG with a transparent background looks best).\\n4. Click any other text or button to edit it.\\n5. Click **Save**.\"\n  },\n  {\n   \"id\": \"k07\",\n   \"q\": \"How do I change the menu?\",\n   \"alt\": [\n    \"navigation bar\",\n    \"nav bar\",\n    \"edit menu\",\n    \"navigation\",\n    \"add menu item\",\n    \"remove menu link\",\n    \"menu order\",\n    \"rename menu\",\n    \"menu links\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in and go to **Appearance \u2192 Menus**.\\n2. **To add a page:** tick it in the left column and click **Add to Menu**.\\n3. **To reorder:** drag items up or down. Drag an item slightly to the right to make it a drop-down under the item above.\\n4. **To rename or remove:** click the arrow on the item, change the **Navigation Label**, or click **Remove**.\\n5. Click **Save Menu**.\",\n   \"video\": \"https://www.loom.com/share/3a5d3a6285a24c4b9faf42488b6653fd\"\n  },\n  {\n   \"id\": \"k08\",\n   \"q\": \"How do I update our staff or leadership page?\",\n   \"alt\": [\n    \"staff page\",\n    \"leadership page\",\n    \"add pastor\",\n    \"new staff member\",\n    \"remove staff\",\n    \"team page\",\n    \"staff bio\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Open the staff page with **Edit with Cornerstone**.\\n2. **To add someone:** right-click an existing staff card and choose **Duplicate**, then change the name, title, bio and photo.\\n3. **To remove someone:** right-click their card and choose **Delete**.\\n4. Click **Save**.\\n\\nClear, similar-sized headshots keep the page looking tidy.\"\n  },\n  {\n   \"id\": \"k09\",\n   \"q\": \"How do I add a sermon video or livestream?\",\n   \"alt\": [\n    \"video thumbnail\",\n    \"photo at start of video\",\n    \"video cover image\",\n    \"sermon video\",\n    \"add youtube\",\n    \"livestream\",\n    \"add video\",\n    \"embed video\",\n    \"sermon page\",\n    \"facebook live\",\n    \"vimeo\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. On YouTube, open your video, click **Share**, and copy the link.\\n2. Open your page with **Edit with Cornerstone**.\\n3. Click the **+** (add element) button, search for **Video**, and drag it onto the page.\\n4. Paste the YouTube link into the video settings on the left.\\n5. Click **Save**.\\n\\nTo replace last week's sermon, just click the existing video and paste the new link.\\n\\n**The photo shown before the video plays** comes from YouTube. Change it in **YouTube Studio \u2192 Content**, click the video, and upload a custom thumbnail.\",\n   \"video\": \"https://www.loom.com/share/a5a307665e354a208745628adcbe66f5\"\n  },\n  {\n   \"id\": \"k10\",\n   \"q\": \"How do I post a bulletin, newsletter or PDF?\",\n   \"alt\": [\n    \"flyer\",\n    \"flyers\",\n    \"updating flyers\",\n    \"upload pdf\",\n    \"bulletin\",\n    \"newsletter\",\n    \"add document\",\n    \"pdf link\",\n    \"weekly bulletin\",\n    \"upload file\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in and go to **Media \u2192 Add New**, then upload your PDF.\\n2. Click the uploaded file and copy the **File URL**.\\n3. Open the page with **Edit with Cornerstone** and click the text or button where the link should go.\\n4. Paste the File URL as the link and click **Save**.\\n\\nTo update it each week, you can upload the new PDF and change the link the same way.\",\n   \"video\": \"https://www.loom.com/share/0f8984580a5e43a2971690c5362b6b0d\"\n  },\n  {\n   \"id\": \"k11\",\n   \"q\": \"How do I add a button that links somewhere?\",\n   \"alt\": [\n    \"add button\",\n    \"link button\",\n    \"donate button\",\n    \"register button\",\n    \"link to page\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Open the page with **Edit with Cornerstone**.\\n2. Click **+** to add an element, search for **Button**, and drag it onto the page.\\n3. On the left, type the button text (for example \\\"Give Online\\\") and paste the link it should open.\\n4. Turn on **open in new tab** if it goes to another website.\\n5. Click **Save**.\"\n  },\n  {\n   \"id\": \"k12\",\n   \"q\": \"I made a mistake while editing. How do I undo it?\",\n   \"alt\": [\n    \"undo\",\n    \"mistake\",\n    \"deleted by accident\",\n    \"revert changes\",\n    \"restore page\",\n    \"go back\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"**Before saving:** press **Ctrl + Z** (or **Cmd + Z** on a Mac) in the builder to undo your last steps, or close the builder without saving.\\n\\n**Deleted a whole page?** Go to **Pages \u2192 Trash**, hover over it and click **Restore**.\\n\\nIf you already saved a change you can't undo, send us a request and we can restore it from a backup.\"\n  },\n  {\n   \"id\": \"k13\",\n   \"q\": \"How do I use a ready-made design template?\",\n   \"alt\": [\n    \"templates\",\n    \"design cloud\",\n    \"premade design\",\n    \"page template\",\n    \"layout ideas\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Open a page with **Edit with Cornerstone**.\\n2. Open the **template library** and browse the ready-made pages and sections.\\n3. Click one to add it to your page.\\n4. Replace the sample text and photos with your own, then click **Save**.\"\n  },\n  {\n   \"id\": \"k14\",\n   \"q\": \"How do I add a pop-up announcement?\",\n   \"alt\": [\n    \"pop-up plugin\",\n    \"popup\",\n    \"pop up\",\n    \"announcement popup\",\n    \"modal\",\n    \"newsletter popup\",\n    \"pop-up recommendations\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"If your site uses the **Convert Plus** plugin, the video below shows how to create a promotional pop-up with it. You can also make a simple pop-up without a plugin:\\n\\n1. Open your page with **Edit with Cornerstone**.\\n2. Add a **Modal** element and type your message inside it (you can add text, a photo and a button).\\n3. In its settings, choose what opens it, for example a button click.\\n4. Click **Save** and test it on the live page.\\n\\nIf you need it to appear automatically on a schedule or on every page, send us a request and we'll set it up.\",\n   \"video\": \"https://www.loom.com/share/fdfd7e727002421c98dea237cc2e3f91\"\n  },\n  {\n   \"id\": \"k15\",\n   \"q\": \"How do I change fonts or colors across the whole website?\",\n   \"alt\": [\n    \"font manager\",\n    \"change font\",\n    \"brand colors\",\n    \"color manager\",\n    \"global colors\",\n    \"site colors\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"Fonts and colors are managed in one place, so one change updates the whole site:\\n\\n1. Log in and open **Cornerstone**.\\n2. Open the **Font Manager** to change fonts, or the **Color Manager** to change colors.\\n3. Edit the saved font or color and click **Save**.\\n\\nEverything using that font or color updates automatically.\"\n  },\n  {\n   \"id\": \"k16\",\n   \"q\": \"How do I add a blog post or news update?\",\n   \"alt\": [\n    \"blog post\",\n    \"blog posts\",\n    \"news update\",\n    \"add post\",\n    \"blog appearance\",\n    \"announcement post\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"1. Log in and go to **Posts \u2192 Add New**.\\n2. Add a title and write your post.\\n3. On the right, choose a **Category** and set a **Featured image** (the photo shown in lists).\\n4. Click **Publish**.\\n\\nTo change how the blog list looks, open the blog page with **Edit with Cornerstone**.\\n\\nAnother walkthrough: https://www.loom.com/share/4f9b1ea18dbe4dbd93d545c6a890e75a\",\n   \"video\": \"https://www.loom.com/share/4b8277edeb4947b2a3919ba04803d91f\"\n  },\n  {\n   \"id\": \"k17\",\n   \"q\": \"How do I redirect an old page to a new one?\",\n   \"alt\": [\n    \"redirect\",\n    \"creating redirect\",\n    \"forward page\",\n    \"old link\",\n    \"moved page\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"If your site has the **Redirection** plugin, go to **Tools \u2192 Redirection**, enter the old address in **Source URL** and the new page in **Target URL**, and click **Add Redirect**.\\n\\nDon't see it? Send us a request with the old and new addresses and we'll set it up.\"\n  },\n  {\n   \"id\": \"k18\",\n   \"q\": \"How do I add an announcement bar?\",\n   \"alt\": [\n    \"announcement bar\",\n    \"top bar\",\n    \"notice bar\",\n    \"banner at top\",\n    \"alert bar\",\n    \"news bar\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"An announcement bar is a strip across the top of your website for quick news, like a change in service times or an upcoming event.\\n\\nThis 4-minute video shows how to add one and change its message.\",\n   \"video\": \"https://www.loom.com/share/f1f3b503f11a418d86be99afef789532\"\n  },\n  {\n   \"id\": \"k19\",\n   \"q\": \"How do I add a scrolling featured events carousel to the homepage?\",\n   \"alt\": [\n    \"event carousel\",\n    \"featured events\",\n    \"events slider\",\n    \"homepage events\",\n    \"scrolling events\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"A featured events carousel shows your upcoming events as scrolling cards on the homepage, so visitors see what's coming up right away.\\n\\nThis video walks through setting one up step by step.\",\n   \"video\": \"https://www.loom.com/share/4af8fff6ea8647e08f2dea1701fb382c\"\n  },\n  {\n   \"id\": \"k20\",\n   \"q\": \"How do I add a form to a page?\",\n   \"alt\": [\n    \"add form\",\n    \"new form\",\n    \"create form\",\n    \"embed form\",\n    \"form on page\",\n    \"contact form on page\",\n    \"signup form\"\n   ],\n   \"cat\": \"Forms\",\n   \"a\": \"Forms are built in your form plugin and then placed on a page.\\n\\nThis video shows the whole process: creating the form, choosing its fields, and adding it to your website.\",\n   \"video\": \"https://www.loom.com/share/b7e37e36fd0744b0b86c4b2db1f9dd9c\"\n  },\n  {\n   \"id\": \"k21\",\n   \"q\": \"How do I create a photo gallery?\",\n   \"alt\": [\n    \"photo gallery\",\n    \"gallery\",\n    \"envira\",\n    \"gallery page\",\n    \"image gallery\",\n    \"picture gallery\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"Photo galleries are made with the **Envira Gallery** plugin: you create a gallery, add your photos, then place it on a page.\\n\\nThis 5-minute video shows each step.\",\n   \"video\": \"https://www.loom.com/share/b0dbf3242a7d4059a5c7b41f644a9691\"\n  },\n  {\n   \"id\": \"k22\",\n   \"q\": \"How do I replace the background image or video on the homepage?\",\n   \"alt\": [\n    \"background image\",\n    \"background video\",\n    \"homepage background\",\n    \"hero image\",\n    \"hero video\",\n    \"homepage banner video\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"The large photo or video behind the top of your homepage can be swapped any time.\\n\\nThis video shows how. **Tip:** keep background videos short and small; the video on compressing videos shows how.\",\n   \"video\": \"https://www.loom.com/share/baa78ab27aee44f2bbcc5e028c6853a8\"\n  },\n  {\n   \"id\": \"k23\",\n   \"q\": \"How do I make a link that jumps to a section on the page?\",\n   \"alt\": [\n    \"jump link\",\n    \"anchor link\",\n    \"scroll to section\",\n    \"link to section\",\n    \"page anchor\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"A jump link takes visitors straight to a section further down a page, for example a \\\"Service Times\\\" button that scrolls down to that section.\\n\\nIn short, you give the section a name (an ID) and link to it with **#** in front, like **#service-times**. The video shows exactly where to do both.\",\n   \"video\": \"https://www.loom.com/share/9b1fa11f40c14819b60446d0422f1286\"\n  },\n  {\n   \"id\": \"k24\",\n   \"q\": \"How do I edit a banner?\",\n   \"alt\": [\n    \"edit banner\",\n    \"page banner\",\n    \"banner image\",\n    \"banner text\",\n    \"header image on page\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"Banners are the large image sections with a heading, usually at the top of a page.\\n\\nThis video shows how to change a banner's image, heading and text.\",\n   \"video\": \"https://www.loom.com/share/21a498edbef143bba08fc1daca8f82a8\"\n  },\n  {\n   \"id\": \"k25\",\n   \"q\": \"How do I crop a photo with Canva?\",\n   \"alt\": [\n    \"canva\",\n    \"crop photo\",\n    \"resize photo\",\n    \"photo size\",\n    \"image dimensions\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"Canva is a free design tool (canva.com) that makes it easy to crop photos to the right shape before you upload them to your website.\\n\\nThis 5-minute video shows how.\",\n   \"video\": \"https://www.loom.com/share/b8de8885a896472c989ae01592335950\"\n  },\n  {\n   \"id\": \"k26\",\n   \"q\": \"My video file is too big. How do I compress it?\",\n   \"alt\": [\n    \"compress video\",\n    \"video too large\",\n    \"video file size\",\n    \"shrink video\",\n    \"video upload failed\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"Large video files make pages slow and can fail to upload. This video shows how to compress a video before uploading it.\\n\\n**Tip:** for long videos like sermons, upload them to YouTube or Vimeo and embed them instead. It keeps your website fast.\",\n   \"video\": \"https://www.loom.com/share/0a2230b81f6d47d2959baf86ed4bf7c9\"\n  },\n  {\n   \"id\": \"k27\",\n   \"q\": \"How do I add a section with an image and text?\",\n   \"alt\": [\n    \"image section\",\n    \"graphic section\",\n    \"image and text\",\n    \"add graphic\",\n    \"picture with text\"\n   ],\n   \"cat\": \"Editing your website\",\n   \"a\": \"This short video shows how to add a section to a page with a graphic or photo alongside your text.\",\n   \"video\": \"https://www.loom.com/share/8f8a1e8a065e42c48c623f94c5c391e0\"\n  },\n  {\n   \"id\": \"k28\",\n   \"q\": \"Something isn't showing correctly on mobile\",\n   \"alt\": [\n    \"not showing on mobile\",\n    \"mobile display\",\n    \"phone view broken\",\n    \"looks wrong on phone\",\n    \"mobile layout\",\n    \"content not showing on mobile\"\n   ],\n   \"cat\": \"Display & mobile\",\n   \"a\": \"1. Refresh the page on your phone, or open it in a **private/incognito** tab. Phones often show an older saved copy.\\n2. If it still looks wrong, open the page with **Edit with Cornerstone** on a computer.\\n3. Use the **phone icon** at the top of the builder to preview the mobile view.\\n4. Click the element that looks wrong and adjust it while in phone view (for example smaller text or less spacing). Changes made in phone view only affect phones.\\n5. Click **Save**.\"\n  },\n  {\n   \"id\": \"k29\",\n   \"q\": \"How do I hide something on mobile or desktop?\",\n   \"alt\": [\n    \"hide on mobile\",\n    \"show only desktop\",\n    \"hide section phone\",\n    \"device size\",\n    \"hide on desktop\"\n   ],\n   \"cat\": \"Display & mobile\",\n   \"a\": \"1. Open the page with **Edit with Cornerstone**.\\n2. Click the section or element you want to hide.\\n3. In its settings, find the **hide** options and pick the screen sizes to hide it on (phone, tablet or desktop).\\n4. Click **Save**, then check the page on your phone.\"\n  },\n  {\n   \"id\": \"k30\",\n   \"q\": \"I made changes but I still see the old version\",\n   \"alt\": [\n    \"changes not showing\",\n    \"old version\",\n    \"updated but not showing\",\n    \"cache\",\n    \"not updating\"\n   ],\n   \"cat\": \"Display & mobile\",\n   \"a\": \"Your browser is probably showing a saved copy.\\n\\n1. Press **Ctrl + F5** (Windows) or **Cmd + Shift + R** (Mac) to fully refresh.\\n2. Or open the page in a **private/incognito** window.\\n3. If you're logged in and see a **Purge Cache** or **Clear Cache** option in the black bar at the top, click it.\\n\\nChanges usually show within a few minutes.\"\n  },\n  {\n   \"id\": \"k31\",\n   \"q\": \"My website looks broken after an update\",\n   \"alt\": [\n    \"broken after update\",\n    \"unstyled after update\",\n    \"styles missing\",\n    \"spacing wrong\",\n    \"layout broke\",\n    \"site looks weird\"\n   ],\n   \"cat\": \"Display & mobile\",\n   \"a\": \"This is almost always old saved files. Clear them in this order:\\n\\n1. Log in and go to **Cornerstone \u2192 Settings**, then click **Clear Style Cache**.\\n2. If there's a **Purge Cache** option in the top black bar, click it.\\n3. Refresh the site with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\"\n  },\n  {\n   \"id\": \"k32\",\n   \"q\": \"My website is down\",\n   \"alt\": [\n    \"website down\",\n    \"site not loading\",\n    \"can't access website\",\n    \"site offline\",\n    \"website not working\",\n    \"white screen\",\n    \"error on website\",\n    \"urgent website down\"\n   ],\n   \"cat\": \"Website problems\",\n   \"a\": \"Try these quick checks:\\n\\n1. Open the site on **your phone using mobile data** (Wi-Fi off). If it works there, the problem is your internet or computer.\\n2. Try a **private/incognito** window.\\n3. Check your email (including spam) for a **domain renewal** notice. An expired domain takes the site offline.\\n\\nIf the site is still down for everyone, send us a request right away and mention it's urgent.\",\n   \"handoff\": true\n  },\n  {\n   \"id\": \"k33\",\n   \"q\": \"My website is slow\",\n   \"alt\": [\n    \"slow website\",\n    \"site loading slowly\",\n    \"takes long to load\",\n    \"speed\",\n    \"performance\"\n   ],\n   \"cat\": \"Website problems\",\n   \"a\": \"1. Test the site on another device or network to rule out your internet.\\n2. Check recent pages for **very large photos**. Photos straight from a camera or phone can be huge; resize them to about 2000 pixels wide before uploading.\\n3. Avoid adding many videos or sliders to one page.\\n\\nIf it's still slow, send us a request with the pages that feel slow.\"\n  },\n  {\n   \"id\": \"k34\",\n   \"q\": \"New pages show \\\"Page not found\\\" (404)\",\n   \"alt\": [\n    \"broken links\",\n    \"link issue\",\n    \"link not working\",\n    \"404\",\n    \"page not found\",\n    \"broken link\",\n    \"link not working\"\n   ],\n   \"cat\": \"Website problems\",\n   \"a\": \"1. Log in and go to **Settings \u2192 Permalinks**.\\n2. Don't change anything; just click **Save Changes** at the bottom.\\n3. Refresh the page that showed the error.\\n\\nThis resets your website's links and usually fixes it straight away.\"\n  },\n  {\n   \"id\": \"k35\",\n   \"q\": \"My website says \\\"Not secure\\\"\",\n   \"alt\": [\n    \"not secure\",\n    \"ssl\",\n    \"https\",\n    \"certificate\",\n    \"security warning\",\n    \"padlock\"\n   ],\n   \"cat\": \"Website problems\",\n   \"a\": \"1. Check the address starts with **https://** (with an \\\"s\\\"). Try typing https:// in front of your web address.\\n2. Refresh with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\\n3. If only one page shows it, an image on that page may be linked from an old address; replace that image.\\n\\nIf the warning shows on the whole site, send us a request so we can renew the security certificate.\"\n  },\n  {\n   \"id\": \"k36\",\n   \"q\": \"Our contact form isn't sending emails\",\n   \"alt\": [\n    \"contact form not working\",\n    \"not receiving form\",\n    \"form submissions missing\",\n    \"form emails\",\n    \"inquiry form\",\n    \"didn't get form\",\n    \"form not sending\"\n   ],\n   \"cat\": \"Forms\",\n   \"a\": \"1. Check your **spam or junk folder** and mark any form emails as **Not spam**.\\n2. Send a **test message** through the form yourself.\\n3. Check the form is sending to the right address: log in, open your form plugin (for example **WPForms** or **Contact**), open the form's **Notifications** or **Mail** settings, and confirm the email address.\\n4. Save and test again.\"\n  },\n  {\n   \"id\": \"k37\",\n   \"q\": \"We're getting spam through our contact form\",\n   \"alt\": [\n    \"form spam\",\n    \"spam submissions\",\n    \"junk form entries\",\n    \"bots filling form\",\n    \"spam messages form\"\n   ],\n   \"cat\": \"Forms\",\n   \"a\": \"1. Log in and open your form plugin's settings (for example **WPForms** or **Contact**).\\n2. Turn on the built-in **anti-spam** or **CAPTCHA** option.\\n3. Save and send yourself a test message to make sure the form still works.\\n\\nThis blocks most automated spam. If it keeps coming, send us a request and we'll add stronger protection.\"\n  },\n  {\n   \"id\": \"k38\",\n   \"q\": \"How do I change who gets form emails, or edit the form?\",\n   \"alt\": [\n    \"change form email\",\n    \"form recipient\",\n    \"add form field\",\n    \"update form\",\n    \"new form\",\n    \"registration form\",\n    \"updated form\"\n   ],\n   \"cat\": \"Forms\",\n   \"a\": \"1. Log in and open your form plugin (for example **WPForms** or **Contact**).\\n2. Click the form to edit it.\\n3. **To add a question:** drag a new field onto the form and give it a label.\\n4. **To change who receives it:** open **Notifications** (or the **Mail** tab) and change the email address.\\n5. Save, then send a test message.\"\n  },\n  {\n   \"id\": \"k39\",\n   \"q\": \"How do I add an event?\",\n   \"alt\": [\n    \"add event\",\n    \"calendar event\",\n    \"new event\",\n    \"event calendar\",\n    \"post event\",\n    \"upcoming events\",\n    \"create event\",\n    \"schedule event\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"1. Log in and go to **M.E. Calendar \u2192 Add Event** in the left menu.\\n2. Type the event name and description.\\n3. Set the **start and end date and time** (or tick **All day**).\\n4. Add a location and a featured image if you like.\\n5. Click **Publish**.\\n\\nYour event appears on the calendar straight away.\",\n   \"video\": \"https://www.loom.com/share/d53f59b8b4524e40b05378a1774123f0\"\n  },\n  {\n   \"id\": \"k40\",\n   \"q\": \"My event isn't showing on the calendar\",\n   \"alt\": [\n    \"calendar not working\",\n    \"calendar broken\",\n    \"event not showing\",\n    \"event missing calendar\",\n    \"calendar view\",\n    \"event view in calendar\",\n    \"event wrong date\",\n    \"event disappeared\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"1. Go to **M.E. Calendar \u2192 All Events** and check the event says **Published**, not Draft.\\n2. Open it and check the **date and time**, including the year.\\n3. Make sure the end date isn't before the start date.\\n4. Refresh the calendar page in a **private/incognito** window.\"\n  },\n  {\n   \"id\": \"k41\",\n   \"q\": \"Can we sell tickets or take registrations for events?\",\n   \"alt\": [\n    \"event tickets\",\n    \"sell tickets\",\n    \"event registration\",\n    \"event payment\",\n    \"booking form\",\n    \"rsvp\"\n   ],\n   \"cat\": \"Events\",\n   \"a\": \"Yes, the calendar has a booking feature:\\n\\n1. Go to **M.E. Calendar \u2192 Settings** and turn on **Booking**, then save.\\n2. Set up **Booking Form** (the questions people answer) and **Payment Gateways** (for example Stripe or PayPal) if you charge.\\n3. Open your event and add tickets in its booking section, then click **Update**.\",\n   \"video\": \"https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600\"\n  },\n  {\n   \"id\": \"k42\",\n   \"q\": \"I can't log in to my website\",\n   \"alt\": [\n    \"login issue\",\n    \"password reset\",\n    \"can't log in\",\n    \"forgot password\",\n    \"login not working\",\n    \"reset password\",\n    \"wp-admin\",\n    \"can't sign in\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"1. Go to your login page: your web address followed by **/wp-login.php** (for example yourchurch.org/wp-login.php).\\n2. Click **Lost your password?**\\n3. Enter your username or email and click **Get New Password**.\\n4. Open the email (check spam) and follow the link to set a new password.\"\n  },\n  {\n   \"id\": \"k43\",\n   \"q\": \"It says I'm locked out\",\n   \"alt\": [\n    \"locked out\",\n    \"too many login attempts\",\n    \"blocked login\",\n    \"access denied login\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"The security system blocks logins after several wrong passwords.\\n\\n1. Wait about **1 hour**, then try again.\\n2. Use **Lost your password?** on the login page to reset it instead of guessing.\\n3. Try from your phone using mobile data if you need in sooner.\"\n  },\n  {\n   \"id\": \"k44\",\n   \"q\": \"How do I add a login for a new staff member?\",\n   \"alt\": [\n    \"add user\",\n    \"new staff login\",\n    \"give access\",\n    \"create account\",\n    \"user account\",\n    \"editor access\",\n    \"new user\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"You need to be an Administrator to do this.\\n\\n1. Log in and go to **Users \u2192 Add New**.\\n2. Enter their username, email and name.\\n3. Choose a **Role**: **Editor** can edit pages and events; **Administrator** can change everything (only give this when needed).\\n4. Click **Add New User**. They'll get an email to set their password.\"\n  },\n  {\n   \"id\": \"k45\",\n   \"q\": \"How do I change my password?\",\n   \"alt\": [\n    \"change password\",\n    \"update password\",\n    \"new password\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"1. Log in and go to **Users \u2192 Profile** (or click your name at the top right).\\n2. Scroll to **Account Management** and click **Set New Password**.\\n3. Type your new password and click **Update Profile**.\"\n  },\n  {\n   \"id\": \"k46\",\n   \"q\": \"How do I remove a user who left?\",\n   \"alt\": [\n    \"remove user\",\n    \"delete user\",\n    \"staff left\",\n    \"revoke access\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"1. Log in as an Administrator and go to **Users**.\\n2. Hover over the person and click **Delete**.\\n3. When asked, choose to **attribute their content to another user** so their pages aren't lost.\\n4. Click **Confirm Deletion**.\"\n  },\n  {\n   \"id\": \"k47\",\n   \"q\": \"Can I get FTP access?\",\n   \"alt\": [\n    \"ftp\",\n    \"ftp access\",\n    \"sftp\",\n    \"server access\",\n    \"file access\",\n    \"cpanel\"\n   ],\n   \"cat\": \"Login & users\",\n   \"a\": \"FTP gives direct access to your website's files, so it's usually only needed by a developer. Most changes can be made from your WordPress dashboard instead.\\n\\nIf you do need it, send us a request with the name and email of the person who needs access and why, and we'll share login details securely.\"\n  },\n  {\n   \"id\": \"k48\",\n   \"q\": \"What do these Wordfence emails mean?\",\n   \"alt\": [\n    \"wordfence\",\n    \"security alert\",\n    \"wordfence alert\",\n    \"critical alert\",\n    \"problems found\",\n    \"security email\",\n    \"wordfence activity\"\n   ],\n   \"cat\": \"Security & updates\",\n   \"a\": \"Wordfence is the security system protecting your website. Most emails are just reports (blocked logins, weekly summaries) and need no action.\\n\\n**To get fewer emails:** log in, go to **Wordfence \u2192 All Options \u2192 Email Alert Preferences**, untick the alerts you don't need, and click **Save Changes**.\\n\\nIf an email says **Critical** or **Problems found**, forward it to us.\"\n  },\n  {\n   \"id\": \"k49\",\n   \"q\": \"Should I update plugins myself?\",\n   \"alt\": [\n    \"update plugins\",\n    \"update wordpress\",\n    \"plugin updates\",\n    \"should i update\",\n    \"updates available\",\n    \"update theme\"\n   ],\n   \"cat\": \"Security & updates\",\n   \"a\": \"Updates keep your site safe, but occasionally one can cause a conflict. If you update yourself:\\n\\n1. Make sure a **backup** exists first.\\n2. Go to **Dashboard \u2192 Updates** and update a few plugins at a time.\\n3. Check your homepage and a couple of key pages afterwards.\\n\\nIf anything looks wrong after an update, send us a request.\"\n  },\n  {\n   \"id\": \"k50\",\n   \"q\": \"Our church email isn't working\",\n   \"alt\": [\n    \"email not working\",\n    \"can't send email\",\n    \"email problem\",\n    \"not receiving email\",\n    \"email account\",\n    \"mailbox\"\n   ],\n   \"cat\": \"Email\",\n   \"a\": \"1. Try logging in to your email on the web (for example Gmail or Outlook in a browser). If it works there, the issue is your email app; remove and re-add the account.\\n2. Check your **mailbox isn't full**; delete old emails with large attachments.\\n3. Make sure your **password hasn't changed** or expired.\\n4. Check the **domain renewal**; if the domain expired, email stops too.\"\n  },\n  {\n   \"id\": \"k51\",\n   \"q\": \"We're getting a lot of spam email\",\n   \"alt\": [\n    \"spam\",\n    \"spam email\",\n    \"junk mail\",\n    \"phishing\",\n    \"suspicious email\"\n   ],\n   \"cat\": \"Email\",\n   \"a\": \"1. Don't click links or open attachments in suspicious emails.\\n2. Mark them as **Spam** or **Junk** in your email; this trains the filter.\\n3. Never reply with passwords; we will never ask for yours by email.\\n\\nIf spam is coming through your website's contact form, turn on the form's anti-spam option (ask \\\"form spam\\\" for steps).\"\n  },\n  {\n   \"id\": \"k52\",\n   \"q\": \"How do I renew our domain name?\",\n   \"alt\": [\n    \"change domain\",\n    \"org to com\",\n    \"domain change\",\n    \"domain renewal\",\n    \"domain expiring\",\n    \"renew domain\",\n    \"domain name\",\n    \"transfer domain\",\n    \"domain expired\"\n   ],\n   \"cat\": \"Domain & stats\",\n   \"a\": \"1. Find the renewal email from your domain company (search your email for your domain name and \\\"renew\\\").\\n2. Log in to that company's website and renew the domain.\\n3. Turn on **auto-renew** so it doesn't expire in future.\\n\\nNot sure who your domain is with? Send us a request and we'll check.\"\n  },\n  {\n   \"id\": \"k53\",\n   \"q\": \"How many people visit our website?\",\n   \"alt\": [\n    \"website statistics\",\n    \"visitors\",\n    \"analytics\",\n    \"traffic\",\n    \"google analytics\",\n    \"site stats\",\n    \"how many visitors\"\n   ],\n   \"cat\": \"Domain & stats\",\n   \"a\": \"1. Log in to your website.\\n2. Look for **Site Kit** (Google) or **Jetpack \u2192 Stats** in the left menu. Either shows visitors and popular pages.\\n3. If you use Google Analytics directly, log in at analytics.google.com.\\n\\nIf you don't see any of these, send us a request and we can set up visitor stats or send you a report.\"\n  },\n  {\n   \"id\": \"k54\",\n   \"q\": \"How do I set up online giving?\",\n   \"alt\": [\n    \"online giving\",\n    \"donations\",\n    \"square payment\",\n    \"payment plugin\",\n    \"accept payments\",\n    \"tithe\",\n    \"donate\",\n    \"give online\"\n   ],\n   \"cat\": \"Domain & stats\",\n   \"a\": \"The simplest way is a **Give** button that links to your giving page:\\n\\n1. Copy the link to your online giving page (from your giving provider).\\n2. Open your page with **Edit with Cornerstone** and add a **Button**.\\n3. Type \\\"Give Online\\\", paste the link, and click **Save**.\\n4. Add a **Give** link to your menu too (**Appearance \u2192 Menus**).\\n\\nWant giving built into a form on your site, for example with Square? Send us a request.\"\n  },\n  {\n   \"id\": \"k55\",\n   \"q\": \"How do I make an urgent request?\",\n   \"alt\": [\n    \"urgent\",\n    \"emergency\",\n    \"asap\",\n    \"need help now\",\n    \"critical issue\",\n    \"report an outage\",\n    \"outage\"\n   ],\n   \"cat\": \"Getting help\",\n   \"a\": \"If your website is down, click **Submit a ticket** below and tick **My website is down (urgent)**. Your request is marked **URGENT**, and down sites go to the front of the line.\\n\\nYou can also email **support@reachrightstudios.com** with **URGENT** in the subject line.\",\n   \"handoff\": true\n  },\n  {\n   \"id\": \"k56\",\n   \"q\": \"What should I include when I ask for help?\",\n   \"alt\": [\n    \"support request\",\n    \"what to send\",\n    \"help request\",\n    \"how to contact support\",\n    \"speed things up\"\n   ],\n   \"cat\": \"Getting help\",\n   \"a\": \"Include these and we can fix it faster:\\n\\n1. Your **church name**.\\n2. The **page address** (copy it from your browser's address bar).\\n3. **What's wrong**, or exactly what you'd like changed.\\n4. A **screenshot**, if you have one.\"\n  },\n  {\n   \"id\": \"k57\",\n   \"q\": \"How fast will I hear back?\",\n   \"alt\": [\n    \"response time\",\n    \"how long\",\n    \"when will you reply\",\n    \"support hours\",\n    \"business hours\",\n    \"weekend\"\n   ],\n   \"cat\": \"Getting help\",\n   \"a\": \"Within one business day, and usually faster. Our support team works **Monday to Friday, 9:00 to 5:00 Central**. If you write in over the weekend, you'll hear from us on Monday.\"\n  },\n  {\n   \"id\": \"k58\",\n   \"q\": \"Can I edit our website myself?\",\n   \"alt\": [\n    \"edit myself\",\n    \"do it myself\",\n    \"backend access\",\n    \"make my own changes\",\n    \"self edit\"\n   ],\n   \"cat\": \"Getting help\",\n   \"a\": \"Yes. You have full access to your website's dashboard. Ask this chat how to do something (for example \\\"how do I update the footer\\\") for step-by-step instructions.\\n\\nIf you'd rather we handle it, submit a ticket and we'll take care of it.\"\n  },\n  {\n   \"id\": \"k59\",\n   \"q\": \"How do I update our card or bank details?\",\n   \"alt\": [\n    \"update credit card\",\n    \"change card\",\n    \"bank account\",\n    \"payment method\",\n    \"billing portal\",\n    \"update payment\"\n   ],\n   \"cat\": \"Billing\",\n   \"a\": \"Use the billing portal. It takes about two minutes:\\n\\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\\n2. Enter your **billing email**.\\n3. Click the secure link we email you (no password needed).\\n4. Update your payment method. It applies to your next invoice automatically.\"\n  },\n  {\n   \"id\": \"k60\",\n   \"q\": \"Where do I find our invoices and receipts?\",\n   \"alt\": [\n    \"invoices\",\n    \"receipts\",\n    \"payment history\",\n    \"download invoice\",\n    \"billing history\"\n   ],\n   \"cat\": \"Billing\",\n   \"a\": \"Every invoice and receipt is in the billing portal:\\n\\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\\n2. Enter your **billing email** and click the secure link we send you.\\n3. View or download your full payment history.\"\n  },\n  {\n   \"id\": \"k61\",\n   \"q\": \"I have a billing question or want to change our plan\",\n   \"alt\": [\n    \"billing question\",\n    \"change plan\",\n    \"cancel plan\",\n    \"upgrade plan\",\n    \"billing email\",\n    \"accounting\"\n   ],\n   \"cat\": \"Billing\",\n   \"a\": \"Most billing tasks can be done in the [billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00): updating your card, downloading invoices, and changing your billing email.\\n\\nFor plan changes or anything the portal can't do, email **accounting@reachrightstudios.com**.\"\n  }\n ],\n \"resources\": [\n  {\n   \"id\": \"g01\",\n   \"q\": \"Cornerstone won't load or freezes on the loading screen\",\n   \"alt\": [\n    \"builder not loading\",\n    \"cornerstone stuck\",\n    \"builder frozen\",\n    \"spinning\",\n    \"edit with cornerstone not working\",\n    \"builder won't open\",\n    \"cornerstone not working\",\n    \"chrome cornerstone\"\n   ],\n   \"a\": \"The help guides say a frozen builder is usually caused by another plugin clashing with it. To find it:\\n\\n1. Go to **Dashboard \u2192 Plugins** and deactivate your other plugins (leave Cornerstone active if it's listed as a plugin).\\n2. Try opening the builder again.\\n3. If it works, turn your plugins back on **one at a time**, checking the builder each time. The one that breaks it is the cause.\\n4. Also make sure your theme and Cornerstone are **updated** to the latest version.\\n\\nTry a different browser too (for example Chrome or Firefox), with browser extensions turned off.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g02\",\n   \"q\": \"The builder shows a preview error\",\n   \"alt\": [\n    \"preview error\",\n    \"preview not loading\",\n    \"conflict prevented the preview\",\n    \"builder warning\",\n    \"preview url\"\n   ],\n   \"a\": \"The help guides suggest these steps for preview errors:\\n\\n1. **Update** your theme and Cornerstone. Newer versions show a clearer error message.\\n2. Try the builder with your **other plugins turned off** (Dashboard \u2192 Plugins), then turn them back on one by one.\\n3. If your site is a **staging copy**, check **Settings \u2192 General** and make sure both web addresses point to the staging site, not the live one.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g03\",\n   \"q\": \"My changes won't save\",\n   \"alt\": [\n    \"save failed\",\n    \"can't save\",\n    \"changes not saving\",\n    \"saving error\",\n    \"won't publish\"\n   ],\n   \"a\": \"When saving fails, the help guides point to three common causes:\\n\\n1. **A plugin conflict.** Turn off other plugins, try saving, then turn them back on one at a time.\\n2. **Security or caching plugins** blocking the save. Pause them briefly and try again.\\n3. **Low server memory.** Your web host can raise the \\\"PHP memory limit\\\" for you (the guides recommend at least 256MB).\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g04\",\n   \"q\": \"My website looks broken or unstyled after an update\",\n   \"alt\": [\n    \"broken after update\",\n    \"unstyled\",\n    \"styles missing\",\n    \"spacing wrong\",\n    \"layout broke\",\n    \"looks weird after update\"\n   ],\n   \"a\": \"The help guides explain this is almost always leftover saved files, in three places:\\n\\n1. **Style cache:** go to **Cornerstone \u2192 Settings** and click **Clear Style Cache**.\\n2. **Caching plugin or hosting cache:** purge it completely.\\n3. **Cloudflare or other CDN:** purge its cache. If Cloudflare's **Auto Minify** for CSS is on, turn it off, because it can cut the site's styles short.\\n\\nWhile you're making lots of changes, turning on Cloudflare's **Development Mode** stops it from showing old versions.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g05\",\n   \"q\": \"Changes aren't showing on the live site\",\n   \"alt\": [\n    \"changes not showing\",\n    \"old version showing\",\n    \"cache\",\n    \"not updating\",\n    \"still see old\"\n   ],\n   \"a\": \"The help guides recommend clearing every layer of saved copies:\\n\\n1. In **Cornerstone \u2192 Settings**, click **Clear Style Cache**.\\n2. Purge your **caching plugin** and any **hosting cache**.\\n3. Purge **Cloudflare** or your CDN if you use one.\\n4. Refresh your browser with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\\n\\nWhile editing a lot, you can pause the caching plugin, then turn it back on when you're done.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g06\",\n   \"q\": \"Pages or links show \\\"Page not found\\\"\",\n   \"alt\": [\n    \"404\",\n    \"page not found\",\n    \"broken link\",\n    \"broken links\",\n    \"link not working\",\n    \"permalinks\"\n   ],\n   \"a\": \"The help guides suggest resetting your website's link settings:\\n\\n1. Go to **Settings \u2192 Permalinks**.\\n2. Click **Save Changes** without changing anything.\\n\\nThen check the menu link itself: in **Appearance \u2192 Menus**, open the item and make sure it points to a page that still exists (renamed or deleted pages leave broken links).\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g07\",\n   \"q\": \"How do I build or change a footer?\",\n   \"alt\": [\n    \"footer builder\",\n    \"edit footer\",\n    \"new footer\",\n    \"footer edits\",\n    \"different footer\",\n    \"change footer\"\n   ],\n   \"a\": \"From the help guides on the Footer Builder:\\n\\n1. Open **Cornerstone** and go to **Footers**.\\n2. Click an existing footer to edit it, or create a new one.\\n3. Add or edit text, links, logos and social icons like any page.\\n4. Use the footer's **assignment** settings to choose where it shows: the whole site, or only certain pages.\\n5. Click **Save**.\\n\\nThis also lets you use a simpler footer on landing pages.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g08\",\n   \"q\": \"How do I build or change a header?\",\n   \"alt\": [\n    \"header builder\",\n    \"edit header\",\n    \"change logo\",\n    \"new header\",\n    \"header\",\n    \"top bar\"\n   ],\n   \"a\": \"From the help guides on the Header Builder:\\n\\n1. Open **Cornerstone** and go to **Headers**.\\n2. Click your header to edit it, or create a new one.\\n3. Click the logo to swap the image, and click text or buttons to change them.\\n4. Use the header's **assignment** settings to choose which pages it appears on.\\n5. Click **Save**.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g09\",\n   \"q\": \"My menu isn't showing or updating in the header\",\n   \"alt\": [\n    \"navigation\",\n    \"menu not showing\",\n    \"menu not updating\",\n    \"nav bar\",\n    \"set up navigation\",\n    \"menu missing\"\n   ],\n   \"a\": \"The help guides explain that the header shows a menu through a **navigation element**:\\n\\n1. Make your menu in **Appearance \u2192 Menus** and click **Save Menu**.\\n2. Open **Cornerstone \u2192 Headers** and click the navigation in your header.\\n3. In its settings, choose the **menu** it should display.\\n4. Click **Save**, then clear your cache and refresh.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g10\",\n   \"q\": \"Drop-down menus aren't working\",\n   \"alt\": [\n    \"dropdown not working\",\n    \"submenu not opening\",\n    \"navigation dropdown\",\n    \"menu dropdown issue\"\n   ],\n   \"a\": \"Try these steps from the help guides:\\n\\n1. In **Appearance \u2192 Menus**, check the sub-items are **indented** under their parent item, then save.\\n2. Clear your caches (Cornerstone style cache, caching plugin, CDN).\\n3. Test with other plugins turned off, in case one is interfering with menus.\\n4. Check on both desktop and phone, since mobile menus are set up separately in the header.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/3a5d3a6285a24c4b9faf42488b6653fd\"\n  },\n  {\n   \"id\": \"g11\",\n   \"q\": \"How do I add something to a page (text, image, button)?\",\n   \"alt\": [\n    \"add element\",\n    \"add content\",\n    \"drag and drop\",\n    \"elements library\",\n    \"add section\"\n   ],\n   \"a\": \"From the help guides on adding elements:\\n\\n1. Open the page with **Edit with Cornerstone**.\\n2. Click the **+** button to open the elements library.\\n3. Search for what you need (Text, Image, Button, Video and more).\\n4. Drag it onto the page where you want it.\\n5. Change its settings on the left, then click **Save**.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g12\",\n   \"q\": \"How do I duplicate, move or undo things in the builder?\",\n   \"alt\": [\n    \"undo\",\n    \"duplicate\",\n    \"copy section\",\n    \"keyboard shortcuts\",\n    \"right click\",\n    \"move element\"\n   ],\n   \"a\": \"The help guides list these shortcuts:\\n\\n- **Right-click** any element for options like **Duplicate**, **Copy**, **Paste** and **Delete**.\\n- **Ctrl + Z** (or **Cmd + Z** on a Mac) undoes your last change.\\n- Drag elements to move them, or use the **Outline** view to see and reorder everything on the page.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g13\",\n   \"q\": \"How do I make the page look right on phones?\",\n   \"alt\": [\n    \"responsive\",\n    \"mobile styles\",\n    \"breakpoints\",\n    \"phone layout\",\n    \"tablet\",\n    \"mobile view\",\n    \"looks wrong on mobile\"\n   ],\n   \"a\": \"From the help guides on responsive styling:\\n\\n1. In the builder, use the **screen size buttons** at the top to preview phone, tablet and desktop.\\n2. While previewing a size, click an element and adjust it (text size, spacing, columns). Changes made there apply to that screen size.\\n3. Check each size, then click **Save**.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g14\",\n   \"q\": \"How do I hide a section on certain devices?\",\n   \"alt\": [\n    \"hide on mobile\",\n    \"hide on desktop\",\n    \"show only on phone\",\n    \"device visibility\"\n   ],\n   \"a\": \"From the help guides:\\n\\n1. Open the page in Cornerstone and click the section or element.\\n2. In its settings, find the **hide** options for screen sizes.\\n3. Choose the sizes to hide it on, then click **Save**.\\n\\nA common approach is to make one version for desktop and a simpler one for phones, and hide each on the other.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g15\",\n   \"q\": \"How do I reuse a section on many pages?\",\n   \"alt\": [\n    \"components\",\n    \"global block\",\n    \"reuse section\",\n    \"same section everywhere\",\n    \"template\"\n   ],\n   \"a\": \"The help guides recommend **Components** for this: build a section once and place it on many pages. When you edit the Component, every page using it updates automatically.\\n\\nYou can also save any section as a **template** and add it to other pages from the template library. Templates are copies, so later edits don't spread to the other pages.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g16\",\n   \"q\": \"How do I use ready-made designs?\",\n   \"alt\": [\n    \"design cloud\",\n    \"templates\",\n    \"premade\",\n    \"layout ideas\",\n    \"template library\"\n   ],\n   \"a\": \"The help guides describe **Design Cloud**, a library of ready-made pages, sections and styles:\\n\\n1. Open a page in Cornerstone and open the **template library**.\\n2. Browse and click a design to add it.\\n3. Replace the sample text and photos with your own, then click **Save**.\\n\\nA validated license is needed to use it.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g17\",\n   \"q\": \"How do I change fonts across the site?\",\n   \"alt\": [\n    \"font manager\",\n    \"change font\",\n    \"google fonts\",\n    \"custom font\",\n    \"typography\"\n   ],\n   \"a\": \"From the help guides on the **Font Manager**:\\n\\n1. Open **Cornerstone** and go to the Font Manager.\\n2. Add the fonts you want (Google Fonts or uploaded fonts) and name them, for example \\\"Headings\\\" and \\\"Body\\\".\\n3. Choose those fonts in your site settings and elements.\\n\\nChange a saved font later and it updates everywhere it's used.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g18\",\n   \"q\": \"How do I change brand colors across the site?\",\n   \"alt\": [\n    \"color manager\",\n    \"brand colors\",\n    \"global colors\",\n    \"site colors\"\n   ],\n   \"a\": \"From the help guides on the **Color Manager**:\\n\\n1. Open **Cornerstone** and go to the Color Manager.\\n2. Add your brand colors and give them names.\\n3. Pick those saved colors when styling elements.\\n\\nWhen you edit a saved color, every element using it changes too.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g19\",\n   \"q\": \"How do I add a pop-up window?\",\n   \"alt\": [\n    \"pop-up\",\n    \"popup\",\n    \"modal\",\n    \"announcement\",\n    \"pop up alert\"\n   ],\n   \"a\": \"The help guides cover the **Modal** element, which makes pop-ups:\\n\\n1. Open the page in Cornerstone and add a **Modal** element.\\n2. Put your message, image or button inside it.\\n3. Choose what opens it, for example clicking a button or link.\\n4. Click **Save** and test it on the live page.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/fdfd7e727002421c98dea237cc2e3f91\"\n  },\n  {\n   \"id\": \"g20\",\n   \"q\": \"How do I add a video?\",\n   \"alt\": [\n    \"add video\",\n    \"youtube\",\n    \"vimeo\",\n    \"embed video\",\n    \"sermon video\",\n    \"video not playing\"\n   ],\n   \"a\": \"From the help guides on the **Video** element:\\n\\n1. Open the page in Cornerstone and add a **Video** element.\\n2. Paste your YouTube or Vimeo link (or embed code) into its settings.\\n3. Adjust the size and options, then click **Save**.\\n\\nIf a video won't play, check it's set to **Public** or **Unlisted** (not Private) on YouTube or Vimeo.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/a5a307665e354a208745628adcbe66f5\"\n  },\n  {\n   \"id\": \"g21\",\n   \"q\": \"How do I add or fix images and galleries?\",\n   \"alt\": [\n    \"image\",\n    \"photo\",\n    \"gallery\",\n    \"picture blurry\",\n    \"upload photo\",\n    \"media upload problem\",\n    \"trouble uploading media\"\n   ],\n   \"a\": \"From the help guides:\\n\\n1. Click an **Image** element in Cornerstone and choose a picture from the Media Library, or upload a new one.\\n2. For several photos, use a gallery or slider element and add images to it.\\n3. If an upload fails, the file may be too large; resize it to about 2000 pixels wide and try again.\\n4. If a photo looks blurry, upload a larger original instead of a small or screenshot version.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g22\",\n   \"q\": \"How do I change a slider?\",\n   \"alt\": [\n    \"slider\",\n    \"carousel\",\n    \"slideshow\",\n    \"slides\"\n   ],\n   \"a\": \"From the help guides on sliders:\\n\\n1. Open the page (or header/footer) in Cornerstone and click the slider.\\n2. Each slide is listed on the left. Click one to change its image or text.\\n3. Use **+** to add a slide, or delete ones you don't need.\\n4. Adjust timing and arrows in the slider settings, then click **Save**.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/64abe0bf24bf4e258c3f2e98f8558dc2\"\n  },\n  {\n   \"id\": \"g23\",\n   \"q\": \"How do I add events to the calendar?\",\n   \"alt\": [\n    \"add event\",\n    \"events calendar\",\n    \"modern events calendar\",\n    \"create event\",\n    \"calendar not working\",\n    \"event not showing\"\n   ],\n   \"a\": \"The help guides cover the Modern Events Calendar included with your site:\\n\\n1. If you don't see **M.E. Calendar** in your dashboard menu, go to your dashboard's **Validation** page, find Modern Events Calendar and click **Install**, then **Activate**. You can skip its purchase-code screen.\\n2. Go to **M.E. Calendar \u2192 Add Event**, fill in the dates, times and details, and click **Publish**.\\n3. Events show at yoursite.com/events by default.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/d53f59b8b4524e40b05378a1774123f0\"\n  },\n  {\n   \"id\": \"g24\",\n   \"q\": \"How do I customize the events page?\",\n   \"alt\": [\n    \"events page\",\n    \"event list\",\n    \"calendar page\",\n    \"event shortcode\",\n    \"calendar look\"\n   ],\n   \"a\": \"From the help guides: create a normal page in Cornerstone, design it how you like, and add the calendar with one of its **shortcodes** (found under **M.E. Calendar \u2192 Shortcodes**). Paste the shortcode into a text or shortcode element and click **Save**.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g25\",\n   \"q\": \"How do I take event registrations or payments?\",\n   \"alt\": [\n    \"event tickets\",\n    \"event registration\",\n    \"booking\",\n    \"event payment\"\n   ],\n   \"a\": \"From the help guides:\\n\\n1. In the **M.E. Calendar** settings, turn on the **booking** option and save.\\n2. New sections appear for the **Booking Form** (questions people answer) and **Payment Gateways** (Stripe or PayPal).\\n3. Each event can use its own booking form if needed.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600\"\n  },\n  {\n   \"id\": \"g26\",\n   \"q\": \"How do I put a form on a page?\",\n   \"alt\": [\n    \"add form\",\n    \"form element\",\n    \"contact form on page\",\n    \"embed form\",\n    \"form not showing\",\n    \"prayer form\"\n   ],\n   \"a\": \"The help guides explain you can place any form from your form plugin on a page:\\n\\n1. In your form plugin (for example WPForms or Contact Form 7), copy the form's **shortcode**.\\n2. Open the page in Cornerstone and add a **text** or **shortcode** element (or the form integration element).\\n3. Paste the shortcode and click **Save**.\",\n   \"src\": \"cornerstone\",\n   \"video\": \"https://www.loom.com/share/b7e37e36fd0744b0b86c4b2db1f9dd9c\"\n  },\n  {\n   \"id\": \"g27\",\n   \"q\": \"My license or validation isn't working\",\n   \"alt\": [\n    \"validation\",\n    \"license\",\n    \"already used\",\n    \"could not establish a connection\",\n    \"not validated\"\n   ],\n   \"a\": \"From the help guides:\\n\\n- **\\\"Already used on another site\\\"** means the license is linked to a different web address, usually after moving the site. The license's location needs updating in the license account.\\n- **\\\"Could not establish a connection\\\"** means your server couldn't reach the license server. Your web host can check that outgoing connections aren't blocked.\\n\\nBoth are quick fixes for our team, so a support ticket is the fastest route.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g28\",\n   \"q\": \"How do I update the theme safely?\",\n   \"alt\": [\n    \"update theme\",\n    \"update cornerstone\",\n    \"updates\",\n    \"latest version\"\n   ],\n   \"a\": \"The help guides recommend:\\n\\n1. **Back up** your site first.\\n2. Update the theme and Cornerstone **together**, so their versions match.\\n3. Afterwards, click **Clear Style Cache** in **Cornerstone \u2192 Settings**, then purge your caching plugin and CDN.\\n4. Check your homepage and a few key pages.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g29\",\n   \"q\": \"Icons are missing or showing as squares\",\n   \"alt\": [\n    \"icons missing\",\n    \"font awesome\",\n    \"icons not showing\",\n    \"squares instead of icons\"\n   ],\n   \"a\": \"Missing icons are usually caused by old saved files or a clash with another plugin that loads its own icons. Try:\\n\\n1. **Clear Style Cache** in **Cornerstone \u2192 Settings**, then purge your caching plugin and CDN.\\n2. Turn off other plugins one at a time to see if one is replacing the icons.\\n3. Make sure your theme and Cornerstone are updated.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"g30\",\n   \"q\": \"How can I make my website faster?\",\n   \"alt\": [\n    \"site speed\",\n    \"slow website\",\n    \"performance\",\n    \"page speed\",\n    \"loading slowly\"\n   ],\n   \"a\": \"The help guides' performance tips:\\n\\n1. Use a **caching plugin**.\\n2. **Resize and compress images** before uploading.\\n3. Remove plugins you don't use.\\n4. Avoid putting many sliders or videos on one page.\\n5. Good hosting makes a big difference for speed.\",\n   \"src\": \"cornerstone\"\n  },\n  {\n   \"id\": \"w01\",\n   \"q\": \"How do I change the site title or tagline?\",\n   \"alt\": [\n    \"site title\",\n    \"tagline\",\n    \"site name\",\n    \"browser tab name\",\n    \"change site name\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 General**.\\n2. Change the **Site Title** and **Tagline**.\\n3. Click **Save Changes** at the bottom.\\n\\nThe title shows in browser tabs and Google results. Your header logo is separate; change it in **Cornerstone \u2192 Headers**.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w02\",\n   \"q\": \"How do I choose which page is the homepage?\",\n   \"alt\": [\n    \"homepage\",\n    \"home page\",\n    \"front page\",\n    \"set homepage\",\n    \"blog page\",\n    \"posts page\",\n    \"reading settings\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 Reading**.\\n2. Under **Your homepage displays**, choose **A static page**.\\n3. Pick your **Homepage** (and a **Posts page** if you have a blog or news page).\\n4. Click **Save Changes**.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w03\",\n   \"q\": \"Our website isn't showing up on Google\",\n   \"alt\": [\n    \"not on google\",\n    \"search engines\",\n    \"discourage search engines\",\n    \"seo\",\n    \"google search\",\n    \"indexing\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 Reading**.\\n2. Make sure **Discourage search engines from indexing this site** is **not ticked**.\\n3. Click **Save Changes**.\\n\\nNew websites can take a few weeks to appear in Google. Sharing your link on social media and your church's listings helps Google find it sooner.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w04\",\n   \"q\": \"How do I change the admin email address?\",\n   \"alt\": [\n    \"admin email\",\n    \"administration email\",\n    \"change site email\",\n    \"notification email\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 General**.\\n2. Change the **Administration Email Address**.\\n3. Click **Save Changes**.\\n4. WordPress emails the new address a confirmation link. The change only takes effect after you click it.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w05\",\n   \"q\": \"The times on posts or events are wrong\",\n   \"alt\": [\n    \"wrong time\",\n    \"timezone\",\n    \"time zone\",\n    \"date wrong\",\n    \"scheduled wrong time\",\n    \"event time wrong\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 General**.\\n2. Under **Timezone**, choose a **city in your time zone** (for example Chicago), rather than a UTC offset, so daylight saving is handled automatically.\\n3. Click **Save Changes**.\\n\\nThen check the time on the post or event again.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w06\",\n   \"q\": \"How do I schedule a post to publish later?\",\n   \"alt\": [\n    \"schedule post\",\n    \"publish later\",\n    \"future post\",\n    \"schedule announcement\"\n   ],\n   \"a\": \"1. Open the post in the editor.\\n2. In the right sidebar, click the **Publish** date (it says \\\"Immediately\\\").\\n3. Pick the date and time.\\n4. Click **Schedule**.\\n\\nIt publishes automatically at that time. Check **Settings \u2192 General** has the right time zone first.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w07\",\n   \"q\": \"How do I use categories and tags?\",\n   \"alt\": [\n    \"categories\",\n    \"tags\",\n    \"organize posts\",\n    \"post category\",\n    \"add category\"\n   ],\n   \"a\": \"**Categories** are broad groups (for example News, Sermons, Youth). **Tags** are optional keywords.\\n\\n1. Go to **Posts \u2192 Categories**, type a name and click **Add New Category**.\\n2. When editing a post, tick its category in the right sidebar.\\n3. Click **Update**.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w08\",\n   \"q\": \"How do I approve, delete or turn off comments?\",\n   \"alt\": [\n    \"comments\",\n    \"moderate comments\",\n    \"turn off comments\",\n    \"disable comments\",\n    \"approve comment\"\n   ],\n   \"a\": \"**To manage comments:** go to **Comments**, hover over one and choose **Approve**, **Spam** or **Trash**.\\n\\n**To turn comments off for new posts:** go to **Settings \u2192 Discussion**, untick **Allow people to submit comments on new posts**, and click **Save Changes**.\\n\\nFor posts that already exist, open the post, find **Discussion** in the right sidebar, and untick **Allow comments**.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w09\",\n   \"q\": \"We're getting spam comments\",\n   \"alt\": [\n    \"spam comments\",\n    \"comment spam\",\n    \"junk comments\",\n    \"bot comments\"\n   ],\n   \"a\": \"1. Go to **Settings \u2192 Discussion**.\\n2. Tick **Comment must be manually approved**, so nothing appears until you approve it.\\n3. Click **Save Changes**.\\n4. In **Comments**, select the spam and choose **Mark as Spam**.\\n\\nIf you don't use comments at all, turning them off (ask \\\"turn off comments\\\") stops the spam completely.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w10\",\n   \"q\": \"How do I edit widgets in the sidebar or footer?\",\n   \"alt\": [\n    \"widgets\",\n    \"sidebar\",\n    \"widget area\",\n    \"footer widgets\",\n    \"edit widget\"\n   ],\n   \"a\": \"1. Go to **Appearance \u2192 Widgets**.\\n2. Click the widget area you want to change (for example Sidebar or Footer).\\n3. Click **+** to add a block, or click an existing one to edit or remove it.\\n4. Click **Update**.\\n\\nIf your footer is built in Cornerstone, edit it in **Cornerstone \u2192 Footers** instead.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w11\",\n   \"q\": \"How do I bring back an older version of a page or post?\",\n   \"alt\": [\n    \"revisions\",\n    \"restore older version\",\n    \"go back to previous version\",\n    \"undo changes after saving\",\n    \"version history\"\n   ],\n   \"a\": \"For pages and posts written in the WordPress editor:\\n\\n1. Open the page or post.\\n2. In the right sidebar, click **Revisions**.\\n3. Use the slider to compare versions.\\n4. Click **Restore This Revision**.\\n\\nFor pages built with Cornerstone, older versions may not be kept this way; send a ticket and we can restore from a backup.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w12\",\n   \"q\": \"How do I recover something I deleted?\",\n   \"alt\": [\n    \"deleted page\",\n    \"deleted post\",\n    \"trash\",\n    \"restore deleted\",\n    \"accidentally deleted\"\n   ],\n   \"a\": \"1. Go to **Pages** (or **Posts**).\\n2. Click **Trash** at the top of the list.\\n3. Hover over the item and click **Restore**.\\n\\nItems stay in the Trash for **30 days**, then they're deleted for good. For deleted photos or older items, send a ticket and we can check a backup.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w13\",\n   \"q\": \"How do I preview a page before publishing?\",\n   \"alt\": [\n    \"preview\",\n    \"draft\",\n    \"save draft\",\n    \"see before publishing\"\n   ],\n   \"a\": \"1. While editing, click **Save draft** so your work is kept but not public.\\n2. Click **Preview** to see how it will look.\\n3. When you're happy, click **Publish** (or **Update** for pages that are already live).\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w14\",\n   \"q\": \"How do I password-protect a page?\",\n   \"alt\": [\n    \"password protect\",\n    \"private page\",\n    \"members only\",\n    \"hide page\",\n    \"protected page\"\n   ],\n   \"a\": \"1. Open the page in the WordPress editor.\\n2. In the right sidebar, click the **Visibility** setting (it usually says Public).\\n3. Choose **Password protected** and type a password.\\n4. Click **Update**.\\n\\nChoose **Private** instead if only logged-in staff should see it.\",\n   \"src\": \"wp\",\n   \"video\": \"https://www.loom.com/share/06b62c61698b4839a0bc79a836b68c17\"\n  },\n  {\n   \"id\": \"w15\",\n   \"q\": \"How do I change a page's web address?\",\n   \"alt\": [\n    \"change url\",\n    \"page slug\",\n    \"page address\",\n    \"permalink of page\",\n    \"rename url\"\n   ],\n   \"a\": \"1. Go to **Pages** and hover over the page.\\n2. Click **Quick Edit**.\\n3. Change the **Slug** (the last part of the address, for example **youth-ministry**).\\n4. Click **Update**.\\n\\nAfterwards, check your menu link still works, and set up a redirect from the old address if people have shared it.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w16\",\n   \"q\": \"How do I make a page a sub-page of another?\",\n   \"alt\": [\n    \"parent page\",\n    \"sub page\",\n    \"child page\",\n    \"page hierarchy\",\n    \"nested page\"\n   ],\n   \"a\": \"1. Open the page, or use **Quick Edit** from the Pages list.\\n2. In **Page Attributes** (or **Parent**), choose the parent page.\\n3. Click **Update**.\\n\\nThis changes the address (for example /ministries/youth/). To show it as a drop-down in the menu, arrange it in **Appearance \u2192 Menus**.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w17\",\n   \"q\": \"What can each user role do?\",\n   \"alt\": [\n    \"user roles\",\n    \"editor vs administrator\",\n    \"roles\",\n    \"permissions\",\n    \"author contributor\",\n    \"new staff login\",\n    \"staff access\",\n    \"which role\",\n    \"add user\"\n   ],\n   \"a\": \"- **Administrator:** full control, including plugins, users and settings.\\n- **Editor:** can publish and edit all pages and posts.\\n- **Author:** can publish and edit their own posts.\\n- **Contributor:** can write posts but can't publish them.\\n- **Subscriber:** can only manage their own profile.\\n\\n**Editor** suits most church staff. Keep Administrator accounts to a minimum.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w18\",\n   \"q\": \"How do I change my name or email on my login?\",\n   \"alt\": [\n    \"change my email\",\n    \"display name\",\n    \"my profile\",\n    \"update profile\"\n   ],\n   \"a\": \"1. Go to **Users \u2192 Profile**.\\n2. Change your **First Name**, **Last Name** or **Email**, and choose how your name displays.\\n3. Click **Update Profile**.\\n\\nIf you change your email, WordPress sends a confirmation to the new address.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w19\",\n   \"q\": \"I still can't get into the dashboard\",\n   \"alt\": [\n    \"can't log in\",\n    \"login not working\",\n    \"login problem\",\n    \"can't sign in\",\n    \"wp-admin not working\",\n    \"password not working\"\n   ],\n   \"a\": \"Try these in order:\\n\\n1. Check **Caps Lock** is off and try typing the password rather than pasting it.\\n2. Try a **private/incognito window** or a different browser. Old saved login data sometimes gets in the way.\\n3. Use **Lost your password?** on the login page to set a new one (check spam for the email).\\n4. If it says you're **locked out**, the security system blocked too many attempts; wait an hour or ask us to unlock it.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w20\",\n   \"q\": \"How do I share a PDF or document on the site?\",\n   \"alt\": [\n    \"pdf\",\n    \"bulletin\",\n    \"newsletter\",\n    \"upload document\",\n    \"link to pdf\",\n    \"share file\"\n   ],\n   \"a\": \"1. Go to **Media \u2192 Add New Media File** and upload the file.\\n2. Click the uploaded file and click **Copy URL to clipboard**.\\n3. Open the page, highlight the words or button that should link to it, and paste the address as the link.\\n4. Save the page.\\n\\nTo replace a weekly bulletin, upload the new file and update the link the same way.\",\n   \"src\": \"wp\",\n   \"video\": \"https://www.loom.com/share/0f8984580a5e43a2971690c5362b6b0d\"\n  },\n  {\n   \"id\": \"w21\",\n   \"q\": \"How do I crop or rotate a photo?\",\n   \"alt\": [\n    \"crop image\",\n    \"rotate photo\",\n    \"resize image\",\n    \"edit image\",\n    \"image sideways\"\n   ],\n   \"a\": \"1. Go to **Media \u2192 Library** and click the photo.\\n2. Click **Edit Image**.\\n3. Use the **crop**, **rotate** or **scale** tools.\\n4. Click **Save**, then update any page using the photo if needed.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w22\",\n   \"q\": \"How do I add alt text to images?\",\n   \"alt\": [\n    \"alt text\",\n    \"image description\",\n    \"accessibility images\",\n    \"alternative text\"\n   ],\n   \"a\": \"Alt text describes a photo for people using screen readers, and helps Google.\\n\\n1. Go to **Media \u2192 Library** and click the photo.\\n2. Fill in **Alternative Text** with a short description (for example \\\"Children singing at Christmas service\\\").\\n3. Changes save automatically.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w23\",\n   \"q\": \"I get an error that my file is too large to upload\",\n   \"alt\": [\n    \"file too large\",\n    \"exceeds maximum upload size\",\n    \"upload failed\",\n    \"upload error\",\n    \"maximum upload\"\n   ],\n   \"a\": \"1. Make the file smaller: resize photos to about **2000 pixels wide**, or compress them with a free tool such as TinyPNG.\\n2. For PDFs, use a \\\"compress PDF\\\" tool.\\n3. Try uploading again.\\n\\nIf you regularly need bigger files (like audio sermons), send a ticket and we can raise the upload limit or suggest a better way to host them.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w24\",\n   \"q\": \"How do I delete old photos and files?\",\n   \"alt\": [\n    \"delete media\",\n    \"clean up media library\",\n    \"remove photos\",\n    \"unused images\"\n   ],\n   \"a\": \"1. Go to **Media \u2192 Library** and switch to **list view** (the icon at the top left).\\n2. Tick the files you want to remove.\\n3. Choose **Delete permanently** from Bulk actions and click **Apply**.\\n\\nMake sure a file isn't used on a page first, or that page will show a broken image.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w25\",\n   \"q\": \"How do I install or turn off a plugin?\",\n   \"alt\": [\n    \"install plugin\",\n    \"add plugin\",\n    \"deactivate plugin\",\n    \"remove plugin\",\n    \"new plugin\"\n   ],\n   \"a\": \"**To install:** go to **Plugins \u2192 Add New Plugin**, search, click **Install Now**, then **Activate**.\\n\\n**To turn one off:** go to **Plugins** and click **Deactivate** under its name. Click **Delete** only if you're sure you don't need it.\\n\\nPlugins can clash with each other, so check with us before adding one to a live church site.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w26\",\n   \"q\": \"Where can I see if something's wrong with the site?\",\n   \"alt\": [\n    \"site health\",\n    \"site problems\",\n    \"health check\",\n    \"recommended improvements\"\n   ],\n   \"a\": \"Go to **Tools \u2192 Site Health**. It lists **critical issues** and **recommended improvements**, such as out-of-date plugins or security settings. Click an item to see what it means.\\n\\nNot sure what to do about one? Send a ticket with a screenshot.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w27\",\n   \"q\": \"How do I update WordPress?\",\n   \"alt\": [\n    \"update wordpress\",\n    \"wordpress update\",\n    \"new version of wordpress\",\n    \"core update\"\n   ],\n   \"a\": \"1. Make sure a **backup** exists.\\n2. Go to **Dashboard \u2192 Updates**.\\n3. Click **Update to version\u2026** and wait until it finishes (don't close the page).\\n4. Check your homepage and a few key pages afterwards.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w28\",\n   \"q\": \"The site says \\\"There has been a critical error on this website\\\"\",\n   \"alt\": [\n    \"critical error\",\n    \"technical issue\",\n    \"site crashed\",\n    \"fatal error\",\n    \"there has been a critical error\"\n   ],\n   \"a\": \"1. Check the **admin email inbox** (including spam) for a message titled **Your Site is Experiencing a Technical Issue**.\\n2. It names the plugin or theme causing the problem and includes a special **recovery mode** login link.\\n3. Use that link to log in, then deactivate the plugin it mentions.\\n\\nIf you can't find the email, send an urgent ticket and we'll fix it.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w29\",\n   \"q\": \"The site says \\\"Briefly unavailable for scheduled maintenance\\\"\",\n   \"alt\": [\n    \"briefly unavailable\",\n    \"scheduled maintenance\",\n    \"maintenance mode\",\n    \"stuck updating\"\n   ],\n   \"a\": \"This shows while WordPress is updating and usually disappears within a minute or two.\\n\\n1. Wait a few minutes and refresh.\\n2. If it's still there after 10 minutes, the update got stuck. Send an urgent ticket and we'll clear it (it needs a file removed from the server).\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w30\",\n   \"q\": \"How do I use the WordPress block editor?\",\n   \"alt\": [\n    \"block editor\",\n    \"gutenberg\",\n    \"add block\",\n    \"edit post\",\n    \"wordpress editor\"\n   ],\n   \"a\": \"1. Click **+** to add a block (paragraph, image, heading, button and more), or type **/** followed by the block name.\\n2. Click any block to edit it; its settings appear in the right sidebar.\\n3. Drag the handle (six dots) to move blocks.\\n4. Click **Update** or **Publish**.\\n\\nPages built with Cornerstone should be edited with **Edit with Cornerstone** instead.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w31\",\n   \"q\": \"How do I add a link to text?\",\n   \"alt\": [\n    \"add link\",\n    \"hyperlink\",\n    \"link text\",\n    \"insert link\"\n   ],\n   \"a\": \"1. Highlight the words you want to link.\\n2. Click the **link** icon (or press **Ctrl + K**, **Cmd + K** on a Mac).\\n3. Paste the web address, or type a page name to search your site.\\n4. Press **Enter**, then save the page.\\n\\nTurn on **Open in new tab** for links to other websites.\",\n   \"src\": \"wp\"\n  },\n  {\n   \"id\": \"w32\",\n   \"q\": \"How do I download a copy of our content?\",\n   \"alt\": [\n    \"export\",\n    \"backup content\",\n    \"download content\",\n    \"export posts\",\n    \"copy of website\"\n   ],\n   \"a\": \"Go to **Tools \u2192 Export**, choose **All content**, and click **Download Export File**. This saves your pages, posts and comments as one file.\\n\\nIt isn't a full backup (it doesn't include the design, photos or settings). For a complete backup, send a ticket.\",\n   \"src\": \"wp\"\n  }\n ]\n}"</script>
+<script type="application/json" id="preloadTickets">{"source": "", "exported": "", "headers": [], "rows": []}</script>
+
+<script src="firebase-config.js"></script>
+<script>
+  // If the Firebase code can't load (offline, blocked), say so instead of spinning.
+  setTimeout(function () {
+    var el = document.getElementById("fbStatus");
+    if (el && el.textContent === "Connecting…") el.textContent = "Couldn't reach Firebase. Check your internet connection and reload. You can still edit answers and use Download kb.json.";
+  }, 10000);
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, collection, query, orderBy, limit, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const $ = (id) => document.getElementById(id);
+  const cfg = window.FIREBASE_CONFIG || {};
+  const say = (html) => { $("fbMsg").innerHTML = html; };
+  const esc = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  if (!cfg.projectId || /PASTE/.test(cfg.projectId)) {
+    $("fbStatus").textContent = "Not set up yet. Fill in firebase-config.js (see README), then reload this page.";
+    $("fbSignIn").hidden = true;
+  } else {
+    const app = initializeApp(cfg);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    $("fbSignIn").onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch((e) => say("Sign-in didn't work: " + esc(e.message)));
+    $("fbSignOut").onclick = () => signOut(auth);
+
+    onAuthStateChanged(auth, async (user) => {
+      $("fbSignIn").hidden = !!user; $("fbSignOut").hidden = !user; $("fbPublish").hidden = !user; $("fbInbox").hidden = !user;
+      if (!user) { $("fbStatus").textContent = "Signed out. Sign in to load and publish answers."; say(""); return; }
+      $("fbStatus").innerHTML = "Signed in as <b>" + esc(user.email) + "</b> · project " + esc(cfg.projectId);
+      try {
+        const snap = await getDoc(doc(db, "kb", "current"));
+        if (snap.exists() && snap.data().json) {
+          const data = JSON.parse(snap.data().json);
+          window.__builder.load(data);
+          const when = snap.data().updatedAt ? snap.data().updatedAt.toDate().toLocaleString() : "";
+          say('<span class="ok">Loaded ' + data.entries.length + " published answers</span>" + (when ? " (last published " + esc(when) + " by " + esc(snap.data().updatedBy || "") + ")" : "") + ".");
+        } else {
+          say("Nothing published yet. The starter answers are loaded below. Review them, then click <b>Publish to Firebase</b>.");
+        }
+      } catch (e) {
+        say(/permission/i.test(e.message) ? "Signed in, but this Google account isn't an admin yet. Add it to the admins collection (see README)." : "Couldn't load answers: " + esc(e.message));
+      }
+      loadTickets();
+    });
+
+    $("fbPublish").onclick = async () => {
+      const out = window.__builder.output();
+      if (!out.entries.length) { say("There are no answers to publish."); return; }
+      const json = JSON.stringify({ meta: { source: "Support chat admin", generated: new Date().toISOString().slice(0, 10), count: out.entries.length, resources: out.resources.length }, entries: out.entries, resources: out.resources });
+      if (json.length > 900000) { say("The answers are too large to publish in one piece (over 900 KB). Remove some long answers and try again."); return; }
+      $("fbPublish").disabled = true; say("Publishing…");
+      try {
+        const meta = { json, count: out.entries.length, updatedAt: serverTimestamp(), updatedBy: auth.currentUser.email };
+        await setDoc(doc(db, "kb_versions", new Date().toISOString().replace(/[:.]/g, "-")), meta);  // backup copy for rolling back
+        await setDoc(doc(db, "kb", "current"), meta);
+        say('<span class="ok">Published ' + out.entries.length + " answers.</span> Websites pick up the change within about 10 minutes (visitors already on a page keep their current copy until they come back).");
+      } catch (e) {
+        say("Publishing failed: " + esc(e.message));
+      } finally { $("fbPublish").disabled = false; }
+    };
+
+    async function loadTickets() {
+      try {
+        const snap = await getDocs(query(collection(db, "mail"), orderBy("createdAt", "desc"), limit(20)));
+        if (snap.empty) { $("fbTickets").textContent = "No tickets from the chat yet."; return; }
+        $("fbTickets").innerHTML = snap.docs.map((d) => {
+          const t = d.data(), when = t.createdAt && t.createdAt.toDate ? t.createdAt.toDate().toLocaleString() : "";
+          const state = t.delivery && t.delivery.state ? t.delivery.state : "waiting to send";
+          return '<div class="tk"><div><b>' + esc(t.name) + "</b> · " + esc(t.email) + (t.urgent ? '<span class="badge urgent">URGENT</span>' : "") +
+            '<span class="badge">' + esc(state.toLowerCase()) + "</span></div><div>" + esc(t.message && t.message.subject) + "</div><div>" + esc(when) + (t.website ? " · " + esc(t.website) : "") + "</div></div>";
+        }).join("");
+      } catch (e) { $("fbTickets").textContent = "Couldn't load tickets: " + e.message; }
+    }
+  }
+</script>
+</body>
+</html>

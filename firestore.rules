@@ -1,0 +1,51 @@
+rules_version = '2';
+
+// REACHRIGHT support chat: Firestore security rules
+// - Anyone can READ the published answers (the chat needs them).
+// - Only approved admins (listed in the "admins" collection) can edit answers or see tickets.
+// - Visitors can only CREATE a ticket email addressed to the support inbox, with limited, checked fields.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    // Published answers: one document, kb/current
+    match /kb/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Backup copy saved on every publish, for rolling back
+    match /kb_versions/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Admin list: add documents here by hand in the Firebase console (document ID = admin's Google email)
+    match /admins/{email} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Tickets. The "Trigger Email from Firestore" extension sends each new document as an email.
+    match /mail/{mailId} {
+      allow create: if
+        request.resource.data.keys().hasOnly(['to', 'replyTo', 'message', 'name', 'email', 'website', 'page', 'urgent', 'status', 'createdAt'])
+        && request.resource.data.to == 'support@reachrightstudios.com'
+        && request.resource.data.message.keys().hasOnly(['subject', 'text'])
+        && request.resource.data.message.subject is string && request.resource.data.message.subject.size() <= 200
+        && request.resource.data.message.text is string && request.resource.data.message.text.size() <= 20000
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && request.resource.data.replyTo is string && request.resource.data.replyTo.size() <= 320
+        && request.resource.data.status == 'new'
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && request.resource.data.createdAt < request.time + duration.value(5, 'm');
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
