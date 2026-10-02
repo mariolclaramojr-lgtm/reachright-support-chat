@@ -282,6 +282,14 @@
     "font:800 15px/1 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.01em;box-shadow:0 10px 28px rgba(4,7,7,.28);transition:transform .15s,box-shadow .15s;margin-left:auto}",
     ".launch:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(4,7,7,.34)}",
     ".launch .mk{width:22px;height:25px;flex:none}",
+    ".lw{position:relative;display:flex;width:fit-content;margin-left:auto}",
+    ".min{position:absolute;top:-5px;right:-5px;width:20px;height:20px;padding:0;border-radius:50%;border:2px solid #fff;background:var(--ink);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 6px rgba(4,7,7,.3);transition:transform .15s,background .15s}",
+    ".min:hover{background:var(--c);transform:scale(1.1)}",
+    ".launch.open + .min{display:none}",
+    ".wrap.mini .lw{display:none}",
+    ".wrap.mini .panel{bottom:0}",
+    ".foot .unmin{display:none}",
+    ".wrap.mini .foot .unmin{display:inline}",
     ".launch.open{width:54px;padding:0;justify-content:center}",
     ".launch.open .lbl,.launch.open .mk{display:none}",
     ".launch .x{display:none}.launch.open .x{display:block}",
@@ -408,9 +416,10 @@
           '<div class="topics" role="toolbar" aria-label="Help topics" hidden></div>' +
           '<form class="comp"><textarea rows="1" placeholder="Ask a question…" aria-label="Your question"></textarea>' +
           '<button class="send" type="submit" aria-label="Send" disabled>' + ICON_SEND + "</button></form>" +
-          '<div class="foot"><button type="button" class="contact">Contact our team</button><button type="button" class="reset">Start over</button></div>' +
+          '<div class="foot"><button type="button" class="contact">Contact our team</button><button type="button" class="unmin">Show corner button</button><button type="button" class="reset">Start over</button></div>' +
         "</section>" +
-        '<button class="launch" type="button" aria-label="Open support chat" aria-expanded="false">' + MARK + '<span class="lbl">' + esc(CFG.launcherLabel) + '</span><span class="x">' + ICON_X + "</span></button>" +
+        '<span class="lw"><button class="launch" type="button" aria-label="Open support chat" aria-expanded="false">' + MARK + '<span class="lbl">' + esc(CFG.launcherLabel) + '</span><span class="x">' + ICON_X + "</span></button>" +
+        (CFG.hideLauncher ? "" : '<button class="min" type="button" aria-label="Hide this button (Need help? stays in the top bar)" title="Hide (Need help? stays in the top bar)"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>') + "</span>" +
       "</div>";
 
     var $ = function (s) { return root.querySelector(s); };
@@ -1006,7 +1015,11 @@
     if (history.length) {
       history.forEach(function (m) { addMsg(m.w, m.h, false); });
       // Nothing asked yet (only the greeting): bring the suggestions back after moving to another page.
-      if (history.length === 1 && history[0].w === "bot") starterChips();
+      if (history.length === 1 && history[0].w === "bot") {
+        if (history[0].h !== "<p>" + esc(CFG.greeting) + "</p>") {   // greeting changed (e.g. after an update)
+          history = []; store("sc_history", []); log.innerHTML = ""; greet();
+        } else starterChips();
+      }
     }
     else greet();
 
@@ -1021,6 +1034,46 @@
       if (isOpen) setTimeout(function () { input.focus(); scroll(); }, 60);
     }
     launch.addEventListener("click", function () { toggle(); });
+
+    /* --- hide the corner button: it flies into "Need help?" in the top bar --- */
+    var wrapBox = root.querySelector(".wrap"), lw = root.querySelector(".lw"), minBtn = root.querySelector(".min");
+    function isMini() { return wrapBox.classList.contains("mini"); }
+    function setMini(on) {
+      wrapBox.classList.toggle("mini", on);
+      try { on ? localStorage.setItem("sc_mini", "1") : localStorage.removeItem("sc_mini"); } catch (e) {}
+    }
+    try { if (!CFG.hideLauncher && localStorage.getItem("sc_mini") === "1") wrapBox.classList.add("mini"); } catch (e) {}
+    function topBarItem() { return document.querySelector("#wp-admin-bar-zdsc-help > .ab-item, #wp-admin-bar-zdsc-help"); }
+    function minimize() {
+      var from = lw.getBoundingClientRect();
+      var target = topBarItem();
+      var to = target ? target.getBoundingClientRect() : { left: window.innerWidth - 60, top: 0, width: 40, height: 32 };
+      var dx = (to.left + to.width / 2) - (from.left + from.width / 2);
+      var dy = (to.top + to.height / 2) - (from.top + from.height / 2);
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function done() {
+        setMini(true);
+        lw.style.transform = ""; lw.style.opacity = "";
+        if (target && target.animate) {   // the top bar item lights up where the button landed
+          target.animate([{ backgroundColor: "#189ad0", color: "#fff" }, { backgroundColor: "#189ad0", color: "#fff", offset: 0.4 }, { backgroundColor: "transparent" }], { duration: 900, easing: "ease-out" });
+        }
+      }
+      if (reduce || !lw.animate) return done();
+      lw.style.transformOrigin = "center";
+      var anim = lw.animate([
+        { transform: "none", opacity: 1, easing: "ease-out" },
+        { transform: "translate(" + dx * 0.03 + "px," + dy * 0.02 + "px) scale(1.06, 0.88)", opacity: 1, offset: 0.14, easing: "ease-in" },
+        { transform: "translate(" + dx * 0.35 + "px," + dy * 0.22 + "px) scale(0.62, 0.5)", opacity: 0.95, offset: 0.45 },
+        { transform: "translate(" + dx * 0.78 + "px," + dy * 0.72 + "px) scale(0.22)", opacity: 0.8, offset: 0.8 },
+        { transform: "translate(" + dx + "px," + dy + "px) scale(0.05)", opacity: 0 }
+      ], { duration: 650, easing: "linear", fill: "forwards" });
+      anim.onfinish = function () { anim.cancel(); done(); };
+    }
+    if (minBtn) minBtn.addEventListener("click", function (e) { e.stopPropagation(); minimize(); });
+    root.querySelector(".unmin").addEventListener("click", function () {
+      setMini(false);
+      if (lw.animate) lw.animate([{ transform: "translateY(16px) scale(.6)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 300, easing: "ease-out" });
+    });
     if (CFG.csToolbar) setupCornerstoneButton();
 
     /* --- Cornerstone builder: "Need help?" in the top toolbar, just before Save --- */
@@ -1083,8 +1136,8 @@
       ev.preventDefault();
       toggle();
     });
-    $(".x").addEventListener("click", function () { toggle(false); if (!CFG.hideLauncher) launch.focus(); });
-    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggle(false); if (!CFG.hideLauncher) launch.focus(); } });
+    $(".x").addEventListener("click", function () { toggle(false); if (!CFG.hideLauncher && !isMini()) launch.focus(); });
+    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggle(false); if (!CFG.hideLauncher && !isMini()) launch.focus(); } });
     input.addEventListener("input", function () {
       send.disabled = !input.value.trim();
       input.style.height = "auto";
