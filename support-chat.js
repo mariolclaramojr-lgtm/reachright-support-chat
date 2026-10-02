@@ -327,11 +327,12 @@
     ".typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}",
     "@keyframes b{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}",
     /* composer */
-    ".topics{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;padding:9px 10px 0;border-top:1px solid var(--line);background:var(--bg)}",
+    ".topics{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px;padding:10px 12px 0;border-top:1px solid var(--line);background:var(--bg)}",
     ".topics[hidden]{display:none}",
     ".tp{background:var(--bg);border:1.5px solid var(--line);color:var(--text);border-radius:999px;padding:3px 8px;font:inherit;font-size:12px;font-weight:600;line-height:1.45;cursor:pointer;transition:border-color .12s,color .12s}",
     ".tp:hover{border-color:var(--accent);color:var(--chipText)}",
     ".tp.urgent{border-color:#f0c2c2;color:#a12626}",
+    ".tp.more{border-style:dashed}",
     ".tp.urgent:hover{border-color:#d64545}",
     ".topics:not([hidden]) + form.comp{border-top:0}",
     "form.comp{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--bg)}",
@@ -924,14 +925,9 @@
     var PILLS = [
       { label: "Page error", urgent: true },
       { label: "Editing", cat: "Editing your website" },
-      { label: "Photos", query: "photo image picture slider gallery" },
       { label: "Events", cat: "Events" },
-      { label: "Forms", cat: "Forms" },
-      { label: "Login", cat: "Login & users" },
-      { label: "Email", cat: "Email" },
       { label: "Billing", cat: "Billing" },
-      { label: "Ad Grant", cat: "Google Ad Grant" },
-      { label: "Local SEO", cat: "Local SEO" }
+      { label: "More", more: true }
     ];
     function pillList(pl) {
       if (pl.cat) return topicEntries(pl.cat);
@@ -943,13 +939,14 @@
       box.innerHTML = "";
       PILLS.forEach(function (pl) {
         if (pl.urgent && !(ticketFormOn() && CFG.downChip)) return;
-        if (!pl.urgent && engine && !pillList(pl).length) return;   // hide topics with no answers
+        if (!pl.urgent && !pl.more && engine && !pillList(pl).length) return;   // hide topics with no answers
         var b = document.createElement("button");
-        b.type = "button"; b.className = "tp" + (pl.urgent ? " urgent" : ""); b.textContent = pl.label;
+        b.type = "button"; b.className = "tp" + (pl.urgent ? " urgent" : "") + (pl.more ? " more" : ""); b.textContent = pl.label;
         b.addEventListener("click", function () {
           if (busy) return;
           root.querySelectorAll(".chips").forEach(function (c) { c.remove(); });
           if (pl.urgent) return goUrgent(CFG.downChip);
+          if (pl.more) { addMsg("me", "More topics"); return engine ? askTopic("Sure. What's it about?") : ask("help"); }
           if (!engine) return ask(pl.label);
           addMsg("me", esc(pl.label));
           showTopic(pl.cat || pl.label, 0, pl.cat ? null : pillList(pl));
