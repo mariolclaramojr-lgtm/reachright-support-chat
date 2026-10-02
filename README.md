@@ -45,12 +45,12 @@ Without the extension, tickets are still saved and visible in the admin page, ju
 1. Create a repository on github.com, for example `reachright-support-chat` (**public**; GitHub Pages is free for public repos).
 2. **Add file → Upload files** → drag in everything from this folder (including `firebase-config.js` with your values) → **Commit**.
 3. **Settings → Pages** → Source: **Deploy from a branch** → Branch: `main`, folder `/ (root)` → **Save**.
-4. After a minute your site is live at `https://YOUR-GITHUB-NAME.github.io/reachright-support-chat/`.
-5. Back in Firebase: Authentication → **Settings → Authorized domains** → **Add domain** → `YOUR-GITHUB-NAME.github.io` (needed for Google sign-in on the admin page).
+4. After a minute your site is live at `https://mariolclaramojr-lgtm.github.io/reachright-support-chat/`.
+5. Back in Firebase: Authentication → **Settings → Authorized domains** → **Add domain** → `mariolclaramojr-lgtm.github.io` (needed for Google sign-in on the admin page).
 
 ## Part 3: Publish the answers
 
-1. Open `https://YOUR-GITHUB-NAME.github.io/reachright-support-chat/admin.html`.
+1. Open `https://mariolclaramojr-lgtm.github.io/reachright-support-chat/admin.html`.
 2. **Sign in with Google** (with an email you added to `admins`).
 3. The first time, the 61 starter answers are loaded. Review them and click **Publish to Firebase**.
 4. Open `index.html` on your GitHub site: "Answers loaded from" should say **Firebase**.
@@ -64,10 +64,10 @@ From now on, edit in `admin.html` and click **Publish**. Every publish also save
 **Any website:** add before `</body>`:
 
 ```html
-<script src="https://YOUR-GITHUB-NAME.github.io/reachright-support-chat/support-chat.js"
+<script src="https://mariolclaramojr-lgtm.github.io/reachright-support-chat/support-chat.js"
         data-firebase-project="rr-chat-support"
         data-firebase-key="AIzaSyDJaO0kBPTMBeTgyy_-DAe8gIQ_H2SCFv8"
-        data-kb="https://YOUR-GITHUB-NAME.github.io/reachright-support-chat/kb.json"
+        data-kb="https://mariolclaramojr-lgtm.github.io/reachright-support-chat/kb.json"
         data-support-email="support@reachrightstudios.com"
         data-ticket-endpoint="firebase"
         defer></script>

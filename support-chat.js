@@ -33,7 +33,7 @@
     kbDoc: pick("kbDoc", "kb/current"),           // Firestore document holding the answers
     firestoreBase: pick("firestoreBase", "https://firestore.googleapis.com/v1"),
     kbData: user.kbData || null,               // or pass the knowledge object inline
-    title: pick("title", "Website support"),
+    title: pick("title", "REACHRIGHT SUPPORT"),
     subtitle: pick("subtitle", ""),            // optional line under the title
     greeting: pick("greeting", "Hi! Ask me how to update your website or fix a problem, and I'll walk you through it step by step."),
     color: pick("color", "#0e78a8"),          // buttons (readable with white text)
@@ -45,6 +45,13 @@
     userEmail: pick("userEmail", ""),
     siteLabel: pick("siteLabel", ""),
     nonce: pick("nonce", ""),                     // WordPress security token for tickets
+    ticketCooldown: parseFloat(pick("ticketCooldown", "5")), // minutes to wait between requests
+    downChip: pick("downChip", "Page error or not loading"),     // suggestion that goes straight to an urgent ticket ("" to hide)
+    attachments: pick("attachments", "true") !== "false", // allow screenshots on tickets
+    hideLauncher: pick("hideLauncher", "false") === "true",  // no floating button (open from the admin bar instead)
+    openSelector: pick("openSelector", "#wp-admin-bar-zdsc-help > a, [data-support-chat-open]"), // links that open the chat
+    csToolbar: pick("csToolbar", "false") === "true",        // Cornerstone builder: put "Need help?" next to Save
+    topicPills: pick("topicPills", "true") !== "false",       // quick topic buttons above the message box
     position: pick("position", "right"),        // "right" | "left"
     contactUrl: pick("contactUrl", ""),        // e.g. your Zoho Desk help-center ticket form
     contactEmail: pick("contactEmail", ""),    // mailto fallback, transcript prefilled
@@ -208,7 +215,7 @@
       return "\u0000" + (links.length - 1) + "\u0000";
     });
     var html = esc(text)
-      .replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/(https?:\/\/[A-Za-z0-9][^\s<*]*[^\s<.,;:!?)\]'"*])/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/(^|[\s(>*])([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, '$1<a href="mailto:$2">$2</a>')
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\u0000(\d+)\u0000/g, function (_, i) { return links[+i]; });
@@ -280,12 +287,12 @@
     ".launch .x{display:none}.launch.open .x{display:block}",
     "button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}",
     /* panel */
-    ".panel{position:absolute;bottom:70px;" + SIDE + ":0;width:380px;height:600px;max-height:calc(100vh - 110px);background:var(--bg);border-radius:18px;overflow:hidden;",
+    ".panel{position:absolute;bottom:70px;" + SIDE + ":0;width:400px;height:600px;max-height:calc(100vh - 110px);background:var(--bg);border-radius:18px;overflow:hidden;",
     "display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(4,7,7,.28);border:1px solid var(--line);transform-origin:bottom " + SIDE + ";transition:opacity .18s,transform .18s}",
     ".panel[hidden]{display:flex;opacity:0;transform:scale(.95) translateY(10px);pointer-events:none;visibility:hidden}",
     ".head{background:var(--ink);color:#fff;padding:18px 18px 16px;border-bottom:3px solid var(--accent);display:flex;align-items:center;gap:14px}",
     ".head .icon{width:30px;height:34px;flex:none;margin-top:1px;object-fit:contain}",
-    ".head h2{margin:0;font-size:17px;font-weight:800;line-height:1.2;letter-spacing:-.005em}",
+    ".head h2{margin:0;font-size:16px;font-weight:800;line-height:1.2;letter-spacing:.04em}",
     ".head p{margin:3px 0 0;font-size:13px;color:#b9c3c9}",
 
     ".head .x{margin-left:auto;background:transparent;border:0;color:#fff;cursor:pointer;padding:6px;border-radius:8px;display:grid;opacity:.8}",
@@ -300,7 +307,7 @@
     ".me{background:var(--me);color:var(--meText);border-bottom-right-radius:5px;align-self:flex-end}",
     ".me a{color:#fff}",
     ".src{display:block;margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}",
-    ".chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}",
+    ".chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:calc(100% - 36px);margin-left:36px}",
     ".chip{background:var(--bg);border:1.5px solid var(--line);color:var(--text);border-radius:999px;padding:7px 13px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:border-color .12s,color .12s}",
     ".chip:hover{border-color:var(--accent);color:var(--chipText)}",
     ".cta{display:inline-block;margin-top:6px;background:var(--c);color:#fff !important;text-decoration:none !important;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:700}",
@@ -320,6 +327,13 @@
     ".typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}",
     "@keyframes b{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}",
     /* composer */
+    ".topics{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;padding:9px 10px 0;border-top:1px solid var(--line);background:var(--bg)}",
+    ".topics[hidden]{display:none}",
+    ".tp{background:var(--bg);border:1.5px solid var(--line);color:var(--text);border-radius:999px;padding:3px 8px;font:inherit;font-size:12px;font-weight:600;line-height:1.45;cursor:pointer;transition:border-color .12s,color .12s}",
+    ".tp:hover{border-color:var(--accent);color:var(--chipText)}",
+    ".tp.urgent{border-color:#f0c2c2;color:#a12626}",
+    ".tp.urgent:hover{border-color:#d64545}",
+    ".topics:not([hidden]) + form.comp{border-top:0}",
     "form.comp{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--bg)}",
     "form.comp textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);max-height:110px}",
     "form.comp textarea:focus{border-color:var(--accent);outline:none}",
@@ -328,6 +342,8 @@
     ".send:disabled{opacity:.35;cursor:default}",
     ".foot{display:flex;justify-content:space-between;align-items:center;padding:0 14px 10px;background:var(--bg);font-size:12px;color:var(--mute)}",
     ".foot button{background:none;border:0;color:var(--mute);font:inherit;cursor:pointer;text-decoration:underline;padding:0}",
+    ".foot .contact{color:var(--c);font-weight:600}",
+    "@media (prefers-color-scheme:dark){.foot .contact{color:var(--accent)}}",
     /* ticket form */
     ".tform{display:flex;flex-direction:column;gap:9px;width:100%}",
     ".tform .ttl{margin:0;font-weight:800;font-size:15px}",
@@ -342,7 +358,29 @@
     ".tform .cta{margin-top:0;border:0;cursor:pointer;font:inherit;font-weight:700}",
     ".tform .cancel{background:none;border:0;color:var(--mute);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline}",
     ".tform .err{color:#c62828;font-size:13px;margin:0}",
+    ".tform .attach{flex-direction:row;align-items:center;gap:8px;font-weight:600;color:var(--c);cursor:pointer;width:fit-content}",
+    ".tform .attach input{position:absolute;width:1px;height:1px;opacity:0}",
+    ".tform .attach svg{flex:none}",
+    ".tform .hint{margin:-4px 0 0;font-size:12px;color:var(--mute)}",
+    ".tform .thumbs{display:flex;gap:8px;flex-wrap:wrap}",
+    ".tform .thumb{position:relative;width:64px;height:64px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}",
+    ".tform .thumb img{width:100%;height:100%;object-fit:cover;display:block}",
+    ".tform .thumb button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:0;background:rgba(4,7,7,.75);color:#fff;font-size:13px;line-height:20px;padding:0;cursor:pointer}",
     ".msg.wide{max-width:100%;width:100%}",
+    ".row{display:flex;gap:8px;align-items:flex-start;max-width:92%}",
+    ".row.r-bot{align-self:flex-start}",
+    ".row.r-me{align-self:flex-end;justify-content:flex-end}",
+    ".row.wide{align-self:stretch;max-width:100%}",
+    ".row .col{display:flex;flex-direction:column;min-width:0;flex:1 1 auto}",
+    ".row.r-me .col{align-items:flex-end}",
+    ".row .msg{max-width:100%}",
+    ".av{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none;margin-top:2px}",
+    ".av .avmk{width:13px;height:15px}",
+    ".row.cont .av{visibility:hidden}",
+    ".who{font-size:11px;font-weight:700;color:var(--mute);margin:0 6px 3px;letter-spacing:.01em}",
+    ".row.cont .who{display:none}",
+    ".row.cont{margin-top:-4px}",
+    (CFG.hideLauncher ? ".launch{display:none !important}.panel{bottom:0}.wrap.showlaunch .launch{display:flex !important;height:44px;padding:0 16px 0 12px;font-size:14px}.wrap.showlaunch .panel{bottom:60px}" : ""),
     "@media (max-width:480px){.wrap{bottom:14px;" + SIDE + ":14px}.panel{position:fixed;inset:0;width:auto;height:auto;max-height:none;border-radius:0;bottom:0}}",
     "@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}"
   ].filter(function (rule) { return CFG.theme !== "light" || rule.indexOf("prefers-color-scheme:dark") === -1; }).join("");
@@ -365,9 +403,10 @@
             "<div><h2>" + esc(CFG.title) + "</h2>" + (CFG.subtitle ? "<p>" + esc(CFG.subtitle) + "</p>" : "") + "</div>" +
           '<button class="x" type="button" aria-label="Close chat">' + ICON_X + "</button></header>" +
           '<div class="log" aria-live="polite"></div>' +
+          '<div class="topics" role="toolbar" aria-label="Help topics" hidden></div>' +
           '<form class="comp"><textarea rows="1" placeholder="Ask a question…" aria-label="Your question"></textarea>' +
           '<button class="send" type="submit" aria-label="Send" disabled>' + ICON_SEND + "</button></form>" +
-          '<div class="foot"><span>Step-by-step website help</span><button type="button" class="reset">Start over</button></div>' +
+          '<div class="foot"><button type="button" class="contact">Contact our team</button><button type="button" class="reset">Start over</button></div>' +
         "</section>" +
         '<button class="launch" type="button" aria-label="Open support chat" aria-expanded="false">' + MARK + '<span class="lbl">' + esc(CFG.launcherLabel) + '</span><span class="x">' + ICON_X + "</span></button>" +
       "</div>";
@@ -379,11 +418,38 @@
 
     /* --- rendering --- */
     function scroll() { log.scrollTop = log.scrollHeight; }
+    // Put a bubble in a row: REACHRIGHT avatar for the chat, the admin's name for their messages.
+    // Consecutive messages from the same side are grouped (avatar/name shown once).
+    function place(el, who) {
+      var last = log.lastElementChild;
+      var row = document.createElement("div");
+      row.className = "row r-" + who + (last && last.classList.contains("row") && last.classList.contains("r-" + who) ? " cont" : "");
+      if (el.classList.contains("wide")) row.classList.add("wide");
+      if (who === "bot") {
+        var av = document.createElement("span");
+        av.className = "av";
+        av.innerHTML = MARK.replace('class="mk"', 'class="avmk"');
+        row.appendChild(av);
+      }
+      var col = document.createElement("div");
+      col.className = "col";
+      if (who === "me") {
+        var name = document.createElement("span");
+        name.className = "who";
+        name.textContent = CFG.userName || "You";
+        col.appendChild(name);
+      }
+      col.appendChild(el);
+      row.appendChild(col);
+      log.appendChild(row);
+      return row;
+    }
+    function unplace(el) { var r = el.closest ? el.closest(".row") : null; (r || el).remove(); }
     function addMsg(who, html, save) {
       var el = document.createElement("div");
       el.className = "msg " + who;
       el.innerHTML = html;
-      log.appendChild(el);
+      place(el, who);
       if (save !== false) { history.push({ w: who, h: html }); store("sc_history", history.slice(-60)); }
       scroll();
       return el;
@@ -434,7 +500,20 @@
         return (m.w === "me" ? "Visitor: " : "Chat: ") + t;
       }).join("\n\n").slice(-8000);
     }
+    // Wait between requests (the WordPress plugin enforces the same limit on the server)
+    function lastTicket() { try { return +localStorage.getItem("sc_last_ticket") || 0; } catch (e) { return 0; } }
+    function markTicketSent() { try { localStorage.setItem("sc_last_ticket", String(Date.now())); } catch (e) {} }
+    function minutesLeft() {
+      var ms = CFG.ticketCooldown * 60000 - (Date.now() - lastTicket());
+      return ms > 0 ? Math.max(1, Math.ceil(ms / 60000)) : 0;
+    }
+    function waitMessage(m) {
+      return "<p>Thanks, our team already has your request. You can send another one in about <strong>" + m + " minute" + (m === 1 ? "" : "s") +
+        "</strong>.</p><p>In the meantime, feel free to keep asking me questions.</p>";
+    }
     function openTicketForm() {
+      var left = minutesLeft();
+      if (left) { addMsg("bot", waitMessage(left)); return; }
       var old = log.querySelector(".tform");
       if (old) { old.querySelector("input[name=name]").focus(); return; }
       var el = document.createElement("div");
@@ -447,20 +526,65 @@
           '<label>Your email<input name="email" type="email" autocomplete="email" required></label>' +
           '<label>Church name and website<input name="website" autocomplete="organization" placeholder="Grace Church, www.gracechurch.org"></label>' +
           '<label>How can we help?<textarea name="message" rows="4" required></textarea></label>' +
+          (CFG.attachments && CFG.ticketEndpoint !== "firebase" ?
+            '<label class="attach"><input type="file" name="files" accept="image/png,image/jpeg,image/gif,image/webp" multiple>' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>' +
+            'Attach screenshots</label><p class="hint">Up to 3 images, 5 MB each. You can also paste a screenshot into the message box.</p><div class="thumbs"></div>' : "") +
           '<label class="chk"><input type="checkbox" name="urgent"> My website is down (urgent)</label>' +
           '<label class="chk"><input type="checkbox" name="include" checked> Include this chat conversation</label>' +
           '<label class="hp" aria-hidden="true">Leave empty<input name="company_site" tabindex="-1" autocomplete="off"></label>' +
           '<p class="err" hidden></p>' +
           '<div class="row"><button type="submit" class="cta">Send request</button><button type="button" class="cancel">Cancel</button></div>' +
         "</form>";
-      log.appendChild(el);
+      place(el, "bot");
       var f = el.querySelector("form"), F = f.elements, err = el.querySelector(".err"), opened = Date.now();
+      var files = [];
+      var thumbs = el.querySelector(".thumbs");
+      function addFiles(list) {
+        var problems = [];
+        Array.prototype.forEach.call(list || [], function (file) {
+          if (!/^image\/(png|jpe?g|gif|webp)$/i.test(file.type)) { problems.push(file.name + " isn't an image"); return; }
+          if (file.size > 5 * 1024 * 1024) { problems.push(file.name + " is over 5 MB"); return; }
+          if (files.length >= 3) { problems.push("only 3 screenshots can be attached"); return; }
+          files.push(file);
+        });
+        renderThumbs();
+        if (problems.length) { err.textContent = "Not attached: " + problems.filter(function (p, i, a) { return a.indexOf(p) === i; }).join("; ") + "."; err.hidden = false; }
+        else err.hidden = true;
+      }
+      function renderThumbs() {
+        if (!thumbs) return;
+        thumbs.innerHTML = "";
+        files.forEach(function (file, i) {
+          var t = document.createElement("div");
+          t.className = "thumb";
+          var img = document.createElement("img");
+          img.alt = file.name;
+          img.onerror = function () {   // not a real image: drop it and say why
+            var k = files.indexOf(file);
+            if (k > -1) files.splice(k, 1);
+            renderThumbs();
+            err.textContent = "Not attached: " + file.name + " isn't a readable image.";
+            err.hidden = false;
+          };
+          img.src = URL.createObjectURL(file);
+          var x = document.createElement("button");
+          x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", "Remove " + file.name);
+          x.addEventListener("click", function () { files.splice(i, 1); renderThumbs(); });
+          t.appendChild(img); t.appendChild(x); thumbs.appendChild(t);
+        });
+      }
+      if (F.files) F.files.addEventListener("change", function () { addFiles(F.files.files); F.files.value = ""; });
+      if (thumbs) F.message.addEventListener("paste", function (ev) {
+        var items = (ev.clipboardData && ev.clipboardData.files) || [];
+        if (items.length) { ev.preventDefault(); addFiles(items); }
+      });
       F.message.value = (thread && thread.q) || lastQuestion();
       if (CFG.userName) F.name.value = CFG.userName;
       if (CFG.userEmail) F.email.value = CFG.userEmail;
       if (CFG.siteLabel) F.website.value = CFG.siteLabel;
       if (/\b(down|not loading|offline|white screen|urgent)\b/i.test(F.message.value)) F.urgent.checked = true;
-      f.querySelector(".cancel").addEventListener("click", function () { el.remove(); input.focus(); });
+      f.querySelector(".cancel").addEventListener("click", function () { unplace(el); input.focus(); });
       f.addEventListener("submit", function (ev) {
         ev.preventDefault();
         var name = F.name.value.trim(), email = F.email.value.trim(), msg = F.message.value.trim();
@@ -474,16 +598,19 @@
           urgent: F.urgent.checked ? "1" : "",
           page: location.href, company_site: F.company_site.value, elapsed: String(Date.now() - opened)
         };
+        data.__files = files.slice();
         var btn = f.querySelector("button[type=submit]");
         btn.disabled = true; btn.textContent = "Sending…";
         sendTicket(data).then(function (mode) {
-          el.remove();
+          unplace(el);
+          markTicketSent();
           if (mode === "test") {
-            addMsg("bot", "<p><strong>Test mode:</strong> on your live site, this request would be emailed to " + esc(CFG.supportEmail || "your support address") + " with the visitor's details and this chat attached.</p>");
+            addMsg("bot", "<p><strong>Test mode:</strong> on your live site, this request would be emailed to " + esc(CFG.supportEmail || "your support address") + " with the visitor's details and this chat attached" + (data.__files.length ? ", plus " + data.__files.length + " screenshot" + (data.__files.length > 1 ? "s" : "") : "") + ".</p>");
           } else {
             addMsg("bot", "<p>Thanks, " + esc(name.split(" ")[0]) + "! Your request is with our support team. We'll reply to <strong>" + esc(email) + "</strong> within one business day" + (data.urgent ? ", and urgent requests go to the front of the line" : "") + ".</p>");
           }
-        }).catch(function () {
+        }).catch(function (e) {
+          if (e && e.wait) { unplace(el); markTicketSent(); addMsg("bot", waitMessage(e.wait)); return; }
           btn.disabled = false; btn.textContent = "Send request";
           var fallback = CFG.supportEmail ? ' You can also email us at <a href="mailto:' + esc(CFG.supportEmail) + "?subject=" + encodeURIComponent("Support request") + "&body=" + encodeURIComponent(msg + "\n\n" + name + (data.website ? "\n" + data.website : "")) + '">' + esc(CFG.supportEmail) + "</a>." : "";
           err.innerHTML = "The request couldn't be sent. Check your connection and try again." + fallback;
@@ -522,10 +649,18 @@
       if (!CFG.ticketEndpoint || CFG.ticketEndpoint === "test") return Promise.resolve("test");
       if (CFG.ticketEndpoint === "firebase") return sendToFirebase(data);
       var body = new FormData();
-      Object.keys(data).forEach(function (k) { body.append(k, data[k]); });
+      Object.keys(data).forEach(function (k) { if (k !== "__files") body.append(k, data[k]); });
+      (data.__files || []).forEach(function (f) { body.append("files[]", f, f.name); });
       if (CFG.nonce) body.append("nonce", CFG.nonce);
       return fetch(CFG.ticketEndpoint, { method: "POST", body: body, credentials: "same-origin" })
-        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j || j.success === false) throw new Error("send failed"); return "sent"; }); });
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || !j || j.success === false) {
+            var err = new Error("send failed");
+            if (j && j.data && j.data.wait) err.wait = Math.max(1, Math.ceil(j.data.wait / 60));
+            throw err;
+          }
+          return "sent";
+        }); });
     }
     log.addEventListener("click", function (ev) {
       var t = ev.target.closest && ev.target.closest('[data-action="ticket"]');
@@ -539,6 +674,7 @@
           '<a class="vopen" href="https://www.loom.com/share/' + id + '" target="_blank" rel="noopener noreferrer">Open in Loom</a>';
         v.replaceWith(box);
         var m = box.closest(".msg"); if (m) m.classList.add("wide");
+        var r = box.closest(".row"); if (r) r.classList.add("wide");
       }
     });
 
@@ -624,6 +760,61 @@
         "Got it. This is the next closest match to your issue:"
       ]));
     }
+    /* --- asking for more details when a question is vague or could mean several things --- */
+    var TOPICS = [
+      ["Editing your website", "Editing pages & content"],
+      ["Website problems", "Site down or errors"],
+      ["Display & mobile", "Display & mobile"],
+      ["Events", "Events & calendar"],
+      ["Forms", "Forms"],
+      ["Login & users", "Login & users"],
+      ["Email", "Email"],
+      ["Domain & stats", "Domain, stats & giving"],
+      ["Security & updates", "Security & updates"],
+      ["Billing", "Billing"],
+      ["Google Ad Grant", "Google Ad Grant"],
+      ["Local SEO", "Local SEO & Google listing"]
+    ];
+    function topicEntries(cat) { return engine.docs.map(function (d) { return d.e; }).filter(function (e) { return e.cat === cat; }); }
+    function askTopic(lead) {
+      var avail = TOPICS.filter(function (t) { return topicEntries(t[0]).length; });
+      addMsg("bot", "<p>" + lead + "</p>");
+      addChips(avail.map(function (t) { return t[1]; }).concat(["Something else"]), function (label) {
+        if (label === "Something else") {
+          addMsg("me", esc(label));
+          return addMsg("bot", "<p>No problem. Tell me in your own words what you're trying to do, or what's going wrong.</p>");
+        }
+        var t = avail.filter(function (x) { return x[1] === label; })[0];
+        addMsg("me", esc(label));
+        showTopic(t[0], 0);
+      });
+    }
+    function showTopic(cat, offset, given) {
+      var list = given || topicEntries(cat), page = list.slice(offset, offset + 6);
+      thread = { q: cat, hits: [], shown: {}, tries: 0, cat: cat };
+      addMsg("bot", "<p>" + (offset ? "Here are more:" : "What would you like to do?") + "</p>");
+      var labels = page.map(function (e) { return e.q; });
+      if (list.length > offset + 6) labels.push("More…");
+      labels.push("Something else");
+      addChips(labels, function (label) {
+        if (label === "More…") { addMsg("me", "More…"); return showTopic(cat, offset + 6, given); }
+        if (label === "Something else") return ask(label);
+        var e = page.filter(function (x) { return x.q === label; })[0];
+        addMsg("me", esc(label));
+        thread = { q: label, hits: engine.search(label, 8), shown: {}, tries: 0, cat: cat };
+        showEntry(e);
+      });
+    }
+    function clarify(q, options, hits) {
+      thread = { q: q, hits: hits, shown: {}, tries: 0, cat: "" };
+      addMsg("bot", "<p>" + vary(["Sure, I can help with that. Which of these do you mean?", "Just to be sure, which of these is it?", "Got it. Which one fits best?"]) + "</p>");
+      addChips(options.map(function (h) { return h.entry.q; }).concat(["Something else"]), function (label) {
+        if (label === "Something else") return ask(label);
+        var h = options.filter(function (x) { return x.entry.q === label; })[0];
+        addMsg("me", esc(label));
+        showEntry(h.entry);
+      });
+    }
     function answer(q) {
       if (thread && /^something else$/i.test(q.trim())) {
         thread.tries++;
@@ -640,6 +831,9 @@
       if (kind === "human") return addMsg("bot", contactHtml("Sure. Send us a request and a real person on our support team will reply by email."));
       if (!engine) return addMsg("bot", contactHtml("The help library didn't load, so I can't search answers right now."));
 
+      var qt = tokens(q);
+      if (!qt.length) { misses = 0; return askTopic("Happy to help! What's it about?"); }
+
       var hits = engine.search(q, 8);
       var top = hits[0];
       // Your own answers come first. The help guides answer first only when they're a clearly better match.
@@ -653,6 +847,8 @@
         checkIn();
       } else if (top && top.conf >= CFG.threshold) {
         misses = 0;
+        var close = hits.filter(function (h) { return h !== top && h.conf >= top.conf - 0.12 && h.qRatio >= 0.5; });
+        if (qt.length <= 2 && close.length && top.conf < 1.1) return clarify(q, [top].concat(close).slice(0, 4), hits);
         thread = { q: q, hits: hits, shown: {}, tries: 0, cat: "" };
         showEntry(top.entry);
       } else if (hits.length && hits[0].conf >= CFG.threshold * 0.5) {
@@ -671,8 +867,8 @@
         if (misses >= MAX_TRIES || (thread && thread.tries >= MAX_TRIES)) {
           suggestTicket("I'm not finding an answer for this one. Our team can help: send a support ticket and a real person will reply within one business day.");
         } else {
-          addMsg("bot", "<p>" + vary(["Hmm, I'm not sure I have an answer for that yet.", "I couldn't find an answer for that one."]) +
-            " Could you describe it another way? For example, which page it's on or what you see on the screen.</p>");
+          askTopic(vary(["Hmm, I'm not sure I have an answer for that yet.", "I couldn't find an answer for that one."]) +
+            " Could you describe it another way, for example which page it's on or what you see on the screen? Or pick a topic:");
         }
       }
     }
@@ -685,16 +881,89 @@
       var t = document.createElement("div");
       t.className = "msg bot typing";
       t.innerHTML = "<i></i><i></i><i></i>";
-      log.appendChild(t); scroll();
-      setTimeout(function () { t.remove(); answer(q); busy = false; }, 350 + Math.random() * 300);
+      place(t, "bot"); scroll();
+      setTimeout(function () { unplace(t); answer(q); busy = false; }, 350 + Math.random() * 300);
     }
 
     /* --- start / restore --- */
     function greet() {
       addMsg("bot", "<p>" + esc(CFG.greeting) + "</p>");
-      if (CFG.suggestions.length) addChips(CFG.suggestions, ask);
+      starterChips();
     }
-    if (history.length) history.forEach(function (m) { addMsg(m.w, m.h, false); });
+    // Top issues from the Zoho Desk tickets (ticket counts), each with matching answers.
+    var TOP_ISSUES = [[42, ["How do I edit text on a page?", "How do I update the footer?", "How do I update our staff or leadership page?", "How do I add a new page?"]], [23, ["How do I add or replace a photo?", "How do I change the photos in a slider or carousel?", "How do I post a bulletin, newsletter or PDF?"]], [16, ["How do I add an event?", "My event isn't showing on the calendar"]], [12, ["My website says \"Not secure\"", "How do I renew our domain name?"]], [11, ["How do I change the menu?", "New pages show \"Page not found\" (404)"]], [10, ["Our contact form isn't sending emails", "We're getting spam through our contact form"]], [9, ["I can't log in to my website", "How do I add a login for a new staff member?"]], [9, ["Our church email isn't working"]], [6, ["How do I set up online giving?"]]];
+    // 3 random suggestions from different top issues (more common issues come up more often)
+    function pickSuggestions() {
+      if (CFG.suggestions.length) return CFG.suggestions.slice();
+      var pool = TOP_ISSUES.slice(), out = [];
+      while (out.length < 3 && pool.length) {
+        var total = pool.reduce(function (t, g) { return t + g[0]; }, 0), r = Math.random() * total, i = 0;
+        for (; i < pool.length; i++) { r -= pool[i][0]; if (r <= 0) break; }
+        var g = pool.splice(Math.min(i, pool.length - 1), 1)[0];
+        out.push(g[1][Math.floor(Math.random() * g[1].length)]);
+      }
+      return out;
+    }
+    function starterChips() {
+      var chips = pickSuggestions();
+      if (CFG.downChip && ticketFormOn()) chips.push(CFG.downChip);
+      if (chips.length) addChips(chips, function (label) {
+        if (label !== CFG.downChip) return ask(label);
+        goUrgent(label);
+      });
+    }
+    function goUrgent(label) {
+      addMsg("me", esc(label));
+      thread = { q: label, hits: [], shown: {}, tries: 0, cat: "" };
+      if (minutesLeft()) return addMsg("bot", waitMessage(minutesLeft()));
+      addMsg("bot", "<p>Sorry to hear that. Let's get this to our team right away. Add any details you can (an error message or a screenshot helps), then send.</p>");
+      openTicketForm();
+    }
+
+    /* --- quick topic buttons above the message box --- */
+    var PILLS = [
+      { label: "Page error", urgent: true },
+      { label: "Editing", cat: "Editing your website" },
+      { label: "Photos", query: "photo image picture slider gallery" },
+      { label: "Events", cat: "Events" },
+      { label: "Forms", cat: "Forms" },
+      { label: "Login", cat: "Login & users" },
+      { label: "Email", cat: "Email" },
+      { label: "Billing", cat: "Billing" },
+      { label: "Ad Grant", cat: "Google Ad Grant" },
+      { label: "Local SEO", cat: "Local SEO" }
+    ];
+    function pillList(pl) {
+      if (pl.cat) return topicEntries(pl.cat);
+      return engine.search(pl.query, 12).filter(function (h) { return h.qHits > 0; }).map(function (h) { return h.entry; });
+    }
+    function renderPills() {
+      var box = root.querySelector(".topics");
+      if (!CFG.topicPills || !box) return;
+      box.innerHTML = "";
+      PILLS.forEach(function (pl) {
+        if (pl.urgent && !(ticketFormOn() && CFG.downChip)) return;
+        if (!pl.urgent && engine && !pillList(pl).length) return;   // hide topics with no answers
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "tp" + (pl.urgent ? " urgent" : ""); b.textContent = pl.label;
+        b.addEventListener("click", function () {
+          if (busy) return;
+          root.querySelectorAll(".chips").forEach(function (c) { c.remove(); });
+          if (pl.urgent) return goUrgent(CFG.downChip);
+          if (!engine) return ask(pl.label);
+          addMsg("me", esc(pl.label));
+          showTopic(pl.cat || pl.label, 0, pl.cat ? null : pillList(pl));
+        });
+        box.appendChild(b);
+      });
+      box.hidden = !box.children.length;
+    }
+    renderPills();
+    if (history.length) {
+      history.forEach(function (m) { addMsg(m.w, m.h, false); });
+      // Nothing asked yet (only the greeting): bring the suggestions back after moving to another page.
+      if (history.length === 1 && history[0].w === "bot") starterChips();
+    }
     else greet();
 
     /* --- events --- */
@@ -708,8 +977,70 @@
       if (isOpen) setTimeout(function () { input.focus(); scroll(); }, 60);
     }
     launch.addEventListener("click", function () { toggle(); });
-    $(".x").addEventListener("click", function () { toggle(false); launch.focus(); });
-    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggle(false); launch.focus(); } });
+    if (CFG.csToolbar) setupCornerstoneButton();
+
+    /* --- Cornerstone builder: "Need help?" in the top toolbar, just before Save --- */
+    function setupCornerstoneButton() {
+      var host = null, placedOnce = false, started = Date.now();
+      var wrapEl = root.querySelector(".wrap");
+      function findSave() {
+        var els = document.querySelectorAll("button, a, [role='button']");
+        for (var i = 0; i < els.length; i++) {
+          var t = (els[i].textContent || "").trim();
+          if (t.length < 14 && /^(save|saved|saving)/i.test(t)) {
+            var r = els[i].getBoundingClientRect();
+            if (r.height > 0 && r.top < 140) return els[i];
+          }
+        }
+        return null;
+      }
+      function makeButton(h) {
+        host = document.createElement("span");
+        host.id = "zdsc-cs-help";
+        host.style.cssText = "display:inline-flex;align-items:stretch;align-self:stretch;flex:none";
+        var sr = host.attachShadow ? host.attachShadow({ mode: "open" }) : host;
+        sr.innerHTML = "<style>button{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:7px;height:" + h + "px;padding:0 16px;" +
+          "color:#e8e8e8;font:600 13px/1 system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;cursor:pointer;white-space:nowrap}" +
+          "button:hover{background:rgba(255,255,255,.08);color:#fff}button:focus-visible{outline:2px solid #189ad0;outline-offset:-2px}" +
+          ".mk{width:13px;height:15px;flex:none}</style>" +
+          '<button type="button" title="Open REACHRIGHT Support">' + MARK + "<span>Need help?</span></button>";
+        sr.querySelector("button").addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); toggle(); });
+      }
+      function placeButton() {
+        var save = findSave();
+        if (!save) return false;
+        var node = save;   // step up to the toolbar-level item that holds Save
+        while (node.parentElement && node.parentElement !== document.body && node.parentElement.children.length === 1) node = node.parentElement;
+        if (!node.parentElement) return false;
+        if (host && host.isConnected && host.nextElementSibling === node) return true;
+        if (!host) makeButton(Math.round(node.getBoundingClientRect().height) || 48);
+        node.parentElement.insertBefore(host, node);
+        return true;
+      }
+      function check() {
+        var ok = false;
+        try { ok = placeButton(); } catch (e) {}
+        if (ok) { placedOnce = true; wrapEl.classList.remove("showlaunch"); }
+        else if (Date.now() - started > 8000) wrapEl.classList.add("showlaunch");  // backup: small button bottom-left
+      }
+      check();
+      // Cornerstone redraws its toolbar; keep the button in place.
+      var pending = false;
+      new MutationObserver(function () {
+        if (pending) return;
+        pending = true;
+        setTimeout(function () { pending = false; check(); }, 250);
+      }).observe(document.body, { childList: true, subtree: true });
+      setInterval(check, 3000);
+    }
+    document.addEventListener("click", function (ev) {
+      var link = ev.target && ev.target.closest && ev.target.closest(CFG.openSelector);
+      if (!link) return;
+      ev.preventDefault();
+      toggle();
+    });
+    $(".x").addEventListener("click", function () { toggle(false); if (!CFG.hideLauncher) launch.focus(); });
+    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggle(false); if (!CFG.hideLauncher) launch.focus(); } });
     input.addEventListener("input", function () {
       send.disabled = !input.value.trim();
       input.style.height = "auto";
@@ -723,6 +1054,11 @@
       var v = input.value; input.value = ""; input.style.height = "auto"; send.disabled = true;
       ask(v);
     });
+    $(".contact").addEventListener("click", function () {
+      if (ticketFormOn()) { toggle(true); openTicketForm(); }
+      else if (CFG.contactUrl) window.open(CFG.contactUrl, "_blank", "noopener");
+      else if (CFG.contactEmail) location.href = "mailto:" + CFG.contactEmail;
+    });
     $(".reset").addEventListener("click", function () {
       history = []; store("sc_history", []); log.innerHTML = ""; thread = null; misses = 0; greet();
     });
@@ -733,6 +1069,7 @@
       var entries = Array.isArray(data) ? data : (data && data.entries) || [];
       engine = new Engine(entries);
       guides = new Engine((data && data.resources) || []);
+      renderPills();
     }
     function loadFile() {
       return fetch(CFG.kb, { credentials: "same-origin" })

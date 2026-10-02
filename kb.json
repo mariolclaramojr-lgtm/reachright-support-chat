@@ -2,7 +2,7 @@
  "meta": {
   "source": "ReachRight support answers, based on 358 Zoho Desk ticket topics",
   "generated": "2026-09-24",
-  "count": 61,
+  "count": 86,
   "resources": 62
  },
  "entries": [
@@ -418,6 +418,301 @@
   },
   {
    "id": "k28",
+   "q": "How does billing work?",
+   "alt": [
+    "billing",
+    "how are we billed",
+    "monthly billing",
+    "invoice",
+    "when am i charged",
+    "payment schedule"
+   ],
+   "cat": "Billing",
+   "a": "Billing is **monthly** for each service. Each service also has a one-time setup fee, which is **waived when you commit to 12 months** (most churches choose this).\n\nYou can see every invoice and update your card anytime in the [billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)."
+  },
+  {
+   "id": "k29",
+   "q": "What payment methods do you accept?",
+   "alt": [
+    "payment methods",
+    "pay by ach",
+    "bank transfer",
+    "pay by card",
+    "credit card",
+    "pay by invoice",
+    "check"
+   ],
+   "cat": "Billing",
+   "a": "We accept **credit cards**, **ACH bank transfers**, and **invoices** for churches that route payments through their accounting system.\n\nTo change how you pay, use the [billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00) or email **accounting@reachrightstudios.com**."
+  },
+  {
+   "id": "k30",
+   "q": "Can we add another service?",
+   "alt": [
+    "add a service",
+    "add local seo",
+    "add google grant",
+    "add social media",
+    "upgrade",
+    "bundle",
+    "combine services"
+   ],
+   "cat": "Billing",
+   "a": "Yes. You can add a service anytime and we adjust your billing right away. Bundles cost less than separate services:\n\n- **Website + Local SEO:** $397/mo\n- **Website + Google Ad Grant:** $497/mo\n- **Local SEO + Google Ad Grant:** $697/mo\n- **Website + Local SEO + Google Ad Grant:** $797/mo\n\nSee all prices on our [pricing page](https://reachrightstudios.com/pricing/), or email **accounting@reachrightstudios.com** to add one."
+  },
+  {
+   "id": "k31",
+   "q": "What are the setup fees?",
+   "alt": [
+    "setup fee",
+    "one-time fee",
+    "waived setup",
+    "12-month commitment",
+    "contract length"
+   ],
+   "cat": "Billing",
+   "a": "Each service has a one-time setup fee, **waived with a 12-month commitment**:\n\n- **Church Web Design:** $2,000\n- **Local SEO:** $1,500\n- **Google Ad Grant:** $2,000\n- **Social Media Management:** $2,000"
+  },
+  {
+   "id": "k32",
+   "q": "How do we cancel or change a service?",
+   "alt": [
+    "cancel",
+    "cancel service",
+    "stop service",
+    "end contract",
+    "downgrade",
+    "notice period"
+   ],
+   "cat": "Billing",
+   "a": "Contact your project manager or our accounting team at **accounting@reachrightstudios.com**.\n\nMost services have a **12-month agreement**, and cancelling early may mean repaying setup fees that were waived. We'll review your account and confirm the details with you first."
+  },
+  {
+   "id": "k33",
+   "q": "Do we pay for the Google ads themselves?",
+   "alt": [
+    "ad costs",
+    "pay for clicks",
+    "ad spend",
+    "google ads cost",
+    "do we pay google"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "No. **Google pays for the ads** through the Ad Grant, so there are no ad costs to your church. You only pay our monthly management fee."
+  },
+  {
+   "id": "k34",
+   "q": "What is the Google Ad Grant?",
+   "alt": [
+    "google grant",
+    "ad grant",
+    "google ads grant",
+    "free google ads",
+    "10000",
+    "10k ads",
+    "grant"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "The Google Ad Grant gives qualifying nonprofits, including churches, up to **$10,000 a month** (about $120,000 a year) in free Google Search ads. Your church appears at the top of Google when people nearby search things like \"churches near me\" or \"Easter service.\"\n\nIt renews every month as long as the account stays within Google's rules, which our team handles for you."
+  },
+  {
+   "id": "k35",
+   "q": "Does our church qualify for the Google Ad Grant?",
+   "alt": [
+    "qualify for grant",
+    "grant eligibility",
+    "eligible",
+    "501c3",
+    "requirements for grant"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Most churches qualify. You need:\n\n1. **501(c)(3) status** (most US churches already have it).\n2. **A working website** with real content about your church.\n3. **A secure website** (the address starts with https://).\n4. **Agreement to Google's terms**, such as its nondiscrimination policy.\n\nCheck in about 5 minutes with our [Grant Eligibility Checker](https://reachrightstudios.com/tools/grant-eligibility-checker)."
+  },
+  {
+   "id": "k36",
+   "q": "How long does the Google Ad Grant take to start?",
+   "alt": [
+    "grant approval time",
+    "how long grant",
+    "when will ads start",
+    "grant application status",
+    "grant timeline"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Usually **2–4 weeks**. Some churches are approved in about 10 days. Once approved, the first campaigns go live within a week, and you're covered by our **90-day approval guarantee**.\n\nDuring setup, we may ask you to sign up for Google for Nonprofits or confirm your website. Watch your inbox and reply to us when we ask."
+  },
+  {
+   "id": "k37",
+   "q": "Why are we spending less than $10,000 a month?",
+   "alt": [
+    "spending less",
+    "spending less than",
+    "less than 10000",
+    "less than $10,000",
+    "not using full grant",
+    "grant spend",
+    "only spending",
+    "budget not spent",
+    "why aren't we using the full $10,000",
+    "grant underspent",
+    "how much of the grant"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Spending depends on how many people in your area search for terms related to your church. Google's grant rules also limit which keywords and bids we can use.\n\nMost churches spend only part of the full grant, and that's normal. We focus on getting the **right visitors**, not just using up the budget."
+  },
+  {
+   "id": "k38",
+   "q": "Our Google Ad Grant was suspended or we got a warning",
+   "alt": [
+    "grant suspended",
+    "grant paused",
+    "google grant warning",
+    "compliance email",
+    "account suspended",
+    "grant deactivated"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Please forward any email from Google about your grant account to your project manager, and don't change the Google Ads account yourself. We'll take it from there.",
+   "handoff": true
+  },
+  {
+   "id": "k39",
+   "q": "How do we promote an event with our Google ads?",
+   "alt": [
+    "promote event ads",
+    "easter ads",
+    "christmas ads",
+    "advertise event",
+    "change our ads",
+    "new ad"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Yes, we can run ads for an upcoming event. Send your project manager the **event name, date, the page on your website it should link to**, and **who it's for**.\n\nPlease give us at least **4–6 weeks' notice** for the best results.",
+   "handoff": true
+  },
+  {
+   "id": "k40",
+   "q": "Where do we see our Google Ad Grant results?",
+   "alt": [
+    "grant report",
+    "ads report",
+    "monthly report",
+    "grant results",
+    "clicks report"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "You get a **monthly report** with your clicks, website visits, the searches people used to find you, and conversions. It's the most accurate way to see how your ads are doing.\n\nHave a question about your report? Your project manager can walk you through it.",
+   "handoff": true
+  },
+  {
+   "id": "k41",
+   "q": "What does Local SEO include?",
+   "alt": [
+    "local seo",
+    "seo",
+    "what is local seo",
+    "google maps",
+    "map pack",
+    "show up on google",
+    "churches near me"
+   ],
+   "cat": "Local SEO",
+   "a": "Local SEO helps families find your church on **Google, Google Maps and AI search** (like ChatGPT). We handle:\n\n- Your **Google Business Profile** (weekly posts, photos and updates)\n- Your details on **25+ directories**, kept accurate and consistent\n- **Review strategy** coaching for your team\n- **\"Near me\" keyword** targeting and on-page SEO\n- **Schema markup** that tells search engines your service times and location\n- **Monthly reports**"
+  },
+  {
+   "id": "k42",
+   "q": "How long until Local SEO shows results?",
+   "alt": [
+    "seo results",
+    "how long seo",
+    "when will we rank",
+    "not ranking yet",
+    "seo timeline"
+   ],
+   "cat": "Local SEO",
+   "a": "The setup goes live in about **14 days**. Google usually reflects changes in **4–6 weeks**, and most churches see measurable improvement within **90 days**. AI search tools update on their own schedule.\n\nYour monthly report shows your progress. Results build over time, so the longer your listing stays strong, the better."
+  },
+  {
+   "id": "k43",
+   "q": "How do we get more Google reviews?",
+   "alt": [
+    "google reviews",
+    "get reviews",
+    "review link",
+    "ask for reviews",
+    "more reviews",
+    "reviews"
+   ],
+   "cat": "Local SEO",
+   "a": "Ask members personally, especially after a good Sunday or event. Share your **review link** in the bulletin, in emails, or on a slide.\n\nNeed your review link or a QR code? Send us a request and we'll send them to you.\n\nPlease don't offer anything in exchange for reviews, because that breaks Google's rules."
+  },
+  {
+   "id": "k44",
+   "q": "How do we respond to a bad Google review?",
+   "alt": [
+    "bad review",
+    "negative review",
+    "delete review",
+    "remove review",
+    "fake review",
+    "respond to review"
+   ],
+   "cat": "Local SEO",
+   "a": "Reply **calmly and briefly**: thank them, acknowledge their experience, and invite them to talk with you directly (with a phone number or email). Future visitors read how you respond.\n\nReviews can't simply be deleted. If one breaks Google's rules (for example it's spam, offensive, or about a different place), you can **flag it for removal** in Google. Send us a request if you'd like help."
+  },
+  {
+   "id": "k45",
+   "q": "Our service times or address has changed. What should we do?",
+   "alt": [
+    "service times changed",
+    "our service times changed",
+    "address changed",
+    "our address has changed",
+    "new address",
+    "new service times",
+    "moved locations",
+    "change service times",
+    "update address",
+    "update google listing",
+    "google business profile",
+    "service times google",
+    "hours on google",
+    "change address google",
+    "google maps wrong"
+   ],
+   "cat": "Local SEO",
+   "a": "Let us know right away. We'll update your **Google Business Profile** and your listings across the web, since mismatched information can hurt your ranking.\n\nSend us a support request with the new service times or address. If your website also shows them (for example in the footer), we'll update those too.",
+   "handoff": true
+  },
+  {
+   "id": "k46",
+   "q": "Can you guarantee we'll be #1 on Google?",
+   "alt": [
+    "guarantee ranking",
+    "number one on google",
+    "first page",
+    "rank first",
+    "guaranteed results"
+   ],
+   "cat": "Local SEO",
+   "a": "No honest SEO provider can guarantee rankings, since Google and AI tools control their own results. What we do guarantee is a fully optimized local presence: an accurate profile, consistent listings, active reviews and proper structured data. Those are what drive rankings, and they've worked for 800+ churches."
+  },
+  {
+   "id": "k47",
+   "q": "Will our church show up in ChatGPT and AI search?",
+   "alt": [
+    "chatgpt",
+    "ai search",
+    "gemini",
+    "perplexity",
+    "geo",
+    "show up in ai"
+   ],
+   "cat": "Local SEO",
+   "a": "Yes, that's part of Local SEO. AI tools like ChatGPT, Gemini and Perplexity rely on the same signals as Google: reviews, consistent directory listings, structured data and your website content. When we strengthen those, your church becomes more likely to be recommended in both. Your monthly report includes AI visibility."
+  },
+  {
+   "id": "k48",
    "q": "Something isn't showing correctly on mobile",
    "alt": [
     "not showing on mobile",
@@ -431,7 +726,7 @@
    "a": "1. Refresh the page on your phone, or open it in a **private/incognito** tab. Phones often show an older saved copy.\n2. If it still looks wrong, open the page with **Edit with Cornerstone** on a computer.\n3. Use the **phone icon** at the top of the builder to preview the mobile view.\n4. Click the element that looks wrong and adjust it while in phone view (for example smaller text or less spacing). Changes made in phone view only affect phones.\n5. Click **Save**."
   },
   {
-   "id": "k29",
+   "id": "k49",
    "q": "How do I hide something on mobile or desktop?",
    "alt": [
     "hide on mobile",
@@ -444,7 +739,7 @@
    "a": "1. Open the page with **Edit with Cornerstone**.\n2. Click the section or element you want to hide.\n3. In its settings, find the **hide** options and pick the screen sizes to hide it on (phone, tablet or desktop).\n4. Click **Save**, then check the page on your phone."
   },
   {
-   "id": "k30",
+   "id": "k50",
    "q": "I made changes but I still see the old version",
    "alt": [
     "changes not showing",
@@ -457,7 +752,7 @@
    "a": "Your browser is probably showing a saved copy.\n\n1. Press **Ctrl + F5** (Windows) or **Cmd + Shift + R** (Mac) to fully refresh.\n2. Or open the page in a **private/incognito** window.\n3. If you're logged in and see a **Purge Cache** or **Clear Cache** option in the black bar at the top, click it.\n\nChanges usually show within a few minutes."
   },
   {
-   "id": "k31",
+   "id": "k51",
    "q": "My website looks broken after an update",
    "alt": [
     "broken after update",
@@ -471,7 +766,7 @@
    "a": "This is almost always old saved files. Clear them in this order:\n\n1. Log in and go to **Cornerstone → Settings**, then click **Clear Style Cache**.\n2. If there's a **Purge Cache** option in the top black bar, click it.\n3. Refresh the site with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac)."
   },
   {
-   "id": "k32",
+   "id": "k52",
    "q": "My website is down",
    "alt": [
     "website down",
@@ -488,7 +783,7 @@
    "handoff": true
   },
   {
-   "id": "k33",
+   "id": "k53",
    "q": "My website is slow",
    "alt": [
     "slow website",
@@ -501,7 +796,7 @@
    "a": "1. Test the site on another device or network to rule out your internet.\n2. Check recent pages for **very large photos**. Photos straight from a camera or phone can be huge; resize them to about 2000 pixels wide before uploading.\n3. Avoid adding many videos or sliders to one page.\n\nIf it's still slow, send us a request with the pages that feel slow."
   },
   {
-   "id": "k34",
+   "id": "k54",
    "q": "New pages show \"Page not found\" (404)",
    "alt": [
     "broken links",
@@ -516,7 +811,7 @@
    "a": "1. Log in and go to **Settings → Permalinks**.\n2. Don't change anything; just click **Save Changes** at the bottom.\n3. Refresh the page that showed the error.\n\nThis resets your website's links and usually fixes it straight away."
   },
   {
-   "id": "k35",
+   "id": "k55",
    "q": "My website says \"Not secure\"",
    "alt": [
     "not secure",
@@ -530,7 +825,7 @@
    "a": "1. Check the address starts with **https://** (with an \"s\"). Try typing https:// in front of your web address.\n2. Refresh with **Ctrl + F5** (or **Cmd + Shift + R** on a Mac).\n3. If only one page shows it, an image on that page may be linked from an old address; replace that image.\n\nIf the warning shows on the whole site, send us a request so we can renew the security certificate."
   },
   {
-   "id": "k36",
+   "id": "k56",
    "q": "Our contact form isn't sending emails",
    "alt": [
     "contact form not working",
@@ -545,7 +840,7 @@
    "a": "1. Check your **spam or junk folder** and mark any form emails as **Not spam**.\n2. Send a **test message** through the form yourself.\n3. Check the form is sending to the right address: log in, open your form plugin (for example **WPForms** or **Contact**), open the form's **Notifications** or **Mail** settings, and confirm the email address.\n4. Save and test again."
   },
   {
-   "id": "k37",
+   "id": "k57",
    "q": "We're getting spam through our contact form",
    "alt": [
     "form spam",
@@ -558,7 +853,7 @@
    "a": "1. Log in and open your form plugin's settings (for example **WPForms** or **Contact**).\n2. Turn on the built-in **anti-spam** or **CAPTCHA** option.\n3. Save and send yourself a test message to make sure the form still works.\n\nThis blocks most automated spam. If it keeps coming, send us a request and we'll add stronger protection."
   },
   {
-   "id": "k38",
+   "id": "k58",
    "q": "How do I change who gets form emails, or edit the form?",
    "alt": [
     "change form email",
@@ -573,7 +868,7 @@
    "a": "1. Log in and open your form plugin (for example **WPForms** or **Contact**).\n2. Click the form to edit it.\n3. **To add a question:** drag a new field onto the form and give it a label.\n4. **To change who receives it:** open **Notifications** (or the **Mail** tab) and change the email address.\n5. Save, then send a test message."
   },
   {
-   "id": "k39",
+   "id": "k59",
    "q": "How do I add an event?",
    "alt": [
     "add event",
@@ -590,7 +885,7 @@
    "video": "https://www.loom.com/share/d53f59b8b4524e40b05378a1774123f0"
   },
   {
-   "id": "k40",
+   "id": "k60",
    "q": "My event isn't showing on the calendar",
    "alt": [
     "calendar not working",
@@ -606,7 +901,7 @@
    "a": "1. Go to **M.E. Calendar → All Events** and check the event says **Published**, not Draft.\n2. Open it and check the **date and time**, including the year.\n3. Make sure the end date isn't before the start date.\n4. Refresh the calendar page in a **private/incognito** window."
   },
   {
-   "id": "k41",
+   "id": "k61",
    "q": "Can we sell tickets or take registrations for events?",
    "alt": [
     "event tickets",
@@ -621,7 +916,7 @@
    "video": "https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600"
   },
   {
-   "id": "k42",
+   "id": "k62",
    "q": "I can't log in to my website",
    "alt": [
     "login issue",
@@ -637,7 +932,7 @@
    "a": "1. Go to your login page: your web address followed by **/wp-login.php** (for example yourchurch.org/wp-login.php).\n2. Click **Lost your password?**\n3. Enter your username or email and click **Get New Password**.\n4. Open the email (check spam) and follow the link to set a new password."
   },
   {
-   "id": "k43",
+   "id": "k63",
    "q": "It says I'm locked out",
    "alt": [
     "locked out",
@@ -649,7 +944,7 @@
    "a": "The security system blocks logins after several wrong passwords.\n\n1. Wait about **1 hour**, then try again.\n2. Use **Lost your password?** on the login page to reset it instead of guessing.\n3. Try from your phone using mobile data if you need in sooner."
   },
   {
-   "id": "k44",
+   "id": "k64",
    "q": "How do I add a login for a new staff member?",
    "alt": [
     "add user",
@@ -664,7 +959,7 @@
    "a": "You need to be an Administrator to do this.\n\n1. Log in and go to **Users → Add New**.\n2. Enter their username, email and name.\n3. Choose a **Role**: **Editor** can edit pages and events; **Administrator** can change everything (only give this when needed).\n4. Click **Add New User**. They'll get an email to set their password."
   },
   {
-   "id": "k45",
+   "id": "k65",
    "q": "How do I change my password?",
    "alt": [
     "change password",
@@ -675,7 +970,7 @@
    "a": "1. Log in and go to **Users → Profile** (or click your name at the top right).\n2. Scroll to **Account Management** and click **Set New Password**.\n3. Type your new password and click **Update Profile**."
   },
   {
-   "id": "k46",
+   "id": "k66",
    "q": "How do I remove a user who left?",
    "alt": [
     "remove user",
@@ -687,7 +982,7 @@
    "a": "1. Log in as an Administrator and go to **Users**.\n2. Hover over the person and click **Delete**.\n3. When asked, choose to **attribute their content to another user** so their pages aren't lost.\n4. Click **Confirm Deletion**."
   },
   {
-   "id": "k47",
+   "id": "k67",
    "q": "Can I get FTP access?",
    "alt": [
     "ftp",
@@ -701,7 +996,7 @@
    "a": "FTP gives direct access to your website's files, so it's usually only needed by a developer. Most changes can be made from your WordPress dashboard instead.\n\nIf you do need it, send us a request with the name and email of the person who needs access and why, and we'll share login details securely."
   },
   {
-   "id": "k48",
+   "id": "k68",
    "q": "What do these Wordfence emails mean?",
    "alt": [
     "wordfence",
@@ -716,7 +1011,7 @@
    "a": "Wordfence is the security system protecting your website. Most emails are just reports (blocked logins, weekly summaries) and need no action.\n\n**To get fewer emails:** log in, go to **Wordfence → All Options → Email Alert Preferences**, untick the alerts you don't need, and click **Save Changes**.\n\nIf an email says **Critical** or **Problems found**, forward it to us."
   },
   {
-   "id": "k49",
+   "id": "k69",
    "q": "Should I update plugins myself?",
    "alt": [
     "update plugins",
@@ -730,7 +1025,7 @@
    "a": "Updates keep your site safe, but occasionally one can cause a conflict. If you update yourself:\n\n1. Make sure a **backup** exists first.\n2. Go to **Dashboard → Updates** and update a few plugins at a time.\n3. Check your homepage and a couple of key pages afterwards.\n\nIf anything looks wrong after an update, send us a request."
   },
   {
-   "id": "k50",
+   "id": "k70",
    "q": "Our church email isn't working",
    "alt": [
     "email not working",
@@ -744,7 +1039,7 @@
    "a": "1. Try logging in to your email on the web (for example Gmail or Outlook in a browser). If it works there, the issue is your email app; remove and re-add the account.\n2. Check your **mailbox isn't full**; delete old emails with large attachments.\n3. Make sure your **password hasn't changed** or expired.\n4. Check the **domain renewal**; if the domain expired, email stops too."
   },
   {
-   "id": "k51",
+   "id": "k71",
    "q": "We're getting a lot of spam email",
    "alt": [
     "spam",
@@ -757,7 +1052,7 @@
    "a": "1. Don't click links or open attachments in suspicious emails.\n2. Mark them as **Spam** or **Junk** in your email; this trains the filter.\n3. Never reply with passwords; we will never ask for yours by email.\n\nIf spam is coming through your website's contact form, turn on the form's anti-spam option (ask \"form spam\" for steps)."
   },
   {
-   "id": "k52",
+   "id": "k72",
    "q": "How do I renew our domain name?",
    "alt": [
     "change domain",
@@ -774,7 +1069,7 @@
    "a": "1. Find the renewal email from your domain company (search your email for your domain name and \"renew\").\n2. Log in to that company's website and renew the domain.\n3. Turn on **auto-renew** so it doesn't expire in future.\n\nNot sure who your domain is with? Send us a request and we'll check."
   },
   {
-   "id": "k53",
+   "id": "k73",
    "q": "How many people visit our website?",
    "alt": [
     "website statistics",
@@ -789,7 +1084,7 @@
    "a": "1. Log in to your website.\n2. Look for **Site Kit** (Google) or **Jetpack → Stats** in the left menu. Either shows visitors and popular pages.\n3. If you use Google Analytics directly, log in at analytics.google.com.\n\nIf you don't see any of these, send us a request and we can set up visitor stats or send you a report."
   },
   {
-   "id": "k54",
+   "id": "k74",
    "q": "How do I set up online giving?",
    "alt": [
     "online giving",
@@ -805,7 +1100,7 @@
    "a": "The simplest way is a **Give** button that links to your giving page:\n\n1. Copy the link to your online giving page (from your giving provider).\n2. Open your page with **Edit with Cornerstone** and add a **Button**.\n3. Type \"Give Online\", paste the link, and click **Save**.\n4. Add a **Give** link to your menu too (**Appearance → Menus**).\n\nWant giving built into a form on your site, for example with Square? Send us a request."
   },
   {
-   "id": "k55",
+   "id": "k75",
    "q": "How do I make an urgent request?",
    "alt": [
     "urgent",
@@ -821,7 +1116,7 @@
    "handoff": true
   },
   {
-   "id": "k56",
+   "id": "k76",
    "q": "What should I include when I ask for help?",
    "alt": [
     "support request",
@@ -834,7 +1129,7 @@
    "a": "Include these and we can fix it faster:\n\n1. Your **church name**.\n2. The **page address** (copy it from your browser's address bar).\n3. **What's wrong**, or exactly what you'd like changed.\n4. A **screenshot**, if you have one."
   },
   {
-   "id": "k57",
+   "id": "k77",
    "q": "How fast will I hear back?",
    "alt": [
     "response time",
@@ -848,7 +1143,7 @@
    "a": "Within one business day, and usually faster. Our support team works **Monday to Friday, 9:00 to 5:00 Central**. If you write in over the weekend, you'll hear from us on Monday."
   },
   {
-   "id": "k58",
+   "id": "k78",
    "q": "Can I edit our website myself?",
    "alt": [
     "edit myself",
@@ -861,7 +1156,7 @@
    "a": "Yes. You have full access to your website's dashboard. Ask this chat how to do something (for example \"how do I update the footer\") for step-by-step instructions.\n\nIf you'd rather we handle it, submit a ticket and we'll take care of it."
   },
   {
-   "id": "k59",
+   "id": "k79",
    "q": "How do I update our card or bank details?",
    "alt": [
     "update credit card",
@@ -872,10 +1167,10 @@
     "update payment"
    ],
    "cat": "Billing",
-   "a": "Use the billing portal. It takes about two minutes:\n\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\n2. Enter your **billing email**.\n3. Click the secure link we email you (no password needed).\n4. Update your payment method. It applies to your next invoice automatically."
+   "a": "Use the billing portal:\n\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00).\n2. Enter your **billing email** and click the secure link we email you.\n3. Update your payment method. It applies to your next invoice automatically.\n\nFor security reasons, please **don't send card numbers by email or chat**."
   },
   {
-   "id": "k60",
+   "id": "k80",
    "q": "Where do I find our invoices and receipts?",
    "alt": [
     "invoices",
@@ -888,7 +1183,7 @@
    "a": "Every invoice and receipt is in the billing portal:\n\n1. [Open the billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00)\n2. Enter your **billing email** and click the secure link we send you.\n3. View or download your full payment history."
   },
   {
-   "id": "k61",
+   "id": "k81",
    "q": "I have a billing question or want to change our plan",
    "alt": [
     "billing question",
@@ -900,6 +1195,77 @@
    ],
    "cat": "Billing",
    "a": "Most billing tasks can be done in the [billing portal](https://billing.stripe.com/p/login/bJe3cwee42tQ9kB1vQfEk00): updating your card, downloading invoices, and changing your billing email.\n\nFor plan changes or anything the portal can't do, email **accounting@reachrightstudios.com**."
+  },
+  {
+   "id": "t82",
+   "q": "Our ranking dropped this month. Should we be worried?",
+   "alt": [
+    "ranking dropped",
+    "lower ranking",
+    "rank went down",
+    "seo dropped",
+    "lost ranking",
+    "not showing as high"
+   ],
+   "cat": "Local SEO",
+   "a": "Small changes from month to month are normal, because Google updates its results constantly. We look at **long-term trends**.\n\nIf a drop is larger or lasts longer, we look into it."
+  },
+  {
+   "id": "t83",
+   "q": "I searched for our church and didn't see our ad",
+   "alt": [
+    "didn't see our ad",
+    "can't find our ad",
+    "ads not showing",
+    "ad not running",
+    "where is our ad"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "That's normal and doesn't mean the ads aren't running. Ads show based on budget, location, and who's searching. Google also often skips showing ads to the account owner and to people who have already visited your website.\n\nYour **monthly report** is the most accurate way to see how they're doing."
+  },
+  {
+   "id": "t84",
+   "q": "Our website changed (new site, new domain, or a page moved). Does that affect the grant?",
+   "alt": [
+    "new website grant",
+    "new domain",
+    "changed website",
+    "page moved",
+    "website change grant",
+    "moved pages"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Yes, so please tell us **before the change** if you can. Ads that point to broken or moved pages can be stopped, and the grant requires a working, secure website.\n\nWe'll update the ads and check that tracking still works.",
+   "handoff": true
+  },
+  {
+   "id": "t85",
+   "q": "Our main contact or pastor left. Will we lose access to the grant?",
+   "alt": [
+    "pastor left",
+    "contact left",
+    "new contact",
+    "admin left",
+    "lost access google",
+    "staff change grant"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "Not if we update things quickly. Let your project manager know who the new contact is.\n\nIf the person who left was the admin on your **Google for Nonprofits** or **Google Ads** account, we'll help get that changed.",
+   "handoff": true
+  },
+  {
+   "id": "t86",
+   "q": "I have another question about our Google Ad Grant",
+   "alt": [
+    "grant question",
+    "google ads account",
+    "email from google",
+    "grant help",
+    "question about ads"
+   ],
+   "cat": "Google Ad Grant",
+   "a": "For anything else about your Google Ad Grant, like emails from Google about your account or questions about your report, please reach out to your project manager. Send a request below and we'll get it to them.",
+   "handoff": true
   }
  ],
  "resources": [
