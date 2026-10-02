@@ -1066,14 +1066,31 @@
         { transform: "translate(" + dx * 0.35 + "px," + dy * 0.22 + "px) scale(0.62, 0.5)", opacity: 0.95, offset: 0.45 },
         { transform: "translate(" + dx * 0.78 + "px," + dy * 0.72 + "px) scale(0.22)", opacity: 0.8, offset: 0.8 },
         { transform: "translate(" + dx + "px," + dy + "px) scale(0.05)", opacity: 0 }
-      ], { duration: 650, easing: "linear", fill: "forwards" });
+      ], { duration: 440, easing: "linear", fill: "forwards" });
       anim.onfinish = function () { anim.cancel(); done(); };
     }
+    function restoreFromTop(after) {
+      var target = topBarItem();
+      setMini(false);                       // show it again so we can measure where it lands
+      var land = lw.getBoundingClientRect();
+      var from = target ? target.getBoundingClientRect() : { left: window.innerWidth - 60, top: 0, width: 40, height: 32 };
+      var dx = (from.left + from.width / 2) - (land.left + land.width / 2);
+      var dy = (from.top + from.height / 2) - (land.top + land.height / 2);
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (target && target.animate) target.animate([{ backgroundColor: "#189ad0", color: "#fff" }, { backgroundColor: "transparent" }], { duration: 500, easing: "ease-out" });
+      if (reduce || !lw.animate) { if (after) after(); return; }
+      lw.style.transformOrigin = "center";
+      var anim = lw.animate([
+        { transform: "translate(" + dx + "px," + dy + "px) scale(0.05)", opacity: 0 },
+        { transform: "translate(" + dx * 0.72 + "px," + dy * 0.78 + "px) scale(0.22)", opacity: 0.8, offset: 0.2 },
+        { transform: "translate(" + dx * 0.22 + "px," + dy * 0.35 + "px) scale(0.62, 0.5)", opacity: 0.95, offset: 0.55, easing: "ease-out" },
+        { transform: "translate(0,0) scale(1.06, 0.9)", opacity: 1, offset: 0.86, easing: "ease-out" },
+        { transform: "none", opacity: 1 }
+      ], { duration: 420, easing: "linear" });
+      anim.onfinish = function () { if (after) after(); };
+    }
     if (minBtn) minBtn.addEventListener("click", function (e) { e.stopPropagation(); minimize(); });
-    root.querySelector(".unmin").addEventListener("click", function () {
-      setMini(false);
-      if (lw.animate) lw.animate([{ transform: "translateY(16px) scale(.6)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 300, easing: "ease-out" });
-    });
+    root.querySelector(".unmin").addEventListener("click", function () { restoreFromTop(); });
     if (CFG.csToolbar) setupCornerstoneButton();
 
     /* --- Cornerstone builder: "Need help?" in the top toolbar, just before Save --- */
@@ -1134,6 +1151,7 @@
       var link = ev.target && ev.target.closest && ev.target.closest(CFG.openSelector);
       if (!link) return;
       ev.preventDefault();
+      if (typeof isMini === "function" && isMini()) return restoreFromTop(function () { toggle(true); });
       toggle();
     });
     $(".x").addEventListener("click", function () { toggle(false); if (!CFG.hideLauncher && !isMini()) launch.focus(); });
