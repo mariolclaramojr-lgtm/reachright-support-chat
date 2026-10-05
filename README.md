@@ -6,6 +6,17 @@ A support chat for **site admins inside the WordPress dashboard**. Website visit
 - **Firebase (Firestore)** stores the answers and the tickets. Edit answers once in the admin page and every website updates.
 - `kb.json` is a backup: if Firebase can't be reached, the chat answers from it.
 
+## What the chat does (version 1.21.0)
+
+- **Start screen:** "Hi Mario! How can we help you today?" with **Website · Local SEO · Grant · Billing**. Website opens Editing pages · Photos · Events · Forms · Login · Email · Page error or not loading.
+- **86 answers + 62 help guides:** support answers from Zoho Desk ticket topics, the support page, the website and the team FAQ (including billing, Google Ad Grant and Local SEO), plus Cornerstone and WordPress help guides. 20 Loom video walkthroughs play inside the chat.
+- **Conversation:** checks in after each answer ("Did that fix it?"), offers a help-guide answer on "Not quite", and suggests a support request after two tries. Asks for details when a question is vague.
+- **Topic bar:** Page error · Editing · Events · Billing · More, shown once a conversation starts.
+- **Support requests:** form opens in the chat, pre-filled with the admin's name, email, church name and the **site address (dashboard) or page address (live site / Cornerstone)**. Up to 3 screenshots. "Page error" requests are marked URGENT. 5-minute wait between requests. Emailed to support@reachrightstudios.com with site details.
+- **Where it appears (administrators only):** WordPress dashboard (corner button + "Need help?" in the top bar), the live site while logged in (top bar), and the Cornerstone builder (button next to Save; chat opens on the left).
+- **Hide button:** the small – on the corner button flies it into "Need help?" in the top bar. Clicking "Need help?" flies it back and opens the chat.
+- **Managed centrally:** answers in Firebase (edit in admin.html), plugin updates from this repository, nothing for clients to configure.
+
 | File | What it's for |
 |---|---|
 | `index.html` | Test page with the chat running |
@@ -91,10 +102,12 @@ Non-WordPress sites load `support-chat.js` from GitHub, so updating that file up
 
 Each WordPress site checks GitHub for a new version every few hours. To release one:
 
-1. Get the new plugin zip (for example from Claude). Its version number must be higher than the current one, e.g. 1.1.0 → 1.2.0.
+1. Get the new plugin zip (for example from Claude, who can also upload it here directly with a repository token). Its version number must be higher than the current one, e.g. 1.20.0 → 1.21.0.
 2. On GitHub, open the `wordpress-plugin` folder → **Add file → Upload files** → upload the new `zd-support-chat.zip` (it replaces the old one) → **Commit changes**.
 3. Open `wordpress-plugin/update.json` → click the **pencil** → change `"version"` to the new number (and the date and changelog if you like) → **Commit changes**.
 4. Wait a minute for GitHub Pages to update.
 5. On a WordPress site: **Dashboard → Updates → Check again**. "Support Chat" appears; click **Update Plugins**. (Or wait: sites find it on their own within about 6–12 hours.)
 
 The version in `update.json` must match the version inside the zip; otherwise WordPress keeps offering the same update.
+
+**Tip:** on each site, click **Enable auto-updates** next to REACHRIGHT Support Chat on the Plugins page. New versions then install on their own within about 12 hours.
