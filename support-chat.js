@@ -44,6 +44,10 @@
     userName: pick("userName", ""),               // pre-fill the ticket form (logged-in admin)
     userEmail: pick("userEmail", ""),
     siteLabel: pick("siteLabel", ""),
+    siteName: pick("siteName", ""),               // church / site name for the ticket form
+    siteUrl: pick("siteUrl", ""),                 // site address (used when opened from the dashboard)
+    pageUrl: pick("pageUrl", ""),                 // page being edited (Cornerstone builder)
+    context: pick("context", ""),                 // "admin", "front" or "builder"
     nonce: pick("nonce", ""),                     // WordPress security token for tickets
     ticketCooldown: parseFloat(pick("ticketCooldown", "5")), // minutes to wait between requests
     downChip: pick("downChip", "Page error or not loading"),     // suggestion that goes straight to an urgent ticket ("" to hide)
@@ -535,7 +539,8 @@
           '<p class="sub">A real person replies within one business day (Mon–Fri, 9–5 Central).</p>' +
           '<label>Your name<input name="name" autocomplete="name" required></label>' +
           '<label>Your email<input name="email" type="email" autocomplete="email" required></label>' +
-          '<label>Church name and website<input name="website" autocomplete="organization" placeholder="Grace Church, www.gracechurch.org"></label>' +
+          '<label>Church name<input name="website" autocomplete="organization" placeholder="Grace Church"></label>' +
+          '<label><span class="urllabel">Page address</span><input name="url" type="url" inputmode="url" placeholder="https://www.gracechurch.org/page"></label>' +
           '<label>How can we help?<textarea name="message" rows="4" required></textarea></label>' +
           (CFG.attachments && CFG.ticketEndpoint !== "firebase" ?
             '<label class="attach"><input type="file" name="files" accept="image/png,image/jpeg,image/gif,image/webp" multiple>' +
@@ -593,7 +598,14 @@
       F.message.value = (thread && thread.q) || lastQuestion();
       if (CFG.userName) F.name.value = CFG.userName;
       if (CFG.userEmail) F.email.value = CFG.userEmail;
-      if (CFG.siteLabel) F.website.value = CFG.siteLabel;
+      if (CFG.siteName) F.website.value = CFG.siteName;
+      else if (CFG.siteLabel) F.website.value = CFG.siteLabel;
+      var where = CFG.context || (/\/wp-admin(\/|$)/.test(location.pathname) ? "admin" : "front");
+      var autoUrl = where === "admin" ? (CFG.siteUrl || location.origin)
+                  : where === "builder" ? (CFG.pageUrl || CFG.siteUrl || location.origin)
+                  : location.origin + location.pathname + location.search;
+      F.url.value = autoUrl;
+      el.querySelector(".urllabel").textContent = where === "admin" ? "Website address" : "Page address";
       if (/\b(down|not loading|offline|white screen|urgent)\b/i.test(F.message.value)) F.urgent.checked = true;
       f.querySelector(".cancel").addEventListener("click", function () { unplace(el); input.focus(); });
       f.addEventListener("submit", function (ev) {
@@ -605,6 +617,7 @@
         if (msg.length < 5) return showErr("Tell us a little about what you need.", F.message);
         var data = {
           name: name, email: email, website: F.website.value.trim(), message: msg,
+          url: F.url.value.trim(),
           transcript: F.include.checked ? transcriptText() : "",
           urgent: F.urgent.checked ? "1" : "",
           page: location.href, company_site: F.company_site.value, elapsed: String(Date.now() - opened)
@@ -635,8 +648,9 @@
     function ticketText(data) {
       return "New support request from the website chat\n\n" +
         "Name: " + data.name + "\nEmail: " + data.email + "\n" +
-        (data.website ? "Church / website: " + data.website + "\n" : "") +
-        (data.page ? "Sent from page: " + data.page + "\n" : "") +
+        (data.website ? "Church: " + data.website + "\n" : "") +
+        (data.url ? "Page / site: " + data.url + "\n" : "") +
+        (data.page && data.page !== data.url ? "Opened from: " + data.page + "\n" : "") +
         "\nMessage:\n" + data.message + "\n" +
         (data.transcript ? "\n--- Chat conversation ---\n" + data.transcript + "\n" : "");
     }
@@ -650,7 +664,7 @@
         replyTo: sv(data.name.replace(/[<>"]/g, "") + " <" + data.email + ">"),
         message: { mapValue: { fields: { subject: sv(subject), text: sv(ticketText(data)) } } },
         name: sv(data.name.slice(0, 100)), email: sv(data.email.slice(0, 200)), website: sv((data.website || "").slice(0, 200)),
-        page: sv((data.page || "").slice(0, 500)), urgent: { booleanValue: !!data.urgent },
+        page: sv((data.url || data.page || "").slice(0, 500)), urgent: { booleanValue: !!data.urgent },
         status: sv("new"), createdAt: { timestampValue: new Date().toISOString() }
       } };
       return fetch(firestoreUrl("mail"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
