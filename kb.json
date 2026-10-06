@@ -2,7 +2,7 @@
  "meta": {
   "source": "ReachRight support answers, based on 358 Zoho Desk ticket topics",
   "generated": "2026-09-24",
-  "count": 86,
+  "count": 100,
   "resources": 62
  },
  "entries": [
@@ -1266,6 +1266,211 @@
    "cat": "Google Ad Grant",
    "a": "For anything else about your Google Ad Grant, like emails from Google about your account or questions about your report, please reach out to your project manager. Send a request below and we'll get it to them.",
    "handoff": true
+  },
+  {
+   "id": "e87",
+   "q": "How do I make an event repeat every week or month?",
+   "alt": [
+    "recurring event",
+    "repeat event",
+    "weekly event",
+    "monthly event",
+    "every sunday",
+    "event repeating",
+    "same event every week"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event (**M.E. Calendar → Events**, then click it), or create a new one.\n2. In **Event Details**, open the **Event Repeating** tab and turn on **Event Repeating**.\n3. Choose how often: **Daily**, **Every Weekday**, **Every Weekend**, **Certain Weekdays**, **Weekly**, **Monthly**, **Yearly**, or **Custom Days**.\n4. Set the **Repeat Interval** (for example, 2 with Weekly means every other week).\n5. Under **End Repeat**, choose **Never**, **On** a date, or **After** a number of times.\n6. Click **Update**.\n\nTip: turn on **Show only one occurrence of this event** if the calendar lists show too many copies of it."
+  },
+  {
+   "id": "e88",
+   "q": "How do I skip one date of a repeating event?",
+   "alt": [
+    "skip a date",
+    "skip a week",
+    "skip one week",
+    "skip christmas",
+    "skip easter",
+    "skip a sunday",
+    "skip recurring",
+    "skip one occurrence",
+    "remove one date",
+    "cancel one date",
+    "exclude date",
+    "exceptional days",
+    "no service this week",
+    "holiday skip"
+   ],
+   "cat": "Events",
+   "a": "1. Open the repeating event.\n2. Go to the **Exceptional Days** tab.\n3. Add the date you want to skip, then click **Update**.\n\nThat date disappears from the calendar while the other dates stay. If you don't see an **Exceptional Days** tab, it needs to be switched on in the calendar settings. Send us a request and we'll turn it on."
+  },
+  {
+   "id": "e89",
+   "q": "How do I hide the end time or add a note about the time?",
+   "alt": [
+    "hide end time",
+    "hide event time",
+    "time note",
+    "doors open",
+    "all day event",
+    "no end time"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and find the **Date and Time** section.\n2. For an event without set times, tick **All-day Event**.\n3. Open the **Advanced** options to tick **Hide Event Time** or **Hide Event End Time**.\n4. To add a short note next to the time (for example \"Doors open at 6:30\"), use **Notes on the time**.\n5. Click **Update**."
+  },
+  {
+   "id": "e90",
+   "q": "How do I add a location to an event?",
+   "alt": [
+    "event location",
+    "venue",
+    "event address",
+    "add location",
+    "map on event",
+    "where is the event"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and go to the **Location/Venue** tab.\n2. Choose a location you've used before from the list, or click **Insert New Location** and enter its name and address.\n3. Click **Update**.\n\nSaved locations can be reused for future events, so you only type the address once."
+  },
+  {
+   "id": "e91",
+   "q": "How do I add an organizer or contact person to an event?",
+   "alt": [
+    "event organizer",
+    "contact person",
+    "event contact",
+    "who to contact",
+    "organizer phone"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and go to the **Organizer** tab.\n2. Pick an existing organizer, or add a new one with their **name, phone, email** and **website**.\n3. Click **Update**.\n\nThe organizer's details show on the event page so people know who to contact."
+  },
+  {
+   "id": "e92",
+   "q": "How do I add a registration or more-info link to an event?",
+   "alt": [
+    "registration link",
+    "register button",
+    "sign up link",
+    "more info link",
+    "event link",
+    "external registration",
+    "planning center link",
+    "link to form"
+   ],
+   "cat": "Events",
+   "a": "Use the **Links** section of the event:\n\n- **Event Link:** where the **Register** button sends people, for example your sign-up form or Planning Center page.\n- **More Info:** a link to a page with more details about the event.\n\n1. Open the event and find the **Links** section.\n2. Paste the address into **Event Link** and/or **More Info**.\n3. Click **Update**.\n\nIf you sell tickets through the calendar itself, the Register button opens the booking form instead.",
+   "video": "https://www.loom.com/share/d8dccba47f1343a9b983a6542090f600"
+  },
+  {
+   "id": "e93",
+   "q": "How do I mark an event as cancelled, postponed or moved online?",
+   "alt": [
+    "cancel event",
+    "event cancelled",
+    "postponed",
+    "moved online",
+    "event status",
+    "reschedule event",
+    "online event"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and find **SEO Schema / Event Status**.\n2. Choose **Canceled**, **Postponed** or **Moved Online** (use **Scheduled** for normal events).\n3. For a cancellation, add a **Reason for Cancellation** and tick **Display in single event page** so visitors see it.\n4. For an online event, add the link people should use to join.\n5. Click **Update**.\n\nThis also tells Google about the change, so search results stay accurate."
+  },
+  {
+   "id": "e94",
+   "q": "How do I add a schedule or agenda to an event?",
+   "alt": [
+    "event schedule",
+    "agenda",
+    "hourly schedule",
+    "program",
+    "timeline",
+    "sessions"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and go to **Hourly Schedule**.\n2. Click **Add Day**, then add each item with its start time, end time and title (for example \"Worship 9:00–9:45\", \"Break\", \"Workshops\").\n3. Drag items by their handle to reorder them.\n4. Click **Update**.\n\nThe schedule appears on the event page."
+  },
+  {
+   "id": "e95",
+   "q": "How do I show the cost of an event, or show that it's free?",
+   "alt": [
+    "event cost",
+    "event price",
+    "free event",
+    "ticket price",
+    "how much"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and find the **Cost** section.\n2. Type the cost (for example **$15** or **Free**).\n3. Click **Update**.\n\nIf you sell tickets through the calendar, you can tick **Show the minimum price based on tickets** to display the lowest ticket price automatically."
+  },
+  {
+   "id": "e96",
+   "q": "How do I limit how many people can register?",
+   "alt": [
+    "limit registrations",
+    "capacity",
+    "max attendees",
+    "sold out",
+    "total booking limit",
+    "how many tickets",
+    "spots left"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event and go to the **Booking** section.\n2. Set **Total Booking Limit** to your capacity (for example, 100 seats).\n3. In **Tickets**, set **Available Tickets** for each ticket type, and optionally a minimum or maximum per person.\n4. Click **Update**.\n\nRegistration closes automatically when the limit is reached. If you don't see a Booking section, booking isn't switched on for your calendar yet. Send us a request and we'll help."
+  },
+  {
+   "id": "e97",
+   "q": "How do I see who registered for an event?",
+   "alt": [
+    "who registered",
+    "attendees list",
+    "bookings",
+    "registrations list",
+    "see sign ups",
+    "event attendees"
+   ],
+   "cat": "Events",
+   "a": "1. Open the event (**M.E. Calendar → Events**, then click it).\n2. Scroll to **Booking / Attendees**.\n\nYou'll see each person's name, email and what they booked. For repeating events, you can also move bookings to another date there, which helps if a date is cancelled."
+  },
+  {
+   "id": "e98",
+   "q": "How do I organize events into categories?",
+   "alt": [
+    "event categories",
+    "event category",
+    "group events",
+    "youth events",
+    "filter events",
+    "ministry events"
+   ],
+   "cat": "Events",
+   "a": "Categories group your events, for example **Worship**, **Youth** or **Women's Ministry**, so visitors can browse by type.\n\n1. Open the event.\n2. In the **Categories** box on the right, tick a category, or click **Add New Category**.\n3. Click **Update**.\n\nYou can manage the full list under **M.E. Calendar → Categories**."
+  },
+  {
+   "id": "e99",
+   "q": "How do I add a label like \"Featured\" or \"Canceled\" to an event?",
+   "alt": [
+    "event label",
+    "badge",
+    "featured event",
+    "canceled badge",
+    "highlight event",
+    "label"
+   ],
+   "cat": "Events",
+   "a": "Labels add a small badge to an event, for example **Featured**, **New** or **Canceled**.\n\n1. Create labels under **M.E. Calendar → Labels** (give each a name and color).\n2. Open the event and tick the label in the **Labels** box.\n3. Click **Update**.\n\nA label's description also shows in the event page's sidebar."
+  },
+  {
+   "id": "e100",
+   "q": "What are tags on events?",
+   "alt": [
+    "event tags",
+    "tags",
+    "keywords"
+   ],
+   "cat": "Events",
+   "a": "Tags are short keywords that describe an event, such as **kids**, **free** or **outdoor**. They help visitors find related events and can help with search.\n\nOpen the event, type tags into the **Tags** box on the right, press **Enter** after each, then click **Update**."
   }
  ],
  "resources": [

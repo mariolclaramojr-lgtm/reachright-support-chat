@@ -6,10 +6,10 @@ A support chat for **site admins inside the WordPress dashboard**. Website visit
 - **Firebase (Firestore)** stores the answers and the tickets. Edit answers once in the admin page and every website updates.
 - `kb.json` is a backup: if Firebase can't be reached, the chat answers from it.
 
-## What the chat does (version 1.21.0)
+## What the chat does (version 1.22.0)
 
 - **Start screen:** "Hi Mario! How can we help you today?" with **Website · Local SEO · Grant · Billing**. Website opens Editing pages · Photos · Events · Forms · Login · Email · Page error or not loading.
-- **86 answers + 62 help guides:** support answers from Zoho Desk ticket topics, the support page, the website and the team FAQ (including billing, Google Ad Grant and Local SEO), plus Cornerstone and WordPress help guides. 20 Loom video walkthroughs play inside the chat.
+- **100 answers + 62 help guides:** support answers from Zoho Desk ticket topics, the support page, the website and the team FAQ (including billing, Google Ad Grant and Local SEO), plus Cornerstone and WordPress help guides. 20 Loom video walkthroughs play inside the chat.
 - **Conversation:** checks in after each answer ("Did that fix it?"), offers a help-guide answer on "Not quite", and suggests a support request after two tries. Asks for details when a question is vague.
 - **Topic bar:** Page error · Editing · Events · Billing · More, shown once a conversation starts.
 - **Support requests:** form opens in the chat, pre-filled with the admin's name, email, church name and the **site address (dashboard) or page address (live site / Cornerstone)**. Up to 3 screenshots. "Page error" requests are marked URGENT. 5-minute wait between requests. Emailed to support@reachrightstudios.com with site details.
